@@ -1,0 +1,204 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div>
+        <div class="box">
+                <div class="left">
+                        <div class="top">
+                                <div class="logo"><img
+                                                src="https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Swiggy_logo.svg/2560px-Swiggy_logo.svg.png">
+                                </div>
+                                <div class="buttons">
+                                        <ng-template #contentsignin let-offcanvas>
+                                                <i class="fa fa-close mt-3 ms-3 mb-4"
+                                                        (click)="offcanvas.close('Close click')"></i>
+
+                                                <div class="topform d-flex justify-content-around">
+                                                        <div class="ms-4">
+                                                                <h3>Sign In</h3>
+                                                        </div>
+                                                        <div class="me-4">
+                                                                <img class="jdo4W"
+                                                                        imageurl="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r"
+                                                                        width="100" height="105" imageid=""
+                                                                        alt="img renderer"
+                                                                        src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r">
+                                                        </div>
+                                                </div>
+                                                <form [formGroup]="signInForm" (ngSubmit)="onSubmitIn()">
+                                                        <div class="col-lg-8 mt-4 ms-3 field">
+                                                                <label style="color: black;">Email</label>
+                                                                <input type="email" id="email" formControlName="email"
+                                                                        class="form-control">
+                                                        </div>
+                                                        <div class="col-lg-8 mt-4 ms-3 field">
+                                                                <label style="color: black;">Password</label>
+                                                                <input type="text" id="password" formControlName="password"
+                                                                        class="form-control">
+                                                        </div>
+                                                       
+                                                        <button type="submit"
+                                                                class="btn btn-primary btn-sm mt-4 ms-5 contbtn">CONTINUE</button>
+                                                </form>
+                                        </ng-template>
+
+                                        <button class="btn btn-lg mb-2 me-2 btn1"
+                                                (click)="openEndSignIn(contentsignin)">Log
+                                                in</button>
+
+                                        <ng-template #contentsignup let-offcanvas>
+                                                <i class="fa fa-close mt-3 ms-3 mb-4"
+                                                        (click)="offcanvas.close('Close click')"></i>
+
+                                                <div class="topform d-flex justify-content-around">
+                                                        <div class="ms-4">
+                                                                <h3>Sign Up</h3>
+                                                        </div>
+                                                        <div class="me-4">
+                                                                <img class="jdo4W"
+                                                                        imageurl="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r"
+                                                                        width="100" height="105" imageid=""
+                                                                        alt="img renderer"
+                                                                        src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r">
+                                                        </div>
+                                                </div>
+                                                <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+                                                        <div class="col-lg-8 mt-4 ms-3 field">
+                                                                <label style="color: black;">Name</label>
+                                                                <input type="text" id="Name" formControlName="userName"
+                                                                        class="form-control">
+                                                        </div>
+                                                        <div class="col-lg-8 mt-4 ms-3 field">
+                                                                <label style="color: black;">Email</label>
+                                                                <input type="email" id="email" formControlName="email"
+                                                                        class="form-control">
+                                                        </div>
+                                                        <div class="col-lg-8 mt-4 ms-3 field">
+                                                                <label style="color: black;">Password</label>
+                                                                <input type="text" id="password"
+                                                                        formControlName="password" class="form-control">
+                                                        </div>
+                                                        <button type="submit"
+                                                                class="btn btn-primary btn-sm mt-4 ms-5 contbtn">CONTINUE</button>
+                                                </form>
+
+                                        </ng-template>
+
+                                        <button class="btn btn-lg mb-2 me-2 btn1" (click)="openEndSignUp(contentsignup)"
+                                                id="btn2">Sign up</button>
+                                </div>
+                        </div>
+                        <div class="text">
+                                <h1 id="text-head">Hungry?</h1>
+                                <p>Order food from favourite restaurants near you.</p>
+                        </div>
+                        <div class="location-box">
+                                <div class="location-search">
+                                        <input type="text" placeholder="Enter your delivery location">
+                                </div>
+
+                                <div class="location-button">
+                                        <a href="#">FIND FOOD</a>
+                                </div>
+                        </div>
+                        <div class="bottom">
+                                <h4>POPULAR CITIES IN INDIA</h4>
+                                <ul>
+                                        <li><a href="#">Ahmedabad</a></li>
+                                        <li><a href="#">Bangalore</a></li>
+                                        <li><a href="#">Chennai</a></li>
+                                        <li><a href="#">Delhi</a></li>
+                                        <li><a href="#">Gurgaon</a></li>
+                                        <li><a href="#">Hyderabad</a></li>
+                                        <li><a href="#">Kolkata</a></li>
+                                        <li><a href="#">Mumbai</a></li>
+                                        <li><a href="#">Pune</a></li>
+                                        <li><a href="#">& more.</a></li>
+
+                                </ul>
+                        </div>
+                </div>
+                <div class="right">
+
+                </div>
+        </div>
+        <div class="function">
+                <div class="fun-box">
+                        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_210,h_398/4x_-_No_min_order_x0bxuf"
+                                width="105" height="199">
+                        <h4>No Minimum Order</h4>
+                        <p>Order in for yourself or for the group, with no restrictions on order value</p>
+                </div>
+                <div class="fun-box">
+                        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_224,h_412/4x_Live_order_zzotwy"
+                                width="112" height="206">
+                        <h4>Live Order Tracking</h4>
+                        <p>Know where your order is at all times, from the restaurant to your doorstep</p>
+                </div>
+                <div class="fun-box">
+                        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_248,h_376/4x_-_Super_fast_delivery_awv7sn"
+                                width="124" height="188">
+                        <h4>Lightning-Fast Delivery</h4>
+                        <p>Experience Swiggy's superfast delivery for food delivered fresh & on time</p>
+                </div>
+        </div>
+        <div class="app">
+                <div class="app-text">
+                        <h1>Restaurants in your pocket</h1>
+                        <p>Order from your favorite restaurants & track on the go, with the all-new Swiggy app.</p>
+                        <div class="app-button">
+                                <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_108/play_ip0jfp"
+                                        height="54">
+                                <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_108/iOS_ajgrty"
+                                        height="54">
+                        </div>
+                </div>
+                <div class="app-image">
+                        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_768,h_978/pixel_wbdy4n"
+                                height="489" width="384">
+                        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_768,h_978/iPhone_wgconp_j0d1fn"
+                                height="489" width="384">
+                </div>
+
+        </div>
+        <footer>
+                <div class="points">
+                        COMPANY
+                        <ul class="footer-ul">
+                                <li class="footer-li"><a href="#">About us</a>
+                                <li class="footer-li"><a href="#">Team</a>
+                                <li class="footer-li"><a href="#">Careers</a>
+                                <li class="footer-li"><a href="#">Swiggy Blog</a>
+                                <li class="footer-li"><a href="#">Bug Bounty</a>
+                                <li class="footer-li"><a href="#">Swiggy Super</a>
+                                <li class="footer-li"><a href="#">Swiggy Corporate</a>
+                                <li class="footer-li"><a href="#">Swiggy Instamart</a>
+                        </ul>
+                </div>
+                <div class="points">
+                        CONTACT
+                        <ul class="footer-ul">
+                                <li class="footer-li"><a href="#">Help & Support</a>
+                                <li class="footer-li"><a href="#">Partner with us</a>
+                                <li class="footer-li"><a href="#">Ride with us</a>
+                        </ul>
+
+                </div>
+                <div class="points">
+                        LEGAL
+                        <ul class="footer-ul">
+                                <li class="footer-li"><a href="#">Terms & Conditions</a>
+                                <li class="footer-li"><a href="#">Refund & Cancellation</a>
+                                <li class="footer-li"><a href="#">Privacy Policy</a>
+                                <li class="footer-li"><a href="#">Cookie Policy</a>
+                                <li class="footer-li"><a href="#">Offer Terms</a>
+                                <li class="footer-li"><a href="#">Phishing & Fraud</a>
+
+                        </ul>
+                </div>
+                <div class="points">
+                        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_108/play_ip0jfp"
+                                height="54">
+                        <img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_108/iOS_ajgrty"
+                                height="54">
+                </div>
+
+        </footer>
