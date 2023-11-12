@@ -9,9 +9,11 @@ import { MaterialModule } from 'src/material/material.module';
 import { MainhomeComponent } from './components/mainhome/mainhome.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, MainhomeComponent],
+  declarations: [AppComponent, MainhomeComponent, DashboardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
