@@ -10,10 +10,14 @@ import { MainhomeComponent } from './components/mainhome/mainhome.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { CartComponent } from './components/cart/cart.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SupportComponent } from './components/support/support.component';
 
 @NgModule({
-  declarations: [AppComponent, MainhomeComponent, DashboardComponent],
+  declarations: [AppComponent, MainhomeComponent, DashboardComponent, CartComponent, FavouritesComponent, ProfileComponent, SupportComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
