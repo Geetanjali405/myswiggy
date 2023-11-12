@@ -14,7 +14,7 @@ export class MainhomeComponent implements OnInit {
   signUpForm: FormGroup;
   signInForm: FormGroup;
   user = new User();
-  userInfo :any;
+  userInfo: any;
 
   constructor(
     private offcanvasService: NgbOffcanvas,
@@ -48,13 +48,15 @@ export class MainhomeComponent implements OnInit {
     console.log(this.user);
     this.userService.loginUser(this.user).subscribe((response) => {
       this.userInfo = response;
-      console.log(response);
-      alert("Logged IN");
+      // console.log(response);
+      alert('Logged IN');
       console.log(' Logged In');
-      localStorage.setItem("user", this.userInfo);
-      localStorage.setItem("email", this.userInfo.email)
-      localStorage.setItem("occupation", this.userInfo.occupation)
-      localStorage.setItem("id", this.userInfo.id)
+      localStorage.setItem('user', JSON.stringify(this.userInfo));
+      console.log('hi');
+      console.error(localStorage.getItem('user'));
+      console.log('hi');
+      localStorage.setItem('email', this.userInfo.email);
+      localStorage.setItem('id', this.userInfo.id);
       this.router.navigate(['/dashboard']);
     });
   }
