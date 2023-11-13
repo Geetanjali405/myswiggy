@@ -13,11 +13,9 @@ export const authGuard: CanActivateFn = (
   const router = inject(Router);
   console.warn(localStorage.getItem('id'));
   if (localStorage.getItem('id') !== null) {
-    // User is authenticated, allow access
     return true;
   } else {
-    // User is not authenticated, redirect to login page
-    router.navigate(['/cart']);
+    router.navigate(['/mainhome']);
     return false;
   }
 };

@@ -17,9 +17,19 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SupportComponent } from './components/support/support.component';
 import { NavbarComponent } from 'src/shared/sharedcomp/navbar/navbar.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
-  declarations: [AppComponent, MainhomeComponent, DashboardComponent, CartComponent, FavouritesComponent, ProfileComponent, SupportComponent, PagenotfoundComponent],
+  declarations: [
+    AppComponent,
+    MainhomeComponent,
+    DashboardComponent,
+    CartComponent,
+    FavouritesComponent,
+    ProfileComponent,
+    SupportComponent,
+    PagenotfoundComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +39,8 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

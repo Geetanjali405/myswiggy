@@ -10,12 +10,12 @@ import { SupportComponent } from './components/support/support.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
+  { path: '', component: MainhomeComponent },
   {
     path: 'dashboard',
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     component: DashboardComponent,
   },
-  { path: '', canActivate: [authGuard], component: MainhomeComponent },
 
   { path: 'cart', component: CartComponent },
   { path: 'profile', component: ProfileComponent },
