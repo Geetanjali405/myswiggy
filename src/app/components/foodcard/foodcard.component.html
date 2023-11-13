@@ -1,4 +1,4 @@
-<p-card header="{{ res?.name | slice: 0:20 }}" subheader="{{ res?.cuisines.slice(0, 2).join(', ') }}"
+<p-card header="{{ res?.name | slice: 0:20 }}" subheader="{{ res?.category }}"
         [style]="{ width: '250px', height: '235px' }" class="card mb-4 ">
         <ng-template pTemplate="header">
                 <img alt="Card" [src]="imgSrc" style="max-width: 100%; max-height: 150px;" class="img">

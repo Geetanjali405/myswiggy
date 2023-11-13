@@ -24,6 +24,7 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { SearchComponent } from './components/search/search.component';
 import { NavComponent } from './components/nav/nav.component';
+import { FoodcardComponent } from './components/foodcard/foodcard.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NavComponent } from './components/nav/nav.component';
     CardComponent,
     SearchComponent,
     NavComponent,
+    FoodcardComponent,
   ],
   imports: [
     BrowserModule,

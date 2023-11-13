@@ -9,6 +9,7 @@ const signUpEndPoint: string = `${baseURL}/signup`;
 const signInEndPoint: string = `${baseURL}/signin`;
 const getRestaurants: string = `${baseURL}/restaurant`;
 const getRestaurantsbyId: string = `${baseURL}/restaurant/{id}`;
+const getMenu: string = `${baseURL}/menu`;
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,12 @@ export class UserService {
   getRestrauntDetails(): Observable<any> {
     return this.httpclient
       .get<any>(`${getRestaurants}`)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getMenuDetails(): Observable<any> {
+    return this.httpclient
+      .get<any>(`${getMenu}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 
