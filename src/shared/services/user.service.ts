@@ -7,6 +7,8 @@ import { User } from '../model/user';
 const baseURL = 'http://localhost:8080';
 const signUpEndPoint: string = `${baseURL}/signup`;
 const signInEndPoint: string = `${baseURL}/signin`;
+const getRestaurants: string = `${baseURL}/restaurant`;
+const getRestaurantsbyId: string = `${baseURL}/restaurant/{id}`;
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +29,12 @@ export class UserService {
     header.set('Content-Type', 'application/json');
     return this.httpclient
       .post<any>(`${signInEndPoint}`, user, { headers: header })
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getRestrauntDetails(email: String): Observable<any> {
+    return this.httpclient
+      .get<any>(`${getRestaurants}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 

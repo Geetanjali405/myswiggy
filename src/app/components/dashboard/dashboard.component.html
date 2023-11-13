@@ -64,7 +64,7 @@
                                                                 </svg>
                                                                 <span class="cart_count_value">0</span>
                                                         </span>
-                                                        <span routerLink="/cart">Cart</span>
+                                                        <span routerLink="/notfound">Cart</span>
                                                 </a>
                                         </li>
                                 </ul>
@@ -72,15 +72,39 @@
                 </div>
         </nav>
 
-        <div>
-
-                <!-- <p-carousel [value]="images" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+        <div style="margin-top: 100px;" class="gap-3">
+                <h2 class="ms-5"><b>Best offers for you</b></h2>
+                <p-carousel [value]="images" [numVisible]="3" [numScroll]="3" [circular]="true"
+                        [autoplayInterval]="3000">
                         <ng-template let-image pTemplate="item">
-                          <div class="p-d-flex p-jc-center">
-                            <img [src]="image.image" />
-                          </div>
+                                <div style="padding-right: 16px;">
+                                        <img [src]="image.image" class="carousel-image" />
+                                </div>
                         </ng-template>
-                      </p-carousel> -->
+
+                        <p-carousel [numVisible]="1" [autoplayInterval]="3000" [responsiveOptions]="[
+                          {
+                            breakpoint: '1024px',
+                            numVisible: 2,
+                            numScroll: 2
+                          },
+                          {
+                            breakpoint: '768px',
+                            numVisible: 1,
+                            numScroll: 1
+                          }
+                        ]">
+                                <ng-template let-image pTemplate="item">
+                                        <div class="carousel-image-container">
+                                                <img [src]="image.image" class="carousel-image" />
+                                        </div>
+                                </ng-template>
+                        </p-carousel>
+                </p-carousel>
         </div>
+
+        
+
+
 
 </div>

@@ -18,6 +18,8 @@ import { SupportComponent } from './components/support/support.component';
 import { NavbarComponent } from 'src/shared/sharedcomp/navbar/navbar.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { CarouselModule } from 'primeng/carousel';
+import { LogoutComponent } from './components/logout/logout.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { CarouselModule } from 'primeng/carousel';
     ProfileComponent,
     SupportComponent,
     PagenotfoundComponent,
+    LogoutComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
