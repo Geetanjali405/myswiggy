@@ -10,6 +10,7 @@ import { SupportComponent } from './components/support/support.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { authGuard } from './guards/auth.guard';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   { path: '', canActivate: [authGuard], component: MainhomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'favourites', component: FavouritesComponent },
   { path: 'customersupport', component: SupportComponent },
+  { path: 'search', component: SearchComponent },
   { path: 'notfound', component: PagenotfoundComponent },
 ];
 

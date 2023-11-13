@@ -22,6 +22,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { CardComponent } from './components/card/card.component';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { SearchComponent } from './components/search/search.component';
+import { NavComponent } from './components/nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { ButtonModule } from 'primeng/button';
     PagenotfoundComponent,
     LogoutComponent,
     CardComponent,
+    SearchComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
