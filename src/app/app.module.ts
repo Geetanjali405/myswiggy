@@ -20,6 +20,8 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { CarouselModule } from 'primeng/carousel';
 import { LogoutComponent } from './components/logout/logout.component';
 import { CardComponent } from './components/card/card.component';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { CardComponent } from './components/card/card.component';
     ReactiveFormsModule,
     HttpClientModule,
     CarouselModule,
+    CardModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],

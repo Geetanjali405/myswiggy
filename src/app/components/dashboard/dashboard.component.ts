@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavbarComponent } from 'src/shared/sharedcomp/navbar/navbar.component';
 import { CarouselModule } from 'primeng/carousel';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/shared/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   public images = [
     {
       image:
@@ -43,8 +45,18 @@ export class DashboardComponent {
         'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_850,h_504/rng/md/carousel/production/c6ecfbe96b4dc6ce6cbe6fcdbe7ab2ae',
     },
   ];
-
-  constructor(private router: Router) { }
-  
-  
+  restaurantList: any[];
+  subscription: Subscription;
+  constructor(private router: Router, private userService: UserService) {}
+  ngOnInit(): void {
+    this.subscription = this.userService.getRestrauntDetails().subscribe(
+      (response) => {
+        this.restaurantList = response;
+        console.log(response);
+      },
+      (error) => {
+        console.log('Error in fetching restaurant details', error);
+      }
+    );
+  }
 }

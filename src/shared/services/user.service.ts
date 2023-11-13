@@ -32,7 +32,7 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getRestrauntDetails(email: String): Observable<any> {
+  getRestrauntDetails(): Observable<any> {
     return this.httpclient
       .get<any>(`${getRestaurants}`)
       .pipe(retry(1), catchError(this.handleError));
