@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
   ];
   restaurantList: any[];
   subscription: Subscription;
+  isAscending: any;
   constructor(private router: Router, private userService: UserService) {}
   ngOnInit(): void {
     this.subscription = this.userService.getRestrauntDetails().subscribe(
@@ -58,5 +59,35 @@ export class DashboardComponent implements OnInit {
         console.log('Error in fetching restaurant details', error);
       }
     );
+  }
+
+  toggleSortByRating(): void {
+    const isAscending =
+      this.isAscending === undefined ? true : this.isAscending;
+    this.restaurantList.sort((a, b) => {
+      const ratingA = parseFloat(a.avgRatingString);
+      const ratingB = parseFloat(b.avgRatingString);
+      if (isAscending) {
+        return ratingA - ratingB;
+      } else {
+        return ratingB - ratingA;
+      }
+    });
+    this.isAscending = !isAscending;
+  }
+
+  toggleSortBynoofRatings(): void {
+    const isAscending =
+      this.isAscending === undefined ? true : this.isAscending;
+    this.restaurantList.sort((a, b) => {
+      const ratingA = parseFloat(a.totalRatingsString);
+      const ratingB = parseFloat(b.totalRatingsString);
+      if (isAscending) {
+        return ratingA - ratingB;
+      } else {
+        return ratingB - ratingA;
+      }
+    });
+    this.isAscending = !isAscending;
   }
 }

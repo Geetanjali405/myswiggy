@@ -37,8 +37,21 @@
                 </p-carousel>
         </div>
 
-        <h2 class="ms-5" style="padding-left: 20px;"><b>Restaurants with online food delivery in Delhi</b></h2>
-        <div class="col-lg-12 d-flex justify-content-center">
+        <h2 class="ms-5 mb-2" style="padding-left: 20px;"><b>Restaurants with online food delivery in Delhi</b></h2>
+        <div class="ms-5">
+                <button pButton pRipple type="button" label="Sort by rating"
+                        class="p-button-raised p-button-secondary p-button-text category-btn"
+                        (click)="toggleSortByRating()"></button>
+                <button pButton pRipple type="button" label="Sort by no. of ratings"
+                        class="p-button-raised p-button-secondary p-button-text category-btn "
+                        (click)="toggleSortBynoofRatings()"></button>
+                <button pButton pRipple type="button" label="Pure Veg"
+                        class="p-button-raised p-button-secondary p-button-text category-btn "></button>
+                <button pButton pRipple type="button" label="Non Veg"
+                        class="p-button-raised p-button-secondary p-button-text category-btn "></button>
+        </div>
+
+        <div class="col-lg-12 d-flex justify-content-center mt-2">
                 <div class="row d-flex justify-content-center flex-wrap gap-2">
                         <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
                         <app-card *ngFor="let res of restaurantList " [res]="res"
