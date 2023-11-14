@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Pipe } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
@@ -14,6 +14,7 @@ export class RestaurantdetailsComponent {
   sub: Subscription;
   restaurant: any;
   menuList: any[];
+  filtered: any[];
   cloudinaryBaseURL =
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
   imgSrc: string;
@@ -47,11 +48,18 @@ export class RestaurantdetailsComponent {
       .subscribe(
         (response) => {
           this.menuList = response;
+          this.filtered = response;
           console.log(response);
         },
         (error) => {
           console.log('Error in fetching menudetails of restaurant', error);
         }
       );
+  }
+  toggleVegFilter() {
+    this.filtered = this.menuList.filter((item) => item.isVeg === '1');
+  }
+  toggleNonVegFilter() {
+    this.filtered = this.menuList.filter((item) => item.isVeg === '0');
   }
 }

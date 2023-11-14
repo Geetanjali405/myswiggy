@@ -69,7 +69,7 @@ export class UserService {
 
   addToFav(id: string, restId: string): Observable<string> {
     const headers = new HttpHeaders().set('Response-Type', 'text/plain');
-    console.log(`${addtofav}/${id}/${restId}`);
+    // console.log(`${addtofav}/${id}/${restId}`);
     return this.httpclient.post<string>(
       `${addtofav}/${id}/${restId}`,
       null,
@@ -83,6 +83,7 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  
   handleError(err: any) {
     return throwError(() => {
       console.log(err);
