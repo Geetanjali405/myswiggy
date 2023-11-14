@@ -25,6 +25,9 @@ import { ButtonModule } from 'primeng/button';
 import { SearchComponent } from './components/search/search.component';
 import { NavComponent } from './components/nav/nav.component';
 import { FoodcardComponent } from './components/foodcard/foodcard.component';
+import { RestaurantdetailsComponent } from './components/restaurantdetails/restaurantdetails.component';
+import {FieldsetModule} from 'primeng/fieldset';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +44,7 @@ import { FoodcardComponent } from './components/foodcard/foodcard.component';
     SearchComponent,
     NavComponent,
     FoodcardComponent,
+    RestaurantdetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,8 @@ import { FoodcardComponent } from './components/foodcard/foodcard.component';
     HttpClientModule,
     CarouselModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    FieldsetModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -11,6 +11,7 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { LogoutComponent } from './components/logout/logout.component';
 import { authGuard } from './guards/auth.guard';
 import { SearchComponent } from './components/search/search.component';
+import { RestaurantdetailsComponent } from './components/restaurantdetails/restaurantdetails.component';
 
 const routes: Routes = [
   { path: '', canActivate: [authGuard], component: MainhomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'favourites', component: FavouritesComponent },
   { path: 'customersupport', component: SupportComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'restaurant/:id', component: RestaurantdetailsComponent },
   { path: 'notfound', component: PagenotfoundComponent },
 ];
 

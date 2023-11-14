@@ -8,8 +8,9 @@ const baseURL = 'http://localhost:8080';
 const signUpEndPoint: string = `${baseURL}/signup`;
 const signInEndPoint: string = `${baseURL}/signin`;
 const getRestaurants: string = `${baseURL}/restaurant`;
-const getRestaurantsbyId: string = `${baseURL}/restaurant/{id}`;
+const getRestaurantsbyId: string = `${baseURL}/restaurant`;
 const getMenu: string = `${baseURL}/menu`;
+const getMenubyRes: string = `${baseURL}/menus`;
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,12 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  getRestaurantsbyId(id: string): Observable<any> {
+    return this.httpclient
+      .get<any>(`${getRestaurantsbyId}/${id}`)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
   getRestrauntDetails(): Observable<any> {
     return this.httpclient
       .get<any>(`${getRestaurants}`)
@@ -42,6 +49,12 @@ export class UserService {
   getMenuDetails(): Observable<any> {
     return this.httpclient
       .get<any>(`${getMenu}`)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getMenuDetailsofRestaurant(restId:string): Observable<any> {
+    return this.httpclient
+      .get<any>(`${getMenubyRes}/${restId}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 
