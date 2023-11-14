@@ -24,15 +24,21 @@ export class CardComponent {
     this.imgSrc = `${this.cloudinaryBaseURL}${this.res.cloudinaryImageId}`;
   }
   addToFav(id: string, restId: string) {
-    console.log('ID: '+id,'RestID: '+ restId);
-    console.log('inside addto fav function in card ts');
     this.userService.addToFav(id, restId).subscribe({
       next: (res) => {
         console.log(res);
-        console.log('after addto fav function in card ts');
       },
       error: (er) => {
         console.warn(er);
+      }
+    })
+
+    this.userService.getFav(id).subscribe({
+      next: (res) => {
+        
+      },
+      error: (er) => {
+        console.log(er);
       }
     })
   }
