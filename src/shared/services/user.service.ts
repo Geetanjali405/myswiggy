@@ -11,11 +11,20 @@ const getRestaurants: string = `${baseURL}/restaurant`;
 const getRestaurantsbyId: string = `${baseURL}/restaurant`;
 const getMenu: string = `${baseURL}/menu`;
 const getMenubyRes: string = `${baseURL}/menus`;
+const addtofav: string = `${baseURL}/addFavouriteRestaurant`;
+const getfav: string = `${baseURL}/getfavourites`;
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  httpOptions = {
+    headers: new HttpHeaders({
+      Accept: 'text/plain,*/*',
+      'Content-type': 'application/json',
+    }),
+    responseType: 'text' as 'json',
+  };
   constructor(private httpclient: HttpClient) {}
 
   registration(user: User): Observable<any> {
@@ -52,9 +61,25 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getMenuDetailsofRestaurant(restId:string): Observable<any> {
+  getMenuDetailsofRestaurant(restId: string): Observable<any> {
     return this.httpclient
       .get<any>(`${getMenubyRes}/${restId}`)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  addToFav(id: string, restId: string): Observable<string> {
+    const headers = new HttpHeaders().set('Response-Type', 'text/plain');
+    console.log(`${addtofav}/${id}/${restId}`);
+    return this.httpclient.post<string>(
+      `${addtofav}/${id}/${restId}`,
+      null,
+      this.httpOptions
+    );
+  }
+
+  getFav(id: string): Observable<any> {
+    return this.httpclient
+      .get<any>(`${getfav}/${id}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 

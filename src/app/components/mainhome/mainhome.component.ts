@@ -35,7 +35,18 @@ export class MainhomeComponent implements OnInit {
   }
   onSubmit() {
     console.warn(this.signUpForm.value);
-    this.user = this.signUpForm.value;
+    const formValue = this.signUpForm.value;
+    const newUser: User = {
+      userName: formValue.userName,
+      email: formValue.email,
+      password: formValue.password,
+      phone: '',
+      userAddress: '',
+      userType: '',
+      firstTimeUser: false,
+      favouriteRestaurants: [],
+    };
+    this.user = newUser;
     console.log(this.user);
     this.userService.registration(this.user).subscribe((response) => {
       console.log(response);
@@ -52,9 +63,9 @@ export class MainhomeComponent implements OnInit {
       alert('Logged IN');
       console.log(' Logged In');
       localStorage.setItem('user', JSON.stringify(this.userInfo));
-      console.log('hi');
+      // console.log('hi');
       console.error(localStorage.getItem('user'));
-      console.log('hi');
+      // console.log('hi');
       localStorage.setItem('email', this.userInfo.email);
       localStorage.setItem('id', this.userInfo.id);
       this.router.navigate(['/dashboard']);

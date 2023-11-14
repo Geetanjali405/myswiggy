@@ -16,7 +16,7 @@ export const authGuard: CanActivateFn = (
   console.error(localStorage.getItem('user'));
   console.warn(localStorage.getItem('id'));
   if (localStorage.getItem('user') !== null) {
-    router.navigate['dashboard']
+    router.navigate['dashboard'];
     // alert('access denied true');
     return true;
   } else {

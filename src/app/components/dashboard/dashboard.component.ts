@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
   isAscending: any;
   constructor(private router: Router, private userService: UserService) {}
   ngOnInit(): void {
+    console.warn(localStorage.getItem('id'));
     this.subscription = this.userService.getRestrauntDetails().subscribe(
       (response) => {
         this.restaurantList = response;

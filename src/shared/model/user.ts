@@ -1,7 +1,7 @@
 import { Restaurant } from './restaurant';
 
 export class User {
-  id: String = '';
+  id?: String = '';
   userName: String = '';
   password: String = '';
   phone: String = '';
