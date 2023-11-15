@@ -8,7 +8,6 @@ import { UserService } from 'src/shared/services/user.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-  
 export class CartComponent implements OnInit {
   Razorpay: any;
   subscription: Subscription;
@@ -74,13 +73,22 @@ export class CartComponent implements OnInit {
     );
   }
 
-  makePayment(amount: any) {
+  makePayment(amount: any, id: any) {
+    this.userService.addToDelivery(id).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (er) => {
+        console.warn(er);
+      },
+    });
+
     const paymentHandler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_51O0D4kSGOSBMEK547xBZt1fmSQFw9w3r0YRpCrtCxvvA1vYrDyqnwlfUcFYDIzxpoLIpJChr7qrxdcSSnSRcoVrR00iOqeCNAt',
       locale: 'auto',
       token: function (stripeToken: any) {
         console.log(stripeToken);
-        alert('Stripe token generated!');
+        // alert('Stripe token generated!');
       },
     });
     paymentHandler.open({
@@ -101,7 +109,7 @@ export class CartComponent implements OnInit {
           locale: 'auto',
           token: function (stripeToken: any) {
             // console.log(stripeToken);
-            alert('Payment has been successfull!');
+            // alert('Payment has been successfull!');
           },
         });
       };
@@ -109,6 +117,6 @@ export class CartComponent implements OnInit {
     }
   }
   Payment() {
-    alert('payment successfull');
+    // alert('payment successfull');
   }
 }

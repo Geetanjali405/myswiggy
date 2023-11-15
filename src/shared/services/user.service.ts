@@ -4,6 +4,7 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 import { Restaurant } from '../model/restaurant';
 import { User } from '../model/user';
 import { Cart } from '../model/cart';
+import { DeliveryData } from '../model/delivery';
 
 const baseURL = 'http://localhost:8080';
 const signUpEndPoint: string = `${baseURL}/signup`;
@@ -19,6 +20,9 @@ const showCart: string = `${baseURL}/carts/user`;
 const addOrIncreaseItem: string = `${baseURL}/cart`;
 const decItem: string = `${baseURL}/cartdec`;
 const remoItem: string = `${baseURL}/delete`;
+const adddel: string = `${baseURL}/delivery`;
+const getdel: string = `${baseURL}/delivery/6554e024a594227362c3e04d`;
+const updateStatus: string = `${baseURL}/delivery`;
 
 @Injectable({
   providedIn: 'root',
@@ -136,6 +140,36 @@ export class UserService {
         console.log('Error in removing item: ' + error);
         return throwError('Error in removing item. Please try again later.');
       })
+    );
+  }
+
+  addToDelivery(cartId: string): Observable<DeliveryData> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.httpclient.post<DeliveryData>(
+      `${adddel}/${cartId}`,
+      null,
+      httpOptions
+    );
+  }
+
+  getDelivery(): Observable<DeliveryData> {
+    return this.httpclient.get<DeliveryData>(`${getdel}`);
+  }
+
+  updateStatusofOrder(orderId: string): Observable<DeliveryData> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.httpclient.post<DeliveryData>(
+      `${updateStatus}/${orderId}`,
+      null,
+      httpOptions
     );
   }
 

@@ -25,6 +25,6 @@
                         <li *ngIf="cart?.orderPlaced">Order Placed: {{ cart.orderPlaced }}</li>
                         <li *ngIf="cart?.total">Total: {{ cart.total }}</li>
                 </ul>
-                <button (click)="makePayment(cart.total )">Place order now</button>
+                <button (click)="makePayment(cart.total, cart.id)">Place order now</button>
         </div>
 </div>

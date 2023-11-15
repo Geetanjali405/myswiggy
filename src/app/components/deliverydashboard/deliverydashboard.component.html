@@ -1,2 +1,21 @@
-
 <h1><b>WELCOME ALEX TO SWIGGY DELIVERY</b></h1>
+<div class="delivery-details">
+        <h2>Delivery Details</h2>
+        <table>
+                <thead>
+                        <tr>
+                                <th>Order ID</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <tr *ngFor="let orderIdStatus of delivery.orderIdAndStatus | keyvalue">
+                                <td>{{orderIdStatus.key}}</td>
+                                <td>{{orderIdStatus.value}}</td>
+                                <td><button (click)="showUpdateStatusPopup(orderIdStatus.key)">Update Status</button>
+                                </td>
+                        </tr>
+                </tbody>
+        </table>
+</div>
