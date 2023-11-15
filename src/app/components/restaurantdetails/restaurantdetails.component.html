@@ -19,14 +19,15 @@
                         style="max-width: 80%;">
                         <img alt="Card" [src]="menuItem.imageId" style="max-width: 85%; max-height: 150px;" class="img">
                         <div class="details">
+                                <h1>{{menuItem.id}}</h1>
                                 <h3>{{ menuItem.name }}</h3>
                                 <p>Category: {{ menuItem.category }}</p>
                                 <p>{{ menuItem.description }}</p>
                                 <p>Price:Rs. {{ menuItem.price /100}}</p>
                                 <p>menu?.</p>
                         </div>
-                        <button class="add-to-cart">
-                              Add too cart
+                        <button class="add-to-cart" (click)=" addIteminCart(menuItem.id)">
+                                Add too cart
                         </button>
                 </div>
         </div>

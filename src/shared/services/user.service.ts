@@ -15,8 +15,8 @@ const getMenubyRes: string = `${baseURL}/menus`;
 const addtofav: string = `${baseURL}/addFavouriteRestaurant`;
 const getfav: string = `${baseURL}/getfavourites`;
 const createuserCart: string = `${baseURL}/cart`;
-const showCart:string=`${baseURL}/carts/user`;
-const addOrIncreaseItem:string =`${baseURL}/cart`;
+const showCart: string = `${baseURL}/carts/user`;
+const addOrIncreaseItem: string = `${baseURL}/cart`;
 
 @Injectable({
   providedIn: 'root',
@@ -93,7 +93,6 @@ export class UserService {
         'Content-Type': 'application/json',
       }),
     };
-    console.log(userId);
     const body = { userId: userId };
     return this.httpclient.post<Cart>(`${createuserCart}`, body, httpOptions);
   }
@@ -101,6 +100,19 @@ export class UserService {
   getCart(userId: string): Observable<Cart> {
     console.warn(`${showCart}/${userId}`);
     return this.httpclient.get<Cart>(`${showCart}/${userId}`);
+  }
+
+  addItemToCart(userId: string, itemId: string): Observable<Cart> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.httpclient.put<Cart>(
+      `${addOrIncreaseItem}/${userId}/${itemId}`,
+      {},
+      httpOptions
+    );
   }
 
   handleError(err: any) {

@@ -71,9 +71,9 @@ export class MainhomeComponent implements OnInit {
       localStorage.setItem('id', this.userInfo.id);
       console.error('line 72, before creation of cart');
       console.warn(localStorage.getItem('id'));
+      
       //creating cart for user
       this.userId = localStorage.getItem('id');
-      // console.warn(this.userId);
       this.userService.createCart(this.userId).subscribe(cart => {
         console.log('Cart created: ', cart);
       }, error => {
