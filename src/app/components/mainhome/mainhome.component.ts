@@ -16,6 +16,7 @@ export class MainhomeComponent implements OnInit {
   user = new User();
   userInfo: any;
   userId: string;
+  delId: string;
 
   constructor(
     private offcanvasService: NgbOffcanvas,
@@ -33,6 +34,15 @@ export class MainhomeComponent implements OnInit {
       email: new FormControl(''),
       password: new FormControl(''),
     });
+    if (this.userInfo.userType === 'Delivery') {
+      localStorage.setItem('delId', this.userInfo.id);
+      console.warn(this.delId);
+      this.router.navigate(['/deliverydashboard']);
+    }
+    // if (localStorage.getItem('user')) {
+    //   // if (confirm('user already logged in') == true)
+    //   this.router.navigate['/dashboard'];
+    //   }
   }
   onSubmit() {
     console.warn(this.signUpForm.value);
@@ -55,32 +65,39 @@ export class MainhomeComponent implements OnInit {
     });
   }
   onSubmitIn() {
-    // console.warn(this.signInForm.value);
     this.user = this.signInForm.value;
     console.log(this.user);
     this.userService.loginUser(this.user).subscribe((response) => {
       this.userInfo = response;
-      // console.log(response);
       alert('Logged IN');
       console.log(' Logged In');
       localStorage.setItem('user', JSON.stringify(this.userInfo));
-      // console.log('hi');
       console.error(localStorage.getItem('user'));
-      // console.log('hi');
       localStorage.setItem('email', this.userInfo.email);
       localStorage.setItem('id', this.userInfo.id);
-      console.error('line 72, before creation of cart');
       console.warn(localStorage.getItem('id'));
-      
+
       //creating cart for user
       this.userId = localStorage.getItem('id');
-      this.userService.createCart(this.userId).subscribe(cart => {
-        console.log('Cart created: ', cart);
-      }, error => {
-        console.error('Error creating cart: ', error);
-      });
+      this.userService.createCart(this.userId).subscribe(
+        (cart) => {
+          console.log('Cart created: ', cart);
+        },
+        (error) => {
+          console.error('Error creating cart: ', error);
+        }
+      );
 
-      this.router.navigate(['/dashboard']);
+      console.log('line 86');
+      console.log(this.userInfo.userType);
+
+      if (this.userInfo.userType === 'Delivery') {
+        localStorage.setItem('delId', this.userInfo.id);
+        console.warn(this.delId);
+        this.router.navigate(['/deliverydashboard']);
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
     });
   }
   openEndSignIn(contentsignin: TemplateRef<any>) {

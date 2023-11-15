@@ -12,14 +12,18 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { authGuard } from './guards/auth.guard';
 import { SearchComponent } from './components/search/search.component';
 import { RestaurantdetailsComponent } from './components/restaurantdetails/restaurantdetails.component';
+import { DeliverydashboardComponent } from './components/deliverydashboard/deliverydashboard.component';
 
 const routes: Routes = [
-  { path: '', canActivate: [authGuard], component: MainhomeComponent },
+  { path: '', component: MainhomeComponent },
   {
     path: 'dashboard',
-    canActivate: [authGuard],
     component: DashboardComponent,
     children: [{ path: '', component: LogoutComponent }],
+  },
+  {
+    path: 'deliverydashboard',
+    component: DeliverydashboardComponent,
   },
 
   { path: 'cart', component: CartComponent },

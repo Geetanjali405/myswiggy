@@ -27,6 +27,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { FoodcardComponent } from './components/foodcard/foodcard.component';
 import { RestaurantdetailsComponent } from './components/restaurantdetails/restaurantdetails.component';
 import {FieldsetModule} from 'primeng/fieldset';
+import { DeliverydashboardComponent } from './components/deliverydashboard/deliverydashboard.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {FieldsetModule} from 'primeng/fieldset';
     NavComponent,
     FoodcardComponent,
     RestaurantdetailsComponent,
+    DeliverydashboardComponent,
   ],
   imports: [
     BrowserModule,
