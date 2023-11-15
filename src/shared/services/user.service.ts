@@ -17,6 +17,8 @@ const getfav: string = `${baseURL}/getfavourites`;
 const createuserCart: string = `${baseURL}/cart`;
 const showCart: string = `${baseURL}/carts/user`;
 const addOrIncreaseItem: string = `${baseURL}/cart`;
+const decItem: string = `${baseURL}/cartdec`;
+const remoItem: string = `${baseURL}/delete`;
 
 @Injectable({
   providedIn: 'root',
@@ -112,6 +114,28 @@ export class UserService {
       `${addOrIncreaseItem}/${userId}/${itemId}`,
       {},
       httpOptions
+    );
+  }
+
+  decreaseItem(userId: string, itemId: string): Observable<Cart> {
+    return this.httpclient
+      .put<Cart>(`${decItem}/${userId}/${itemId}`, null)
+      .pipe(
+        catchError((error) => {
+          console.log('Error in decreasing item: ' + error);
+          return throwError(
+            'Error in decreasing item. Please try again later.'
+          );
+        })
+      );
+  }
+
+  removeItem(userId: string, itemId: string): Observable<Cart> {
+    return this.httpclient.delete<Cart>(`${remoItem}/${userId}/${itemId}`).pipe(
+      catchError((error) => {
+        console.log('Error in removing item: ' + error);
+        return throwError('Error in removing item. Please try again later.');
+      })
     );
   }
 

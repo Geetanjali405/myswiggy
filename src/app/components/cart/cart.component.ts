@@ -20,6 +20,10 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
+    this.populateCart();
+  }
+
+  populateCart() {
     this.userService.getCart(this.userId).subscribe(
       (cart) => {
         this.cart = cart;
@@ -31,20 +35,38 @@ export class CartComponent implements OnInit {
       }
     );
   }
-  removeItem(arg0: unknown) {
-    throw new Error('Method not implemented.');
+  removeItem(menuId: any) {
+    this.userService.removeItem(this.userId, menuId).subscribe(
+      (cart) => {
+        console.log('Removed item from cart');
+        this.cart = cart;
+        this.populateCart();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
   increaseItem(menuId: any) {
     this.userService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item increased by 1 successfully!');
+        this.populateCart();
       },
       (error) => {
         console.error('Error while increasing item in cart: ' + error);
       }
     );
   }
-  decreaseItem(arg0: unknown) {
-    throw new Error('Method not implemented.');
+  decreaseItem(menuId: any) {
+    this.userService.decreaseItem(this.userId, menuId).subscribe(
+      (data) => {
+        console.log('Item decresed by 1 successfully!');
+        this.populateCart();
+      },
+      (error) => {
+        console.error('Error while decreasing item in cart: ' + error);
+      }
+    );
   }
 }
