@@ -15,6 +15,8 @@ const getMenubyRes: string = `${baseURL}/menus`;
 const addtofav: string = `${baseURL}/addFavouriteRestaurant`;
 const getfav: string = `${baseURL}/getfavourites`;
 const createuserCart: string = `${baseURL}/cart`;
+const showCart:string=`${baseURL}/carts/user`;
+const addOrIncreaseItem:string =`${baseURL}/cart`;
 
 @Injectable({
   providedIn: 'root',
@@ -91,8 +93,14 @@ export class UserService {
         'Content-Type': 'application/json',
       }),
     };
-    const body = { userId };
+    console.log(userId);
+    const body = { userId: userId };
     return this.httpclient.post<Cart>(`${createuserCart}`, body, httpOptions);
+  }
+
+  getCart(userId: string): Observable<Cart> {
+    console.warn(`${showCart}/${userId}`);
+    return this.httpclient.get<Cart>(`${showCart}/${userId}`);
   }
 
   handleError(err: any) {

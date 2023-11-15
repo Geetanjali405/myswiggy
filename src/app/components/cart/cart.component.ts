@@ -13,11 +13,6 @@ export class CartComponent implements OnInit {
   subscription: Subscription;
   cart: any;
   userId: string;
-  // this.createCart(2).subscribe(cart => {
-  //   console.log('Cart created: ', cart);
-  // }, error => {
-  //   console.error('Error creating cart: ', error);
-  // });
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -26,6 +21,13 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
-    
+    this.userService.getCart(this.userId).subscribe(cart => {
+      this.cart = cart; 
+      console.log("line 26");
+      console.warn(cart);
+    }, error => {
+      console.error('Error fetching cart: ', error);
+    });
+
   }
 }
