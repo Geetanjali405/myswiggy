@@ -8,10 +8,13 @@ import { UserService } from 'src/shared/services/user.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
+  
 export class CartComponent implements OnInit {
+  Razorpay: any;
   subscription: Subscription;
   cart: any;
   userId: string;
+  paymentHandler: any = null;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -21,6 +24,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
     this.populateCart();
+    this.invokeStripe();
   }
 
   populateCart() {
@@ -68,5 +72,43 @@ export class CartComponent implements OnInit {
         console.error('Error while decreasing item in cart: ' + error);
       }
     );
+  }
+
+  makePayment(amount: any) {
+    const paymentHandler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51O0D4kSGOSBMEK547xBZt1fmSQFw9w3r0YRpCrtCxvvA1vYrDyqnwlfUcFYDIzxpoLIpJChr7qrxdcSSnSRcoVrR00iOqeCNAt',
+      locale: 'auto',
+      token: function (stripeToken: any) {
+        console.log(stripeToken);
+        alert('Stripe token generated!');
+      },
+    });
+    paymentHandler.open({
+      name: 'MySwiggy',
+      description: 'Eat good💗',
+      amount: amount * 100,
+    });
+  }
+  invokeStripe() {
+    if (!window.document.getElementById('stripe-script')) {
+      const script = window.document.createElement('script');
+      script.id = 'stripe-script';
+      script.type = 'text/javascript';
+      script.src = 'https://checkout.stripe.com/checkout.js';
+      script.onload = () => {
+        this.paymentHandler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51H7bbSE2RcKvfXD4DZhu',
+          locale: 'auto',
+          token: function (stripeToken: any) {
+            // console.log(stripeToken);
+            alert('Payment has been successfull!');
+          },
+        });
+      };
+      window.document.body.appendChild(script);
+    }
+  }
+  Payment() {
+    alert('payment successfull');
   }
 }
