@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { Restaurant } from '../model/restaurant';
 import { User } from '../model/user';
+import { Cart } from '../model/cart';
 
 const baseURL = 'http://localhost:8080';
 const signUpEndPoint: string = `${baseURL}/signup`;
@@ -13,6 +14,7 @@ const getMenu: string = `${baseURL}/menu`;
 const getMenubyRes: string = `${baseURL}/menus`;
 const addtofav: string = `${baseURL}/addFavouriteRestaurant`;
 const getfav: string = `${baseURL}/getfavourites`;
+const createuserCart: string = `${baseURL}/cart`;
 
 @Injectable({
   providedIn: 'root',
@@ -83,7 +85,16 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  
+  createCart(userId: string): Observable<Cart> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    const body = { userId };
+    return this.httpclient.post<Cart>(`${createuserCart}`, body, httpOptions);
+  }
+
   handleError(err: any) {
     return throwError(() => {
       console.log(err);

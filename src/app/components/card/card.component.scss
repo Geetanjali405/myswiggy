@@ -5,8 +5,10 @@
 .img{
         border-radius: 10px;
 }
+.pi { font-family:'primeicons' !important }
 .rating-cuisines {
         display: block;
         margin-top: 5px;
         font-weight: bold;
       }
+      @import '~primeicons/primeicons.css';

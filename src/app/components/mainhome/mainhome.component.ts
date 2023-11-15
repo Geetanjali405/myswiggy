@@ -15,6 +15,7 @@ export class MainhomeComponent implements OnInit {
   signInForm: FormGroup;
   user = new User();
   userInfo: any;
+  userId: string;
 
   constructor(
     private offcanvasService: NgbOffcanvas,
@@ -68,6 +69,17 @@ export class MainhomeComponent implements OnInit {
       // console.log('hi');
       localStorage.setItem('email', this.userInfo.email);
       localStorage.setItem('id', this.userInfo.id);
+      console.error('line 72, before creation of cart');
+      console.warn(localStorage.getItem('id'));
+      //creating cart for user
+      // this.userId = localStorage.getItem('id');
+      // console.warn(this.userId);
+      this.userService.createCart('id').subscribe(cart => {
+        console.log('Cart created: ', cart);
+      }, error => {
+        console.error('Error creating cart: ', error);
+      });
+
       this.router.navigate(['/dashboard']);
     });
   }

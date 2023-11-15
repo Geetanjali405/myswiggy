@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { UserService } from 'src/shared/services/user.service';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-card',

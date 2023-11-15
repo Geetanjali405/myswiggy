@@ -55,6 +55,12 @@ export class RestaurantdetailsComponent {
           console.log('Error in fetching menudetails of restaurant', error);
         }
       );
+
+    document.querySelectorAll('.add-to-cart').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        button.classList.toggle('added');
+      });
+    });
   }
   toggleVegFilter() {
     this.filtered = this.menuList.filter((item) => item.isVeg === '1');
