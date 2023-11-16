@@ -1,4 +1,4 @@
-import { Component, Pipe } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
@@ -19,6 +19,7 @@ export class RestaurantdetailsComponent {
   cloudinaryBaseURL =
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
   imgSrc: string;
+  layout: string = 'list';
 
   constructor(
     private route: ActivatedRoute,
@@ -71,6 +72,7 @@ export class RestaurantdetailsComponent {
   toggleNonVegFilter() {
     this.filtered = this.menuList.filter((item) => item.isVeg === '0');
   }
+
   addIteminCart(menuId: string) {
     // console.log(menuId);
     // console.log(this.userId);

@@ -4,7 +4,7 @@
 
                 <h1>
                         <p>{{restaurant?.name}}</p>
-                        <img alt="Card" [src]="imgSrc" style="max-width: 100%; max-height: 150px;" class="img">
+                        <img alt="Card" [src]="imgSrc" style="max-width: 35%; max-height: 150px;" class="img">
 
                 </h1>
         </div>
@@ -15,20 +15,22 @@
                 <button pButton pRipple type="button" label="Non Veg"
                         class="p-button-raised p-button-secondary p-button-text category-btn "
                         (click)="toggleNonVegFilter()"></button>
-                <div *ngFor="let menuItem of filtered " class="card mb-4 d-flex justify-content-between"
-                        style="max-width: 80%;">
-                        <img alt="Card" [src]="menuItem.imageId" style="max-width: 85%; max-height: 150px;" class="img">
-                        <div class="details">
-                                <h1>{{menuItem.id}}</h1>
-                                <h3>{{ menuItem.name }}</h3>
-                                <p>Category: {{ menuItem.category }}</p>
-                                <p>{{ menuItem.description }}</p>
-                                <p>Price:Rs. {{ menuItem.price /100}}</p>
-                                <p>menu?.</p>
+                <div class="list">
+                        <div *ngFor="let menuItem of filtered" class="card-container">
+                                <div class="details">
+                                        <h1>{{menuItem.id}}</h1>
+                                        <h3>{{ menuItem.name }}</h3>
+                                        <p>Category: {{ menuItem.category }}</p>
+                                        <p>{{ menuItem.description }}</p>
+                                        <p>Price:Rs. {{ menuItem.price / 100 }}</p>
+                                </div>
+                                <div class="img-container">
+                                        <img alt="Card" src="https://picsum.photos/200/300" class="img">
+                                        <button class="add-to-cart" (click)="addIteminCart(menuItem.id)">Add to
+                                                cart</button>
+                                </div>
                         </div>
-                        <button class="add-to-cart" (click)=" addIteminCart(menuItem.id)">
-                                Add too cart
-                        </button>
                 </div>
+
         </div>
 </div>

@@ -4,6 +4,7 @@ import { NavbarComponent } from 'src/shared/sharedcomp/navbar/navbar.component';
 import { CarouselModule } from 'primeng/carousel';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-dashboard',
@@ -61,6 +62,7 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
 
   toggleSortByRating(): void {
     const isAscending =

@@ -26,9 +26,10 @@ import { SearchComponent } from './components/search/search.component';
 import { NavComponent } from './components/nav/nav.component';
 import { FoodcardComponent } from './components/foodcard/foodcard.component';
 import { RestaurantdetailsComponent } from './components/restaurantdetails/restaurantdetails.component';
-import {FieldsetModule} from 'primeng/fieldset';
+import { FieldsetModule } from 'primeng/fieldset';
 import { DeliverydashboardComponent } from './components/deliverydashboard/deliverydashboard.component';
-
+import { PanelModule } from 'primeng/panel';
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,9 @@ import { DeliverydashboardComponent } from './components/deliverydashboard/deliv
     CarouselModule,
     CardModule,
     ButtonModule,
-    FieldsetModule
+    FieldsetModule,
+    PanelModule,
+    DataViewModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
