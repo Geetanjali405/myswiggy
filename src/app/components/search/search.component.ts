@@ -14,6 +14,8 @@ export class SearchComponent {
   filteredProducts: any[];
   subscription: Subscription;
   searchForm: FormGroup;
+
+
   constructor(
     private router: Router,
     private userService: UserService,
@@ -41,6 +43,9 @@ export class SearchComponent {
   filterProducts() {
     let query = this.searchForm.get('searchQuery')?.value;
     console.log(query);
+    if (query.length == "") {
+      return null;
+    }
     if (query.length > 1) {
       this.filteredProducts = this.menuList.filter((item) => {
         return (
@@ -52,4 +57,5 @@ export class SearchComponent {
       console.log(this.filteredProducts);
     }
   }
+
 }
