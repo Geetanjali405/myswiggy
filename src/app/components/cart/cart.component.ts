@@ -26,7 +26,8 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
     console.log('hi');
-    this.getOrderStatus();
+    this.populateCart();
+    this.getOrderStatus(this.cartId);
     this.invokeStripe();
   }
 
@@ -34,11 +35,8 @@ export class CartComponent implements OnInit {
     this.userService.getCart(this.userId).subscribe(
       (cart) => {
         this.cart = cart;
-        // console.log('line 26');
-        // console.warn(cart);
-        // console.error(this.cart.id);
         this.cartId = this.cart.id;
-        // this.statusorder = this.getOrderStatus(this.cartId);
+        this.statusorder = this.getOrderStatus(this.cartId);
       },
       (error) => {
         console.error('Error fetching cart: ', error);
@@ -122,33 +120,16 @@ export class CartComponent implements OnInit {
       window.document.body.appendChild(script);
     }
   }
-  Payment() {
-    // alert('payment successfull');
-  }
 
-  getOrderStatus() {
+  getOrderStatus(cartId:string) {
     console.warn('inside get order status');
-    // this.userService.getOrderStatuss(orderId).subscribe({
-    //   next: (response) => {
-    //     console.log(response.body);
-    //     this.status = response;
-    //     this.statusorder = response;
-    //     console.warn(this.statusorder);
-    //     console.log('Response as string:', response);
-    //   },
-    //   error: (error) => {
-    //     console.error(error);
-    //     console.error('Error parsing JSON', error);
-    //   },
-    // });
-    // this.userService.getOrderStatuss(orderId);
-    this.userService.orderStatusBS$.subscribe({
+    this.userService.getOrderStatuss(this.cartId).subscribe({
       next: (response) => {
-        console.warn('inside Behavior subject sub');
-        console.log(response);
+        console.log(response.body);
+        this.status = response;
         this.statusorder = response;
-        console.log("Status order: "+this.statusorder);
-        this.populateCart();
+        console.warn(this.statusorder);
+        console.log('Response as string:', response);
       },
       error: (error) => {
         console.error(error);

@@ -26,29 +26,16 @@ export class DeliverydashboardComponent implements OnInit {
   }
 
   populateCart() {
-    // this.userService.getDelivery().subscribe(
-    //   (delivery) => {
-    //     this.delivery = delivery;
-    //     console.log('line 26');
-    //     console.warn(delivery);
-    //   },
-    //   (error) => {
-    //     console.error('Error fetching delivery: ', error);
-    //   }
-    // );
-    this.userService.getDelivery();
-    this.userService.deliveryBS$.subscribe({
-      next: (res) => {
-        this.delivery = res;
+    this.userService.getDelivery().subscribe(
+      (delivery) => {
+        this.delivery = delivery;
         console.log('line 26');
-        console.warn("Delivery status: "+this.delivery);
-
-        this.userService.getOrderStatuss();
+        console.warn(delivery);
       },
-      error: (error) => {
+      (error) => {
         console.error('Error fetching delivery: ', error);
-      },
-    });
+      }
+    );
   }
 
   showUpdateStatusPopup(orderId: any) {
