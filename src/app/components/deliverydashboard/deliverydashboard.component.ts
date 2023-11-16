@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { DeliveryData } from 'src/shared/model/delivery';
 import { UserService } from 'src/shared/services/user.service';
 
@@ -26,17 +26,31 @@ export class DeliverydashboardComponent implements OnInit {
   }
 
   populateCart() {
-    this.userService.getDelivery().subscribe(
-      (delivery) => {
-        this.delivery = delivery;
+    // this.userService.getDelivery().subscribe(
+    //   (delivery) => {
+    //     this.delivery = delivery;
+    //     console.log('line 26');
+    //     console.warn(delivery);
+    //   },
+    //   (error) => {
+    //     console.error('Error fetching delivery: ', error);
+    //   }
+    // );
+    this.userService.getDelivery();
+    this.userService.deliveryBS$.subscribe({
+      next: (res) => {
+        this.delivery = res;
         console.log('line 26');
-        console.warn(delivery);
+        console.warn("Delivery status: "+this.delivery);
+
+        this.userService.getOrderStatuss();
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching delivery: ', error);
-      }
-    );
+      },
+    });
   }
+
   showUpdateStatusPopup(orderId: any) {
     this.userService.updateStatusofOrder(orderId).subscribe(
       (delivery) => {

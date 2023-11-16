@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, retry, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { BehaviorSubject, catchError, Observable, retry, Subject, throwError } from 'rxjs';
 import { Restaurant } from '../model/restaurant';
 import { User } from '../model/user';
 import { Cart } from '../model/cart';
@@ -23,6 +23,7 @@ const remoItem: string = `${baseURL}/delete`;
 const adddel: string = `${baseURL}/delivery`;
 const getdel: string = `${baseURL}/delivery/6554e024a594227362c3e04d`;
 const updateStatus: string = `${baseURL}/delivery`;
+const getStatus: string = `${baseURL}/getstatus`;
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,16 @@ export class UserService {
     }),
     responseType: 'text' as 'json',
   };
-  constructor(private httpclient: HttpClient) {}
+
+  deliveryBS: Subject<DeliveryData> = new Subject();
+  deliveryBS$ = this.deliveryBS.asObservable();
+
+  orderStatusBS: BehaviorSubject<string> = new BehaviorSubject('');
+  orderStatusBS$ = this.orderStatusBS.asObservable();
+
+  constructor(private httpclient: HttpClient) {
+    this.getDelivery();
+  }
 
   registration(user: User): Observable<any> {
     const header = new HttpHeaders();
@@ -156,8 +166,17 @@ export class UserService {
     );
   }
 
-  getDelivery(): Observable<DeliveryData> {
-    return this.httpclient.get<DeliveryData>(`${getdel}`);
+  // getDelivery(): Observable<DeliveryData> {
+  //   return this.httpclient.get<DeliveryData>(`${getdel}`);
+  // }
+
+  getDelivery() {
+    this.httpclient.get<DeliveryData>(`${getdel}`).subscribe({
+      next: (res) => {
+        this.deliveryBS.next(res);
+        this.getOrderStatuss();
+      },
+    });
   }
 
   updateStatusofOrder(orderId: string): Observable<DeliveryData> {
@@ -171,6 +190,41 @@ export class UserService {
       null,
       httpOptions
     );
+  }
+
+  // getOrderStatuss(orderId: string): Observable<any> {
+  //   // const headers = new HttpHeaders().set('Response-Type', 'text/plain');
+  //   // console.log(' inside getorderstatus service function');
+  //   // console.log(`${getStatus}/${orderId}`);
+  //   return this.httpclient
+  //     .get<any>(`${getStatus}/${orderId}`, this.httpOptions)
+  //     .pipe(retry(1), catchError(this.handleError));
+  // }
+
+  getOrderStatuss() {
+    // const headers = new HttpHeaders().set('Response-Type', 'text/plain');
+    // console.log(' inside getorderstatus service function');
+    // console.log(`${getStatus}/${orderId}`);
+    const userId = localStorage.getItem('id');
+    this.getCart(userId).subscribe({
+      next: (res) => {
+        const orderId = res.id;
+        this.httpclient
+          .get<any>(`${getStatus}/${orderId}`, this.httpOptions)
+          .pipe(retry(1), catchError(this.handleError))
+          .subscribe({
+            next: (res) => {
+              console.warn("incoming response from user service getorderstatus");
+              console.warn(`${getStatus}/${orderId}`);
+              console.warn(res);
+              this.orderStatusBS.next(res);
+            },
+            error: (er) => {
+              console.error(er);
+            },
+          });
+      },
+    });
   }
 
   handleError(err: any) {

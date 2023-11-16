@@ -13,7 +13,10 @@ export class CartComponent implements OnInit {
   subscription: Subscription;
   cart: any;
   userId: string;
+  cartId: any;
   paymentHandler: any = null;
+  status: any;
+  statusorder: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -22,7 +25,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
-    this.populateCart();
+    console.log('hi');
+    this.getOrderStatus();
     this.invokeStripe();
   }
 
@@ -30,8 +34,11 @@ export class CartComponent implements OnInit {
     this.userService.getCart(this.userId).subscribe(
       (cart) => {
         this.cart = cart;
-        console.log('line 26');
-        console.warn(cart);
+        // console.log('line 26');
+        // console.warn(cart);
+        // console.error(this.cart.id);
+        this.cartId = this.cart.id;
+        // this.statusorder = this.getOrderStatus(this.cartId);
       },
       (error) => {
         console.error('Error fetching cart: ', error);
@@ -72,7 +79,6 @@ export class CartComponent implements OnInit {
       }
     );
   }
-
   makePayment(amount: any, id: any) {
     this.userService.addToDelivery(id).subscribe({
       next: (res) => {
@@ -118,5 +124,36 @@ export class CartComponent implements OnInit {
   }
   Payment() {
     // alert('payment successfull');
+  }
+
+  getOrderStatus() {
+    console.warn('inside get order status');
+    // this.userService.getOrderStatuss(orderId).subscribe({
+    //   next: (response) => {
+    //     console.log(response.body);
+    //     this.status = response;
+    //     this.statusorder = response;
+    //     console.warn(this.statusorder);
+    //     console.log('Response as string:', response);
+    //   },
+    //   error: (error) => {
+    //     console.error(error);
+    //     console.error('Error parsing JSON', error);
+    //   },
+    // });
+    // this.userService.getOrderStatuss(orderId);
+    this.userService.orderStatusBS$.subscribe({
+      next: (response) => {
+        console.warn('inside Behavior subject sub');
+        console.log(response);
+        this.statusorder = response;
+        console.log("Status order: "+this.statusorder);
+        this.populateCart();
+      },
+      error: (error) => {
+        console.error(error);
+        console.error('Error parsing JSON', error);
+      },
+    });
   }
 }
