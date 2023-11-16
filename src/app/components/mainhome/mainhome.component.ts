@@ -69,13 +69,9 @@ export class MainhomeComponent implements OnInit {
     console.log(this.user);
     this.userService.loginUser(this.user).subscribe((response) => {
       this.userInfo = response;
-      alert('Logged IN');
-      console.log(' Logged In');
       localStorage.setItem('user', JSON.stringify(this.userInfo));
-      console.error(localStorage.getItem('user'));
       localStorage.setItem('email', this.userInfo.email);
       localStorage.setItem('id', this.userInfo.id);
-      console.warn(localStorage.getItem('id'));
 
       //creating cart for user
       this.userId = localStorage.getItem('id');
