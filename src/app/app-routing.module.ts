@@ -36,7 +36,6 @@ const routes: Routes = [
     path: 'deliverydashboard',
     canActivate: [authGuard],
     component: DeliverydashboardComponent,
-   
   },
 
   { path: 'cart', component: CartComponent },
@@ -45,6 +44,7 @@ const routes: Routes = [
   { path: 'customersupport', component: SupportComponent },
   { path: 'search', component: SearchComponent },
   { path: 'restaurant/:id', component: RestaurantdetailsComponent },
+  { path: 'orderstatuscomp', component: OrderstatusComponent },
   { path: 'notfound', component: PagenotfoundComponent },
 ];
 

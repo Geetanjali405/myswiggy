@@ -9,7 +9,7 @@ import { UserService } from 'src/shared/services/user.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit, OnDestroy {
+export class CartComponent implements OnInit{
   Razorpay: any;
   subscription: Subscription;
   cart: Cart;
@@ -29,21 +29,23 @@ export class CartComponent implements OnInit, OnDestroy {
     this.userId = localStorage.getItem('id');
     console.log('hi');
     this.populateCart();
-    this.orderStatusInterval = setInterval(() => {
-      this.getOrderStatus(this.cartId);
-    }, 5000);
+    this.getOrderStatus(this.cartId);
+    // this.orderStatusInterval = setInterval(() => {
+      
+    // }, 5000);
     this.invokeStripe();
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.orderStatusInterval);
-  }
+  // ngOnDestroy(): void {
+  //   clearInterval(this.orderStatusInterval);
+  // }
 
   populateCart() {
     this.userService.getCart(this.userId).subscribe(
       (cart) => {
         this.cart = cart;
         this.cartId = this.cart.id;
+        localStorage.setItem('cartId', this.cartId);
         // this.statusorder = this.getOrderStatus(this.cartId);
       },
       (error) => {
@@ -137,27 +139,11 @@ export class CartComponent implements OnInit, OnDestroy {
         console.log(response.body);
         this.status = response;
         this.statusorder = response;
-        if (this.status === 'Delivered') {
-          this.userService.deleteCart(this.userId).subscribe({
-            next: (response) => {
-              console.log(response);
-
-              this.userService.createCart(this.userId).subscribe({
-                next: (newcart) => {
-                  console.log('New Cart created: ', newcart);
-                  this.cart = newcart;
-                  this.cartId = this.cart.id;
-                },
-                error: (err) => {
-                  console.error(err);
-                },
-              });
-            },
-            error: (err) => {
-              console.error(err);
-            },
-          });
+        if (this.status === 'Order Placed') {
+          this.router.navigate(['/orderstatuscomp']);
         }
+
+      
       },
       error: (error) => {
         console.error(error);

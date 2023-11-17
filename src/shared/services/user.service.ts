@@ -248,9 +248,9 @@ export class UserService {
   //   });
   // }
 
-  getUserById(userId: string): Observable<User> {
+  getUserById(userId: string): Observable<any> {
     return this.httpclient
-      .get<User>(`${getUser}/${userId}`, this.httpOptions)
+      .get<any>(`${getUser}/${userId}`, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
 

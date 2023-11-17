@@ -33,7 +33,8 @@
                         </ul>
                 </div>
 
-                <button *ngIf="cart?.id" (click)="makePayment(cart.total, cart.id)">Place order now</button>
+                <button [disabled]="statusorder === 'Order Placed'" (click)="makePayment(cart.total, cart.id)" routerLink="/orderstatuscomp">Place
+                        order now</button>
                 <h1>{{statusorder}}</h1>
         </div>
 

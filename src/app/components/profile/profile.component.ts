@@ -1,20 +1,16 @@
-import { Component } from '@angular/core';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
+import { Component,OnInit } from '@angular/core';
 
 import { UserService } from 'src/shared/services/user.service';
-import { User } from 'src/shared/model/user';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
   constructor(private userService: UserService) {}
   userId: string;
-  userData: User;
+  userData: any;
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
@@ -22,8 +18,8 @@ export class ProfileComponent {
   }
 
   profile(userId: string) {
-    this.userService.getUserById(this.userId).subscribe(
-      (data) => {
+    this.userService.getUserById(userId).subscribe(
+      (data:any) => {
         console.log(data);
         this.userData = data;
         console.log(data.id);

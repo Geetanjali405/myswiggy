@@ -16,8 +16,6 @@ export class DeliverydashboardComponent implements OnInit {
   modalCloseSpan: HTMLElement;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private userService: UserService
   ) {}
 
