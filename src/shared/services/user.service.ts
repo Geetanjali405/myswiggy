@@ -44,11 +44,17 @@ export class UserService {
     }),
     responseType: 'text' as 'json',
   };
+  private user$ = new BehaviorSubject<{ loggedIn: boolean }>({
+    loggedIn: false,
+  });
 
-  // deliveryBS$ = this.deliveryBS.asObservable();
+  setUser(loggedIn: boolean) {
+    this.user$.next({loggedIn});
+  }
 
-  // orderStatusBS: BehaviorSubject<string> = new BehaviorSubject('');
-  // orderStatusBS$ = this.orderStatusBS.asObservable();
+  getUser() {
+    return this.user$.asObservable();
+  }
 
   constructor(private httpclient: HttpClient) {
     this.getDelivery();
@@ -65,6 +71,7 @@ export class UserService {
   loginUser(user: User): Observable<any> {
     const header = new HttpHeaders();
     header.set('Content-Type', 'application/json');
+
     return this.httpclient
       .post<any>(`${signInEndPoint}`, user, { headers: header })
       .pipe(retry(1), catchError(this.handleError));

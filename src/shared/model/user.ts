@@ -1,13 +1,13 @@
 import { Restaurant } from './restaurant';
 
 export class User {
-  id?: String = '';
-  userName: String = '';
-  password: String = '';
-  phone: String = '';
-  email: String = '';
-  userAddress: String = '';
-  userType: String = '';
+  id?: string = '';
+  userName: string = '';
+  password: string = '';
+  phone: string = '';
+  email: string = '';
+  userAddress: string = '';
+  userType: string = '';
   firstTimeUser: Boolean = false;
   favouriteRestaurants: Restaurant[] = [];
 

@@ -9,31 +9,43 @@ import { FavouritesComponent } from './components/favourites/favourites.componen
 import { SupportComponent } from './components/support/support.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { authGuard } from './guards/auth.guard';
+// import { authGuard } from './guards/auth.guard';
 import { SearchComponent } from './components/search/search.component';
 import { RestaurantdetailsComponent } from './components/restaurantdetails/restaurantdetails.component';
 import { DeliverydashboardComponent } from './components/deliverydashboard/deliverydashboard.component';
 import { OrderstatusComponent } from './components/orderstatus/orderstatus.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: MainhomeComponent },
+  {
+    path: '',
+    component: MainhomeComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: MainhomeComponent,
+    pathMatch: 'full',
+  },
   {
     path: 'dashboard',
+    canActivate: [authGuard],
     component: DashboardComponent,
-    children: [{ path: '', component: LogoutComponent }],
   },
   {
     path: 'deliverydashboard',
+    canActivate: [authGuard],
     component: DeliverydashboardComponent,
+   
   },
 
-  { path: 'cart', component: CartComponent },
-  { path: 'profile', component: OrderstatusComponent },
-  { path: 'favourites', component: FavouritesComponent },
-  { path: 'customersupport', component: SupportComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'restaurant/:id', component: RestaurantdetailsComponent },
-  { path: 'notfound', component: PagenotfoundComponent },
+  { path: 'cart',  canActivate: [authGuard], component: CartComponent },
+  { path: 'profile',  canActivate: [authGuard], component: ProfileComponent },
+  { path: 'favourites',  canActivate: [authGuard], component: FavouritesComponent },
+  { path: 'customersupport',   canActivate: [authGuard],component: SupportComponent },
+  { path: 'search',   canActivate: [authGuard],component: SearchComponent },
+  { path: 'restaurant/:id',  canActivate: [authGuard], component: RestaurantdetailsComponent },
+  { path: 'notfound',  canActivate: [authGuard], component: PagenotfoundComponent },
 ];
 
 @NgModule({

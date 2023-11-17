@@ -14,7 +14,7 @@ export class MainhomeComponent implements OnInit {
   signUpForm: FormGroup;
   signInForm: FormGroup;
   user = new User();
-  userInfo: any;
+  userInfo: User;
   userId: string;
   delId: string;
 
@@ -34,15 +34,11 @@ export class MainhomeComponent implements OnInit {
       email: new FormControl(''),
       password: new FormControl(''),
     });
-    if (this.userInfo.userType === 'Delivery') {
-      localStorage.setItem('delId', this.userInfo.id);
-      console.warn(this.delId);
-      this.router.navigate(['/deliverydashboard']);
-    }
-    // if (localStorage.getItem('user')) {
-    //   // if (confirm('user already logged in') == true)
-    //   this.router.navigate['/dashboard'];
-    //   }
+
+    if (localStorage.getItem('user')) {
+      // if (confirm('user already logged in') == true)
+      this.router.navigate['/dashboard'];
+      }
   }
   onSubmit() {
     console.warn(this.signUpForm.value);
@@ -68,7 +64,10 @@ export class MainhomeComponent implements OnInit {
     this.user = this.signInForm.value;
     console.log(this.user);
     this.userService.loginUser(this.user).subscribe((response) => {
+      // this.userService.isuser$.next(true);
       this.userInfo = response;
+
+      this.userService.setUser(true);
       localStorage.setItem('user', JSON.stringify(this.userInfo));
       localStorage.setItem('email', this.userInfo.email);
       localStorage.setItem('id', this.userInfo.id);
@@ -84,7 +83,6 @@ export class MainhomeComponent implements OnInit {
         }
       );
 
-      console.log('line 86');
       console.log(this.userInfo.userType);
 
       if (this.userInfo.userType === 'Delivery') {
