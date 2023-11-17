@@ -26,8 +26,12 @@
                                 </div>
                                 <div class="img-container">
                                         <img alt="Card" src="https://picsum.photos/200/300" class="img">
-                                        <button class="add-to-cart" (click)="addIteminCart(menuItem.id)">Add to
-                                                cart</button>
+                                        <!-- <button class="add-to-cart" (click)="addIteminCart(menuItem.id)">Add to
+                                                cart</button> -->
+                                                <div class="myButton">
+                                                        <a class="add-to-cart" (click)="addIteminCart(menuItem.id)">add to cart</a>
+                                                        <a class="cart"><span></span></a>
+                                                </div>
                                 </div>
                         </div>
                 </div>

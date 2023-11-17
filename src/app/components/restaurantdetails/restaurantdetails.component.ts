@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component ,AfterViewInit, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
+import * as $ from "jquery";
 
 @Component({
   selector: 'app-restaurantdetails',
   templateUrl: './restaurantdetails.component.html',
   styleUrls: ['./restaurantdetails.component.scss'],
 })
-export class RestaurantdetailsComponent {
+  
+export class RestaurantdetailsComponent implements OnInit{
   resId: number;
   subscription: Subscription;
   sub: Subscription;
@@ -66,6 +68,7 @@ export class RestaurantdetailsComponent {
       });
     });
   }
+  
   toggleVegFilter() {
     this.filtered = this.menuList.filter((item) => item.isVeg === '1');
   }
@@ -85,4 +88,6 @@ export class RestaurantdetailsComponent {
       }
     );
   }
+
+
 }

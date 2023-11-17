@@ -30,6 +30,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { DeliverydashboardComponent } from './components/deliverydashboard/deliverydashboard.component';
 import { PanelModule } from 'primeng/panel';
 import { DataViewModule } from 'primeng/dataview';
+import { OrderstatusComponent } from './components/orderstatus/orderstatus.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { DataViewModule } from 'primeng/dataview';
     FoodcardComponent,
     RestaurantdetailsComponent,
     DeliverydashboardComponent,
+    OrderstatusComponent,
   ],
   imports: [
     BrowserModule,

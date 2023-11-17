@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Cart } from 'src/shared/model/cart';
 import { UserService } from 'src/shared/services/user.service';
 
 @Component({
@@ -8,15 +9,16 @@ import { UserService } from 'src/shared/services/user.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
   Razorpay: any;
   subscription: Subscription;
-  cart: any;
+  cart: Cart;
   userId: string;
-  cartId: any;
+  cartId: string;
   paymentHandler: any = null;
-  status: any;
-  statusorder: any;
+  status: string;
+  statusorder: string;
+  orderStatusInterval = null;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -27,8 +29,14 @@ export class CartComponent implements OnInit {
     this.userId = localStorage.getItem('id');
     console.log('hi');
     this.populateCart();
-    this.getOrderStatus(this.cartId);
+    this.orderStatusInterval = setInterval(() => {
+      this.getOrderStatus(this.cartId);
+    }, 5000);
     this.invokeStripe();
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.orderStatusInterval);
   }
 
   populateCart() {
@@ -36,13 +44,14 @@ export class CartComponent implements OnInit {
       (cart) => {
         this.cart = cart;
         this.cartId = this.cart.id;
-        this.statusorder = this.getOrderStatus(this.cartId);
+        // this.statusorder = this.getOrderStatus(this.cartId);
       },
       (error) => {
         console.error('Error fetching cart: ', error);
       }
     );
   }
+
   removeItem(menuId: any) {
     this.userService.removeItem(this.userId, menuId).subscribe(
       (cart) => {
@@ -121,15 +130,15 @@ export class CartComponent implements OnInit {
     }
   }
 
-  getOrderStatus(cartId:string) {
+  getOrderStatus(cartId: string) {
     console.warn('inside get order status');
     this.userService.getOrderStatuss(this.cartId).subscribe({
       next: (response) => {
         console.log(response.body);
         this.status = response;
         this.statusorder = response;
-        console.warn(this.statusorder);
-        console.log('Response as string:', response);
+        // console.warn(this.statusorder);
+        // console.log('Response as string:', response);
       },
       error: (error) => {
         console.error(error);

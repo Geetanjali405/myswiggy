@@ -13,6 +13,7 @@ import { authGuard } from './guards/auth.guard';
 import { SearchComponent } from './components/search/search.component';
 import { RestaurantdetailsComponent } from './components/restaurantdetails/restaurantdetails.component';
 import { DeliverydashboardComponent } from './components/deliverydashboard/deliverydashboard.component';
+import { OrderstatusComponent } from './components/orderstatus/orderstatus.component';
 
 const routes: Routes = [
   { path: '', component: MainhomeComponent },
@@ -27,7 +28,7 @@ const routes: Routes = [
   },
 
   { path: 'cart', component: CartComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: OrderstatusComponent },
   { path: 'favourites', component: FavouritesComponent },
   { path: 'customersupport', component: SupportComponent },
   { path: 'search', component: SearchComponent },
