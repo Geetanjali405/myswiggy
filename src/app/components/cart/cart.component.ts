@@ -137,8 +137,27 @@ export class CartComponent implements OnInit, OnDestroy {
         console.log(response.body);
         this.status = response;
         this.statusorder = response;
-        // console.warn(this.statusorder);
-        // console.log('Response as string:', response);
+        if (this.status === 'Delivered') {
+          this.userService.deleteCart(this.userId).subscribe({
+            next: (response) => {
+              console.log(response);
+
+              this.userService.createCart(this.userId).subscribe({
+                next: (newcart) => {
+                  console.log('New Cart created: ', newcart);
+                  this.cart = newcart;
+                  this.cartId = this.cart.id;
+                },
+                error: (err) => {
+                  console.error(err);
+                },
+              });
+            },
+            error: (err) => {
+              console.error(err);
+            },
+          });
+        }
       },
       error: (error) => {
         console.error(error);

@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { BehaviorSubject, catchError, Observable, retry, Subject, throwError } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  Observable,
+  retry,
+  Subject,
+  throwError,
+} from 'rxjs';
 import { Restaurant } from '../model/restaurant';
 import { User } from '../model/user';
 import { Cart } from '../model/cart';
@@ -24,6 +31,7 @@ const adddel: string = `${baseURL}/delivery`;
 const getdel: string = `${baseURL}/delivery/6554e024a594227362c3e04d`;
 const updateStatus: string = `${baseURL}/delivery`;
 const getStatus: string = `${baseURL}/getstatus`;
+const delCart: string = `${baseURL}/deletecart`;
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +44,6 @@ export class UserService {
     }),
     responseType: 'text' as 'json',
   };
-
 
   // deliveryBS$ = this.deliveryBS.asObservable();
 
@@ -116,6 +123,12 @@ export class UserService {
   getCart(userId: string): Observable<Cart> {
     console.warn(`${showCart}/${userId}`);
     return this.httpclient.get<Cart>(`${showCart}/${userId}`);
+  }
+  deleteCart(userId: string): Observable<String> {
+    console.warn(`${showCart}/${userId}`);
+    return this.httpclient
+      .delete<any>(`${delCart}/${userId}`, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
   }
 
   addItemToCart(userId: string, itemId: string): Observable<Cart> {

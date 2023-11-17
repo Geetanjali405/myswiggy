@@ -84,7 +84,8 @@ export class RestaurantdetailsComponent implements OnInit{
         console.log('Item added to cart successfully!');
       },
       (error) => {
-        console.error('Error while adding item to cart: ' + error);
+        console.error('Error while adding item to cart: ');
+        console.error(error);
       }
     );
   }
