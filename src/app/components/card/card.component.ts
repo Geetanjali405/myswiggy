@@ -11,6 +11,7 @@ export class CardComponent {
   @Input() res: any;
   imgSrc: string;
   id: string;
+  isFav: boolean = false;
   cloudinaryBaseURL =
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
 
@@ -24,6 +25,16 @@ export class CardComponent {
     // console.log(this.id);
     this.imgSrc = `${this.cloudinaryBaseURL}${this.res.cloudinaryImageId}`;
   }
+
+ 
+
+  toggleFav():void {
+    this.isFav = true;
+    if (this.isFav) {
+      this.addToFav(this.id, this.res.id);
+    }
+  }
+
   addToFav(id: string, restId: string) {
     this.userService.addToFav(id, restId).subscribe({
       next: (res) => {

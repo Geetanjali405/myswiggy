@@ -39,13 +39,13 @@ const routes: Routes = [
    
   },
 
-  { path: 'cart',  canActivate: [authGuard], component: CartComponent },
-  { path: 'profile',  canActivate: [authGuard], component: ProfileComponent },
-  { path: 'favourites',  canActivate: [authGuard], component: FavouritesComponent },
-  { path: 'customersupport',   canActivate: [authGuard],component: SupportComponent },
-  { path: 'search',   canActivate: [authGuard],component: SearchComponent },
-  { path: 'restaurant/:id',  canActivate: [authGuard], component: RestaurantdetailsComponent },
-  { path: 'notfound',  canActivate: [authGuard], component: PagenotfoundComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'favourites', component: FavouritesComponent },
+  { path: 'customersupport', component: SupportComponent },
+  { path: 'search', component: SearchComponent },
+  { path: 'restaurant/:id', component: RestaurantdetailsComponent },
+  { path: 'notfound', component: PagenotfoundComponent },
 ];
 
 @NgModule({

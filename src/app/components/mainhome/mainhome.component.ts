@@ -88,12 +88,14 @@ export class MainhomeComponent implements OnInit {
       if (this.userInfo.userType === 'Delivery') {
         localStorage.setItem('delId', this.userInfo.id);
         console.warn(this.delId);
+
         this.router.navigate(['/deliverydashboard']);
       } else {
         this.router.navigate(['/dashboard']);
       }
     });
   }
+  
   openEndSignIn(contentsignin: TemplateRef<any>) {
     this.offcanvasService.open(contentsignin, { position: 'end' });
   }

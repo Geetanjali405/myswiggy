@@ -32,6 +32,7 @@ const getdel: string = `${baseURL}/delivery/6554e024a594227362c3e04d`;
 const updateStatus: string = `${baseURL}/delivery`;
 const getStatus: string = `${baseURL}/getstatus`;
 const delCart: string = `${baseURL}/deletecart`;
+const getUser: string = `${baseURL}/user`;
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +50,7 @@ export class UserService {
   });
 
   setUser(loggedIn: boolean) {
-    this.user$.next({loggedIn});
+    this.user$.next({ loggedIn });
   }
 
   getUser() {
@@ -246,6 +247,12 @@ export class UserService {
   //     },
   //   });
   // }
+
+  getUserById(userId: string): Observable<User> {
+    return this.httpclient
+      .get<User>(`${getUser}/${userId}`, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
 
   handleError(err: any) {
     return throwError(() => {
