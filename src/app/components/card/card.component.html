@@ -9,18 +9,16 @@
                         style="max-width: 100%; max-height: 150px;" class="img">
                 <div class="d-flex justify-content-between me-2">
                         <p style="margin-bottom: -12px;" class="ms-1"><b>⭐{{res?.avgRatingString}}</b></p>
+                        <!-- <i class="fa fa-heart" style="font-size:24px; color:grey" (click)="addToFav(id, res.id)"></i> -->
 
-                     
-                                <i [class]="'bi ' + (isFav ? 'bi-heart-fill' : 'bi-heart')" (click)="toggleFav()"></i>
-                           
-                       
+                        <i [class]="'bi ' + (isFav ? 'bi-heart-fill' : 'bi-heart')" style="color: red;"
+                                (click)="toggleFav()"></i>
+
+
                         <!-- <i class="fa fa-heart" style="font-size:24px; color:{{isFav ? 'red' : 'grey'}}"
                         (click)="addToFav(id, res.id); isFav = !isFav;"></i> -->
                         <!-- <button type="button" class="btn btn-primary" (click)="addToFav(id, res.id)">Fav</button> -->
                 </div>
-
-
-                <!-- <h6>{{res?.avgRatingString}}</h6> -->
         </ng-template>
 
 </p-card>

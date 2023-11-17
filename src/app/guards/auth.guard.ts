@@ -11,7 +11,7 @@ export const authGuard: CanActivateFn =
     const router = inject(Router);
     return userService.getUser().pipe(
       map((user) => {
-        if (user.loggedIn) {
+        if (localStorage.getItem('user')) {
           console.log(user.loggedIn);
           return true;
         }
