@@ -17,7 +17,9 @@ export class FavouritesComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) {}
   ngOnInit(): void {
     this.id = localStorage.getItem('id');
+     // this.fav = setInterval(() => {
     this.getFav(this.id);
+     // }, 2000);
  
   }
 

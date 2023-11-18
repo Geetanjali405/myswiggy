@@ -9,7 +9,7 @@ import { UserService } from 'src/shared/services/user.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit,OnDestroy{
+export class CartComponent implements OnInit{
   Razorpay: any;
   subscription: Subscription;
   cart: Cart;
@@ -38,9 +38,9 @@ export class CartComponent implements OnInit,OnDestroy{
     
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.rou);
-  }
+  // ngOnDestroy(): void {
+  //   clearInterval(this.rou);
+  // }
 
   populateCart() {
     this.userService.getCart(this.userId).subscribe(
