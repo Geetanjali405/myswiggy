@@ -4,7 +4,7 @@
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
   transition: transform 0.3s ease-in-out;
 }
@@ -14,6 +14,8 @@
 }
 
 .cart-details {
+  justify-content: center;
+  width:95%;
   list-style-type: none;
   padding: 0;
 }
@@ -21,6 +23,12 @@
 .cart-details li {
   padding: 10px 0;
   border-bottom: 1px solid #f3f3f3;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.cart-details li:hover {
+  // background-color: #f9f9f9;
+  transform: scale(1.01);
 }
 
 .item-details {
@@ -45,10 +53,11 @@
 }
 
 .item-controls button {
+
   background-color: #fc8019;
   color: #ffffff;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   padding: 5px 10px;
   margin: 0 5px;
   cursor: pointer;
@@ -62,3 +71,15 @@
 .item-quantity {
   font-weight: bold;
 }
+.item-controls button:last-child {
+  margin-left: 50px;
+}
+
+
+// button.quan {
+//   border-radius: 50%; /* This will make the button rounded */
+//   background-color: transparent; /* This will make the button transparent */
+//   border: 2px solid orange; /* This will give the button an orange border */
+//   color: orange; /* This will make the text color orange */
+// }
+// 

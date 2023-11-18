@@ -1,7 +1,7 @@
 <div>
         <app-nav></app-nav>
         <div class="main" style="margin-top:100px">
-             
+
 
                 <div class="cart-container">
                         <h1 class="margin-left:400px"><b>Your cart</b></h1>
@@ -15,14 +15,15 @@
                                                         <div class="item">
                                                                 <span class="item-name">{{ item.key }}</span>
                                                                 <div class="item-controls">
-                                                                        <button
+                                                                        <button class="quan me-2"
                                                                                 (click)="decreaseItem(item.key)">-</button>
                                                                         <span class="item-quantity">{{ item.value
                                                                                 }}</span>
-                                                                        <button
+                                                                        <button class="quan ms-2"
                                                                                 (click)="increaseItem(item.key)">+</button>
-                                                                        <button
+                                                                        <button class="removee"
                                                                                 (click)="removeItem(item.key)">Remove</button>
+                                                                                
                                                                 </div>
                                                         </div>
                                                 </li>
@@ -32,9 +33,11 @@
                                 <li *ngIf="cart?.orderPlaced">Order Placed: {{ cart.orderPlaced }}</li>
                                 <li *ngIf="cart?.total">Total: {{ cart.total }}</li>
                         </ul>
-                        <button [disabled]="statusorder === 'Order Placed'" (click)="makePayment(cart.total, cart.id)"
+                        <button pButton pRipple type="button" class="p-button-rounded p-button-warning"
+                                [disabled]="statusorder === 'Order Placed'" (click)="makePayment(cart.total, cart.id)"
                                 routerLink="/orderstatuscomp">Place
                                 order now</button>
+
                         <h1>{{statusorder}}</h1>
                 </div>
 
