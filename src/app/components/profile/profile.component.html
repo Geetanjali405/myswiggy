@@ -40,17 +40,13 @@
                 <button (click)="confirm($event)" pButton icon="pi pi-check" label="Confirm"></button> -->
 <!-- </div>
 </div>  -->
-<div *ngIf="userData">
-        <h1>User Data:</h1>
-      
-        <div>
-          <p>User ID: {{ userData.id }}</p>
-          <p>User Name: {{ userData.userName }}</p>
-          <p>Password: {{ userData.password }}</p>
-          <p>Phone: {{ userData.phone }}</p>
-          <p>Email: {{ userData.email }}</p>
-          <p>User Type: {{ userData.userType }}</p>
-          <p>Is First Time User: {{ userData.firstTimeUser }}</p>
-          <p>User Address: {{ userData.userAddress }}</p>
-        </div>
+<div>
+        User Info:
+        <ul>
+          <li>User ID: {{ userData.id }}</li>
+          <li>User Name: {{ userData.userName }}</li>
+          <li>Email: {{ userData.email }}</li>
+          <li>User Type: {{ userData.userType }}</li>
+          <!-- add more properties as needed -->
+        </ul>
       </div>

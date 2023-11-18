@@ -69,6 +69,7 @@ export class MainhomeComponent implements OnInit {
 
       this.userService.setUser(true);
       localStorage.setItem('user', JSON.stringify(this.userInfo));
+      console.warn(localStorage.getItem('user'));
       localStorage.setItem('email', this.userInfo.email);
       localStorage.setItem('id', this.userInfo.id);
 
