@@ -7,6 +7,11 @@
     
     /* Bootstrap 4 text input with search icon */
     
+.carousel-image {
+    width: 62px;
+    height: 88px;
+    object-fit: cover; 
+  }
     .has-search .form-control {
         padding-left: 2.375rem;
     }

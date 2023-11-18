@@ -1,36 +1,41 @@
 <div>
         <app-nav class="mb-5"></app-nav>
-        <div class="main">
-                <h1>
-                        <p>{{restaurant?.name}}</p>
-                        <img alt="Card" [src]="imgSrc" class="img">
-                </h1>
-        </div>
-        <div id="menu-container" class="ms-5">
-                <button pButton pRipple type="button" label="Pure Veg"
-                        class="p-button-raised p-button-secondary p-button-text category-btn "
-                        (click)="toggleVegFilter()"></button>
-                <button pButton pRipple type="button" label="Non Veg"
-                        class="p-button-raised p-button-secondary p-button-text category-btn "
-                        (click)="toggleNonVegFilter()"></button>
-                <div class="list">
-                        <div *ngFor="let menuItem of filtered" class="card-container">
-                                <div class="details">
-                                        <!-- <h1>{{menuItem.id}}</h1> -->
-                                        <h3><b>{{ menuItem.name }}</b></h3>
-                                        <p>Category: {{ menuItem.category }}</p>
-                                        <p>{{ menuItem.description }}</p>
-                                        <p><b>Price:Rs. {{ menuItem.price / 100 }}</b></p>
-                                </div>
-                                <div class="img-container">
-                                        <img alt="Card" src="https://picsum.photos/200/300" class="img">
-                                        <div class="myButton">
-                                                <a class="add-to-cart" (click)="addIteminCart(menuItem.id)">add to
-                                                        cart</a>
-                                                <a class="cart"><span></span></a>
+        <div style="margin-top: 120px;">
+                <div class="main">
+                        <div class="details">
+                                <h1><b>{{restaurant?.name}}</b></h1>
+                                <!-- Add more details here -->
+                        </div>
+                        <div class="restaurant-image">
+                                <img alt="Card" [src]="imgSrc" class="imgg">
+                        </div>
+                </div>
+
+                <div id="menu-container" class="ms-5">
+                        <button pButton pRipple type="button" label="Pure Veg"
+                                class="p-button-raised p-button-secondary p-button-text category-btn"
+                                (click)="toggleVegFilter()"></button>
+                        <button pButton pRipple type="button" label="Non Veg"
+                                class="p-button-raised p-button-secondary p-button-text category-btn"
+                                (click)="toggleNonVegFilter()"></button>
+                        <div class="list">
+                                <div *ngFor="let menuItem of filtered" class="card-container">
+                                        <div class="details">
+                                                <!-- <h1>{{menuItem.id}}</h1> -->
+                                                <h3><b>{{ menuItem.name }}</b></h3>
+                                                <p>Category: {{ menuItem.category }}</p>
+                                                <p>{{ menuItem.description }}</p>
+                                                <p><b>Price:Rs. {{ menuItem.price / 100 }}</b></p>
+                                        </div>
+                                        <div class="img-container">
+                                                <img alt="Card" src="https://picsum.photos/200/300" class="img">
+                                                <div class="myButton">
+                                                        <a class="add-to-cart" (click)="addIteminCart(menuItem.id)">Add
+                                                                to cart</a>
+                                                        <a class="cart"><span></span></a>
+                                                </div>
                                         </div>
                                 </div>
                         </div>
                 </div>
         </div>
-</div>

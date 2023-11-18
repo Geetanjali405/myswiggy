@@ -1,31 +1,54 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:700);
+
 * {
     font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
     outline: none;
+    box-sizing: border-box;
 }
 
 .main {
-    margin-top: 100px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    // margin: 50px auto;
+    margin-left: 150px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
-.main h1 {
-    font-size: 2.5em;
+.details {
+    // flex: 1;
+    margin-right: 20px;
+}
+
+.details h1 {
+    // font-size: 4.5em;
     color: #ff6434; /* Swiggy's brand color */
+    margin-bottom: 20px;
 }
 
-.main p {
-    font-size: 1.5em;
+.details p {
+    // font-size: 5.5em;
     color: #333;
+    margin-bottom: 20px;
 }
 
-.main .img {
-    max-width: 35%;
-    max-height: 150px;
+.restaurant-image {
+  margin-left: 40px;
+    flex: 1;
+}
+
+.restaurant-image img {
+    max-width: 70%;
+    height: auto;
     border-radius: 10px;
 }
+
 
 .card-container {
     display: flex;
@@ -38,9 +61,12 @@
     border-radius: 10px;
 }
 
+.main:hover{
+  transform: scale(1.02);
+}
 .card-container:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .details {
@@ -99,5 +125,27 @@
 .add-to-cart:hover {
     background-color: white;
     color: black;
+}
+
+
+.category-btn {
+  margin-left: 90px;
+  padding-left: 20px;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  background-color: rgba(255, 100, 52, 0.7); /* Swiggy's brand color with transparency */
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.category-btn:hover {
+  background-color: rgba(255, 100, 52, 0.9); /* Swiggy's brand color with less transparency */
+  color: white;
 }
 

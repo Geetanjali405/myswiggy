@@ -9,6 +9,23 @@
                                         placeholder="Search for restaurants and food">
                         </div>
                 </form>
+                <h2 class="ms-5 mt-5"><b>Best cuisines for you</b></h2>
+                <p-carousel [value]="images" [numVisible]="7" [numScroll]="1" [circular]="true"
+                        [autoplayInterval]="3000">
+                        <ng-template let-image pTemplate="item">
+                                <div style="padding-right: 16px;">
+                                        <img [src]="image.image" class="carousel-image" />
+                                </div>
+                        </ng-template>
+
+                        <p-carousel [numVisible]="7" >
+                                <ng-template let-image pTemplate="item">
+                                        <div class="carousel-image-container">
+                                                <img [src]="image.image" class="carousel-image" />
+                                        </div>
+                                </ng-template>
+                        </p-carousel>
+                </p-carousel>
 
         </div>
 
@@ -19,5 +36,6 @@
                                 class="d-flex justify-content-center col-lg-4 ms-4 me-5 mb-2"></app-foodcard>
                 </div>
         </div>
+
 
 </div>
