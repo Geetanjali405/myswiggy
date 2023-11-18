@@ -21,6 +21,7 @@ const getRestaurantsbyId: string = `${baseURL}/restaurant`;
 const getMenu: string = `${baseURL}/menu`;
 const getMenubyRes: string = `${baseURL}/menus`;
 const addtofav: string = `${baseURL}/addFavouriteRestaurant`;
+const removefav: string = `${baseURL}/removefromfav`;
 const getfav: string = `${baseURL}/getfavourites`;
 const createuserCart: string = `${baseURL}/cart`;
 const showCart: string = `${baseURL}/carts/user`;
@@ -107,6 +108,16 @@ export class UserService {
     // console.log(`${addtofav}/${id}/${restId}`);
     return this.httpclient.post<string>(
       `${addtofav}/${id}/${restId}`,
+      null,
+      this.httpOptions
+    );
+  }
+
+  removeFromFav(id: string, restId: string): Observable<string> {
+    const headers = new HttpHeaders().set('Response-Type', 'text/plain');
+    // console.log(`${addtofav}/${id}/${restId}`);
+    return this.httpclient.post<string>(
+      `${removefav}/${id}/${restId}`,
       null,
       this.httpOptions
     );

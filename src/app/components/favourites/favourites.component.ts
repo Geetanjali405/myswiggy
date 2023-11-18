@@ -17,7 +17,12 @@ export class FavouritesComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) {}
   ngOnInit(): void {
     this.id = localStorage.getItem('id');
-    this.subscription = this.userService.getFav(this.id).subscribe({
+    this.getFav(this.id);
+ 
+  }
+
+  getFav(id: string) {
+    this.userService.getFav(this.id).subscribe({
       next: (response) => {
         this.favList = response;
         console.log(response);
@@ -38,6 +43,7 @@ export class FavouritesComponent implements OnInit {
         console.log('Error in fetching favorite restaurants', error);
       },
     });
-
   }
+
+
 }

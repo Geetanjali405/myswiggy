@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from 'src/shared/services/user.service';
 import { ButtonModule } from 'primeng/button';
 
@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent {
+export class CardComponent implements OnInit{
   @Input() res: any;
   imgSrc: string;
   id: string;
@@ -17,34 +17,15 @@ export class CardComponent {
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
 
   constructor(private userService: UserService) {}
+  fav= null;
   ngOnInit() {
-    // console.log('Current restaurant:', this.res);
     this.id = localStorage.getItem('id');
-    // console.log(this.id);
-    // console.error(this.id);
-    // console.warn(this.id);
-    // console.log(this.id);
+    this.getFav(this.id);
     this.imgSrc = `${this.cloudinaryBaseURL}${this.res.cloudinaryImageId}`;
   }
 
-  toggleFav(): void {
-    this.isFav = true;
-    if (this.isFav) {
-      this.addToFav(this.id, this.res.id);
-    }
-  }
-
-  addToFav(id: string, restId: string) {
-    this.userService.addToFav(id, restId).subscribe({
-      next: (res) => {
-        this.isFav = true;
-        console.log(res);
-      },
-      error: (er) => {
-        console.warn(er);
-      },
-    });
-
+//favarr<=array of faourites
+  getFav(id: string) {
     this.userService.getFav(id).subscribe({
       next: (data) => {
         this.favarr = data;
@@ -55,8 +36,48 @@ export class CardComponent {
       },
     });
   }
+
+
+  addToFav(id: string, restId: string) {
+    this.userService.addToFav(id, restId).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (er) => {
+        console.warn(er);
+      },
+    });
+    // this.userService.getFav(id).subscribe({
+    //   next: (data) => {
+    //     this.favarr = data;
+    //     console.log(this.favarr);
+    //   },
+    //   error: (er) => {
+    //     console.log(er);
+    //   },
+    // });
+  }
+  removeFromFav(id: string, restId: string) {
+    this.userService.removeFromFav(id, restId).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (er) => {
+        console.warn(er);
+      },
+    });
+    // this.userService.getFav(id).subscribe({
+    //   next: (data) => {
+    //     this.favarr = data;
+    //     console.log(this.favarr);
+    //   },
+    //   error: (er) => {
+    //     console.log(er);
+    //   },
+    // });
+  }
   issFav(resId: string): boolean {
-    if (this.favarr.includes(this.res.id)) {
+    if (this.favarr && this.favarr.includes(resId)) {
       return true;
     } else {
       return false;

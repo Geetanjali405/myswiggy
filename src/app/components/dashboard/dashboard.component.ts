@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavbarComponent } from 'src/shared/sharedcomp/navbar/navbar.component';
 import { CarouselModule } from 'primeng/carousel';
@@ -50,17 +50,21 @@ export class DashboardComponent implements OnInit {
   subscription: Subscription;
   isAscending: any;
   constructor(private router: Router, private userService: UserService) {}
+ 
   ngOnInit(): void {
     console.warn(localStorage.getItem('id'));
-    this.subscription = this.userService.getRestrauntDetails().subscribe(
-      (response) => {
-        this.restaurantList = response;
-        console.log(response);
-      },
-      (error) => {
-        console.log('Error in fetching restaurant details', error);
-      }
-    );
+    // this.subInterval = setInterval(() => {
+      this.subscription = this.userService.getRestrauntDetails().subscribe(
+        (response) => {
+          this.restaurantList = response;
+          console.log(response);
+        },
+        (error) => {
+          console.log('Error in fetching restaurant details', error);
+        }
+      );
+    // }, 5000);
+   
   }
 
 

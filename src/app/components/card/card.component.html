@@ -11,13 +11,13 @@
                         <p style="margin-bottom: -12px;" class="ms-1"><b>⭐{{res?.avgRatingString}}</b></p>
                         <!-- <i class="fa fa-heart" style="font-size:24px; color:grey" (click)="addToFav(id, res.id)"></i> -->
 
-                        <i [class]="'bi ' + (isFav ? 'bi-heart-fill' : 'bi-heart')" style="color: red;"
-                                (click)="toggleFav()"></i>
+                        <!-- <i [class]="'bi ' + (isFav ? 'bi-heart-fill' : 'bi-heart')" style="color: red;"
+                                (click)="toggleFav()"></i> -->
+                        <i *ngIf="!issFav(res.id)" class="bi bi-heart" style="color: red;" (click)="addToFav(id,res.id)"></i>
+                        <i *ngIf="issFav(res.id)" class="bi bi-heart-fill" style="color: red;"
+                                (click)="removeFromFav(id,res.id)"></i>
 
 
-                        <!-- <i class="fa fa-heart" style="font-size:24px; color:{{isFav ? 'red' : 'grey'}}"
-                        (click)="addToFav(id, res.id); isFav = !isFav;"></i> -->
-                        <!-- <button type="button" class="btn btn-primary" (click)="addToFav(id, res.id)">Fav</button> -->
                 </div>
         </ng-template>
 
