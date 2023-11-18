@@ -1,4 +1,5 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserService } from 'src/shared/services/user.service';
 
@@ -7,8 +8,8 @@ import { UserService } from 'src/shared/services/user.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit{
-  constructor(private userService: UserService) {}
+export class ProfileComponent implements OnInit {
+  constructor(private userService: UserService, private router: Router) {}
   userId: string;
   userData: any;
   email: any;
@@ -17,10 +18,11 @@ export class ProfileComponent implements OnInit{
     this.email = localStorage.getItem('email');
     console.warn('email');
 
-  const userString = localStorage.getItem('user');
+    const userString = localStorage.getItem('user');
     this.userData = JSON.parse(userString);
     console.log(this.userData);
     this.userId = localStorage.getItem('id');
+
     // this.profile(this.userId);
   }
 
@@ -39,4 +41,9 @@ export class ProfileComponent implements OnInit{
   //     }
   //   );
   // }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
 }

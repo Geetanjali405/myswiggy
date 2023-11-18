@@ -1,17 +1,18 @@
-
-
 <div>
         <app-nav></app-nav>
         <div style="margin-top: 200px;">
                 <div class="profile">
                         <ul>
-                            <li><span>User ID:</span> {{ userData.id }}</li>
-                            <li><span>User Name:</span> {{ userData.userName }}</li>
-                            <li><span>Email:</span> {{ userData.email }}</li>
-                            <li><span>User Type:</span> {{ userData.userType }}</li>
-                            <!-- add more properties as needed -->
+                                <li><span>User ID:</span> {{ userData.id }}</li>
+                                <li><span>User Name:</span> {{ userData.userName }}</li>
+                                <li><span>Email:</span> {{ userData.email }}</li>
+                                <li><span>User Type:</span> {{ userData.userType }}</li>
+                                <!-- add more properties as needed -->
                         </ul>
-                    </div>
-                    
+                        <button pButton pRipple type="button" class="des" label="Log out" class="p-button-rounded p-button-danger pt-1 ps-1 pe-1 pb-2" (click)="logout()"></button>
+                
+
+                </div>
+                
         </div>
 </div>
