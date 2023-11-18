@@ -23,7 +23,7 @@
                                                                                 (click)="increaseItem(item.key)">+</button>
                                                                         <button class="removee"
                                                                                 (click)="removeItem(item.key)">Remove</button>
-                                                                                
+
                                                                 </div>
                                                         </div>
                                                 </li>
@@ -34,8 +34,8 @@
                                 <li *ngIf="cart?.total">Total: {{ cart.total }}</li>
                         </ul>
                         <button pButton pRipple type="button" class="p-button-rounded p-button-warning"
-                                [disabled]="statusorder === 'Order Placed'" (click)="makePayment(cart.total, cart.id)"
-                                routerLink="/orderstatuscomp">Place
+                                [disabled]="statusorder === 'Order Placed'"
+                                (click)="makePayment(cart.total, cart.id)">Place
                                 order now</button>
 
                         <h1>{{statusorder}}</h1>

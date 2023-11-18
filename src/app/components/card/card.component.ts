@@ -16,7 +16,7 @@ export class CardComponent {
   cloudinaryBaseURL =
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
   ngOnInit() {
     // console.log('Current restaurant:', this.res);
     this.id = localStorage.getItem('id');
@@ -58,8 +58,7 @@ export class CardComponent {
   issFav(resId: string): boolean {
     if (this.favarr.includes(this.res.id)) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

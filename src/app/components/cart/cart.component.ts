@@ -9,7 +9,7 @@ import { UserService } from 'src/shared/services/user.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit{
+export class CartComponent implements OnInit,OnDestroy{
   Razorpay: any;
   subscription: Subscription;
   cart: Cart;
@@ -19,6 +19,7 @@ export class CartComponent implements OnInit{
   status: string;
   statusorder: string;
   orderStatusInterval = null;
+  rou = null;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -34,11 +35,12 @@ export class CartComponent implements OnInit{
       
     // }, 5000);
     this.invokeStripe();
+    
   }
 
-  // ngOnDestroy(): void {
-  //   clearInterval(this.orderStatusInterval);
-  // }
+  ngOnDestroy(): void {
+    clearInterval(this.rou);
+  }
 
   populateCart() {
     this.userService.getCart(this.userId).subscribe(
@@ -91,7 +93,11 @@ export class CartComponent implements OnInit{
   makePayment(amount: any, id: any) {
     this.userService.addToDelivery(id).subscribe({
       next: (res) => {
+       this.rou= setTimeout(() => {
+          this.router.navigate(['/orderstatuscomp']);
+      }, 15000);
         console.log(res);
+       
       },
       error: (er) => {
         console.warn(er);
