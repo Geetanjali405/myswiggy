@@ -1,11 +1,9 @@
 <div>
         <app-nav class="mb-5"></app-nav>
-        <div class="main" style="margin-top: 100px;" class="mb-5">
-
+        <div class="main">
                 <h1>
                         <p>{{restaurant?.name}}</p>
-                        <img alt="Card" [src]="imgSrc" style="max-width: 35%; max-height: 150px;" class="img">
-
+                        <img alt="Card" [src]="imgSrc" class="img">
                 </h1>
         </div>
         <div id="menu-container" class="ms-5">
@@ -18,24 +16,21 @@
                 <div class="list">
                         <div *ngFor="let menuItem of filtered" class="card-container">
                                 <div class="details">
-                                        <h1>{{menuItem.id}}</h1>
-                                        <h3>{{ menuItem.name }}</h3>
+                                        <!-- <h1>{{menuItem.id}}</h1> -->
+                                        <h3><b>{{ menuItem.name }}</b></h3>
                                         <p>Category: {{ menuItem.category }}</p>
                                         <p>{{ menuItem.description }}</p>
-                                        <p>Price:Rs. {{ menuItem.price / 100 }}</p>
+                                        <p><b>Price:Rs. {{ menuItem.price / 100 }}</b></p>
                                 </div>
                                 <div class="img-container">
                                         <img alt="Card" src="https://picsum.photos/200/300" class="img">
-                                        <!-- <button class="add-to-cart" (click)="addIteminCart(menuItem.id)">Add to
-                                                cart</button> -->
-                                                <div class="myButton">
-                                                        <a class="add-to-cart" (click)="addIteminCart(menuItem.id)">add to cart</a>
-                                                        <a class="cart"><span></span></a>
-                                                </div>
+                                        <div class="myButton">
+                                                <a class="add-to-cart" (click)="addIteminCart(menuItem.id)">add to
+                                                        cart</a>
+                                                <a class="cart"><span></span></a>
+                                        </div>
                                 </div>
                         </div>
                 </div>
-
         </div>
 </div>
-
