@@ -32,6 +32,7 @@ import { PanelModule } from 'primeng/panel';
 import { DataViewModule } from 'primeng/dataview';
 import { OrderstatusComponent } from './components/orderstatus/orderstatus.component';
 import { SplitterModule } from "primeng/splitter";
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { SplitterModule } from "primeng/splitter";
     FieldsetModule,
     PanelModule,
     DataViewModule,
-    SplitterModule
+    SplitterModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -14,9 +14,16 @@
                         <ng-template pTemplate>
                                 <div class="p-col p-d-flex p-ai-center p-jc-center">
                                         <!-- <h1><b><i><u>{{status}}</u></i></b></h1> -->
-                                        <div class="cla">
+                                        <div class="cla" *ngIf="status; else showLoader">
                                                 <h1 style="text-transform: uppercase;">YOUR ORDER IS {{status}}</h1>
                                         </div>
+                                        <ng-template #showLoader>
+                                                <div class="spin">
+                                                        <p-progressSpinner></p-progressSpinner>
+                                                </div>
+
+                                        </ng-template>
+
 
                                 </div>
                         </ng-template>
