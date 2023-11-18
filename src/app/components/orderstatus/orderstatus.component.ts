@@ -29,7 +29,7 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
 
     this.orderStatusInterval = setInterval(() => {
       this.getOrderStatus(this.cartId);
-    }, 10000);
+    }, 6000);
   }
   ngOnDestroy(): void {
     clearInterval(this.orderStatusInterval);

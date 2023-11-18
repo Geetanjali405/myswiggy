@@ -31,6 +31,7 @@ import { DeliverydashboardComponent } from './components/deliverydashboard/deliv
 import { PanelModule } from 'primeng/panel';
 import { DataViewModule } from 'primeng/dataview';
 import { OrderstatusComponent } from './components/orderstatus/orderstatus.component';
+import { SplitterModule } from "primeng/splitter";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { OrderstatusComponent } from './components/orderstatus/orderstatus.compo
     RestaurantdetailsComponent,
     DeliverydashboardComponent,
     OrderstatusComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,7 @@ import { OrderstatusComponent } from './components/orderstatus/orderstatus.compo
     FieldsetModule,
     PanelModule,
     DataViewModule,
+    SplitterModule
   ],
   providers: [],
   bootstrap: [AppComponent],
