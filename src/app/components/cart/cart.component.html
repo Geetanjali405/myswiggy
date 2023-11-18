@@ -1,14 +1,15 @@
 <div>
         <app-nav></app-nav>
         <div class="main" style="margin-top:100px">
-                <h1 class="margin-left:400px"><b>Your cart</b></h1>
+             
 
                 <div class="cart-container">
+                        <h1 class="margin-left:400px"><b>Your cart</b></h1>
                         <ul class="cart-details">
-                                <li *ngIf="cart?.id">ID: {{ cart.id }}</li>
-                                <li *ngIf="cart?.userId">User ID: {{ cart.userId }}</li>
-                                <li *ngIf="cart?.restId">Rest ID: {{ cart.restId }}</li>
-                                <li *ngIf="cart?.items">Items:
+                                <!-- <li *ngIf="cart?.id">ID: {{ cart.id }}</li>
+                                <li *ngIf="cart?.userId">User ID: {{ cart.userId }}</li> -->
+                                <!-- <li *ngIf="cart?.restId">Rest ID: {{ cart.restId }}</li> -->
+                                <li *ngIf="cart?.items">
                                         <ul class="item-details">
                                                 <li *ngFor="let item of cart.items | keyvalue">
                                                         <div class="item">
@@ -31,11 +32,13 @@
                                 <li *ngIf="cart?.orderPlaced">Order Placed: {{ cart.orderPlaced }}</li>
                                 <li *ngIf="cart?.total">Total: {{ cart.total }}</li>
                         </ul>
+                        <button [disabled]="statusorder === 'Order Placed'" (click)="makePayment(cart.total, cart.id)"
+                                routerLink="/orderstatuscomp">Place
+                                order now</button>
+                        <h1>{{statusorder}}</h1>
                 </div>
 
-                <button [disabled]="statusorder === 'Order Placed'" (click)="makePayment(cart.total, cart.id)" routerLink="/orderstatuscomp">Place
-                        order now</button>
-                <h1>{{statusorder}}</h1>
+
         </div>
 
 </div>

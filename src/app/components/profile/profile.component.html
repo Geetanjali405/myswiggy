@@ -40,13 +40,17 @@
                 <button (click)="confirm($event)" pButton icon="pi pi-check" label="Confirm"></button> -->
 <!-- </div>
 </div>  -->
+
 <div>
-        User Info:
-        <ul>
-          <li>User ID: {{ userData.id }}</li>
-          <li>User Name: {{ userData.userName }}</li>
-          <li>Email: {{ userData.email }}</li>
-          <li>User Type: {{ userData.userType }}</li>
-          <!-- add more properties as needed -->
-        </ul>
-      </div>
+        <app-nav></app-nav>
+        <div style="margin-top: 200px;">
+                User Profile Details:
+                <ul>
+                        <li>User ID: {{ userData.id }}</li>
+                        <li>User Name: {{ userData.userName }}</li>
+                        <li>Email: {{ userData.email }}</li>
+                        <li>User Type: {{ userData.userType }}</li>
+                        <!-- add more properties as needed -->
+                </ul>
+        </div>
+</div>
