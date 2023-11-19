@@ -103,7 +103,7 @@ export class CartComponent implements OnInit{
       next: (res) => {
        this.rou= setTimeout(() => {
           this.router.navigate(['/orderstatuscomp']);
-      }, 15000);
+      }, 20000);
         console.log(res);
        
       },

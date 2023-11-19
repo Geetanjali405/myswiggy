@@ -12,12 +12,13 @@ export const authGuard: CanActivateFn =
     return userService.getUser().pipe(
       map((user) => {
         if (localStorage.getItem('user')) {
-          console.log(user.loggedIn);
+          // console.log(user.loggedIn);
+          console.log(localStorage.getItem('user'));
           return true;
         }
-        console.log('hi');
-        console.log(user.loggedIn);
-        router.navigate(['/login']);
+        // console.log('hi');
+        // console.log(user.loggedIn);
+        router.navigate(['/']);
         return false;
       })
     );

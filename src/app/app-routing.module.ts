@@ -20,12 +20,6 @@ const routes: Routes = [
   {
     path: '',
     component: MainhomeComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    component: MainhomeComponent,
-    pathMatch: 'full',
   },
   {
     path: 'dashboard',
@@ -38,8 +32,13 @@ const routes: Routes = [
     component: DeliverydashboardComponent,
   },
 
+  // {
+  //   path: 'login',
+  //   component: MainhomeComponent,
+  // },
+
   { path: 'cart', component: CartComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', canActivate: [authGuard], component: ProfileComponent },
   { path: 'favourites', component: FavouritesComponent },
   { path: 'customersupport', component: SupportComponent },
   { path: 'search', component: SearchComponent },

@@ -36,7 +36,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import { ConfirmationService,MessageService } from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 
 @NgModule({
@@ -78,10 +80,12 @@ import { ToastModule } from 'primeng/toast';
     ProgressSpinnerModule,
     MatSnackBarModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    ConfirmPopupModule,
+    MessagesModule
     
   ],
-  providers: [],
+   providers: [ConfirmationService,MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
