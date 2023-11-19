@@ -2,7 +2,7 @@ import { Component ,AfterViewInit, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
-import * as $ from "jquery";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-restaurantdetails',
@@ -26,8 +26,13 @@ export class RestaurantdetailsComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private _snackBar: MatSnackBar
+  ) { }
+  
+  openSnackBar(message: string, action: string,) {
+    this._snackBar.open(message, action);
+  }
 
   ngOnInit(): void {
     this.resId = this.route.snapshot.params['id'];
@@ -82,6 +87,7 @@ export class RestaurantdetailsComponent implements OnInit{
     this.userService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item added to cart successfully!');
+        this.openSnackBar("Item added to cart", "OK")
       },
       (error) => {
         console.error('Error while adding item to cart: ');

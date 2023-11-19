@@ -9,10 +9,14 @@
                                 <li><span>User Type:</span> {{ userData.userType }}</li>
                                 <!-- add more properties as needed -->
                         </ul>
-                        <button pButton pRipple type="button" class="des" label="Log out" class="p-button-rounded p-button-danger pt-1 ps-1 pe-1 pb-2" (click)="logout()"></button>
-                
+                        <p-toast></p-toast>
+                        <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+                        <button pButton pRipple type="button" class="des" label="Log out"
+                                class="p-button-rounded p-button-danger pt-1 ps-1 pe-1 pb-2"
+                                (click)="logout()"></button>
+
 
                 </div>
-                
+
         </div>
 </div>

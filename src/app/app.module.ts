@@ -31,8 +31,13 @@ import { DeliverydashboardComponent } from './components/deliverydashboard/deliv
 import { PanelModule } from 'primeng/panel';
 import { DataViewModule } from 'primeng/dataview';
 import { OrderstatusComponent } from './components/orderstatus/orderstatus.component';
-import { SplitterModule } from "primeng/splitter";
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { SplitterModule } from 'primeng/splitter';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -52,7 +57,6 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     RestaurantdetailsComponent,
     DeliverydashboardComponent,
     OrderstatusComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -71,7 +75,11 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     PanelModule,
     DataViewModule,
     SplitterModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    MatSnackBarModule,
+    ConfirmDialogModule,
+    ToastModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

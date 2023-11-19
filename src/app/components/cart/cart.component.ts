@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Cart } from 'src/shared/model/cart';
@@ -23,8 +24,13 @@ export class CartComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private _snackBar: MatSnackBar
+  ) { }
+  
+  openSnackBar(message: string, action: string,) {
+    this._snackBar.open(message, action);
+  }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
@@ -60,6 +66,7 @@ export class CartComponent implements OnInit{
     this.userService.removeItem(this.userId, menuId).subscribe(
       (cart) => {
         console.log('Removed item from cart');
+        this.openSnackBar("Item removed from cart", "OK")
         this.cart = cart;
         this.populateCart();
       },
@@ -72,6 +79,7 @@ export class CartComponent implements OnInit{
     this.userService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item increased by 1 successfully!');
+        this.openSnackBar("Cart Updated", "OK");
         this.populateCart();
       },
       (error) => {
