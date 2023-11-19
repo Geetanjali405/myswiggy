@@ -1,71 +1,66 @@
+
 .delivery-details {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .delivery-details h2 {
-        margin-bottom: 20px;
-      }
-      
-      .delivery-details table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      
-      .delivery-details table th,
-      .delivery-details table td {
-        text-align: left;
-        padding: 8px;
-        border: 1px solid black;
-      }
-      
-      .delivery-details table th {
-        background-color: #f2f2f2;
-      }
-      
-      .delivery-details button {
-        padding: 8px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
-      
-      .popup {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        justify-content: center;
-        align-items: center;
-      }
-      
-      .popup.open {
-        display: flex;
-      }
-      
-      .popup-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 5px;
-        max-width: 400px;
-        text-align: center;
-        position: relative;
-      }
-      
-      .popup-content .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 32px;
-        height: 32px;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-        font-size: 24px;
-      }
+  background-image: url('https://th.bing.com/th/id/OIP.OIrdAqyYMLNG5dCpx-UIqgHaFj?w=216&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7');
+  background-size: contain; /* This will make sure your image covers the whole div */
+  // background-repeat: no-repeat; /* This will prevent your image from repeating */
+  width: 85%;
+  margin-left:70px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-bottom: 90px;
+}
+
+.delivery-details h2 {
+  margin-bottom: 20px;
+  color: #fc8019; /* Swiggy's orange color */
+}
+
+.delivery-details table {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5); 
+  border-collapse: collapse;
+}
+
+.delivery-details th, .delivery-details td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.delivery-details th {
+  background-color: #fc8019; /* Swiggy's orange color */
+  color: white;
+}
+
+.delivery-details tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.delivery-details tr:hover {
+  background-color: #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delivery-details button {
+  background-color: #fc8019; /* Swiggy's orange color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delivery-details button:hover {
+  background-color: #ce6c00; /* Darker shade of Swiggy's orange color */
+}

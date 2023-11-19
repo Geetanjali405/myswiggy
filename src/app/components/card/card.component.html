@@ -15,7 +15,8 @@
                                 (click)="addToFav(id,res.id)"></i>
                         <i *ngIf=favarr.includes(res.id) class="bi bi-heart-fill" style="color: red;"
                                 (click)="removeFromFav(id,res.id)"></i> -->
-                        <i *ngIf="!issFav(res.id)" class="bi bi-heart" style="color: red;" (click)="addToFav(id,res.id)"></i>
+                        <i *ngIf="!issFav(res.id)" class="bi bi-heart" style="color: red;"
+                                (click)="addToFav(id,res.id)"></i>
                         <i *ngIf="issFav(res.id)" class="bi bi-heart-fill" style="color: red;"
                                 (click)="removeFromFav(id,res.id)"></i>
 

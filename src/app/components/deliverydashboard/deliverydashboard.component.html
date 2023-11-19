@@ -1,21 +1,26 @@
-<h1><b>WELCOME ALEX TO SWIGGY DELIVERY</b></h1>
-<div class="delivery-details">
-        <h2>Delivery Details</h2>
-        <table>
-                <thead>
-                        <tr>
-                                <th>Order ID</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                        </tr>
-                </thead>
-                <tbody>
-                        <tr *ngFor="let orderIdStatus of delivery.orderIdAndStatus | keyvalue">
-                                <td>{{orderIdStatus.key}}</td>
-                                <td>{{orderIdStatus.value}}</td>
-                                <td><button (click)="showUpdateStatusPopup(orderIdStatus.key)">Update Status</button>
-                                </td>
-                        </tr>
-                </tbody>
-        </table>
+
+
+<div class="delivery" style="background: url('https://img.freepik.com/premium-vector/stylish-seamless-pattern-with-oranges-linear-shapes_697711-47.jpg'); background-size: cover; ">
+        <h1 ><b>WELCOME ALEX TO SWIGGY DELIVERY</b></h1>
+        <div class="delivery-details" style="position: relative;">
+                <h2>DELIVERY DETAILS</h2>
+                <table>
+                        <thead>
+                                <tr>
+                                        <th>Order ID</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let orderIdStatus of delivery.orderIdAndStatus | keyvalue">
+                                        <td>{{orderIdStatus.key}}</td>
+                                        <td>{{orderIdStatus.value}}</td>
+                                        <td><button (click)="showUpdateStatusPopup(orderIdStatus.key)">Update Status</button>
+                                        </td>
+                                </tr>
+                        </tbody>
+                </table>
+        </div>
 </div>
+
