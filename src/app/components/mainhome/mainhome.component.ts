@@ -1,6 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/shared/model/user';
 import { UserService } from 'src/shared/services/user.service';
@@ -17,6 +22,7 @@ export class MainhomeComponent implements OnInit {
   userInfo: User;
   userId: string;
   delId: string;
+  visible: boolean = false;
 
   constructor(
     private offcanvasService: NgbOffcanvas,
@@ -26,19 +32,29 @@ export class MainhomeComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
-      userName: new FormControl(''),
-      email: new FormControl(''),
-      password: new FormControl(''),
+      userName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20),
+      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
     });
     this.signInForm = this.fb.group({
-      email: new FormControl(''),
-      password: new FormControl(''),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
     });
 
     if (localStorage.getItem('user')) {
       // if (confirm('user already logged in') == true)
       this.router.navigate['/dashboard'];
-      }
+    }
   }
   onSubmit() {
     console.warn(this.signUpForm.value);
@@ -57,7 +73,8 @@ export class MainhomeComponent implements OnInit {
     console.log(this.user);
     this.userService.registration(this.user).subscribe((response) => {
       console.log(response);
-      alert('Registered Successfully! Please Log In');
+      // alert('Registered Successfully! Please Log In');
+      this.visible = true;
     });
   }
   onSubmitIn() {
@@ -96,7 +113,7 @@ export class MainhomeComponent implements OnInit {
       }
     });
   }
-  
+
   openEndSignIn(contentsignin: TemplateRef<any>) {
     this.offcanvasService.open(contentsignin, { position: 'end' });
   }

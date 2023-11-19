@@ -41,6 +41,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { NameComponent } from './components/name/name.component';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { NameComponent } from './components/name/name.component';
     ConfirmDialogModule,
     ToastModule,
     ConfirmPopupModule,
-    MessagesModule
+    MessagesModule,
+    DialogModule
     
   ],
    providers: [ConfirmationService,MessageService],
