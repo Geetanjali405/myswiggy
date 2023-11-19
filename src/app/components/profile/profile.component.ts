@@ -63,11 +63,15 @@ export class ProfileComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         localStorage.clear();
+       
         this.messageService.add({
           severity: 'info',
           summary: 'Confirmed',
           detail: 'You have succesfully logged out',
         });
+        // this.router.navigate(['/mainhome']);
+        
+        
       },
       reject: () => {
         this.messageService.add({

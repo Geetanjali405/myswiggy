@@ -46,27 +46,115 @@ export class DashboardComponent implements OnInit {
         'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_850,h_504/rng/md/carousel/production/c6ecfbe96b4dc6ce6cbe6fcdbe7ab2ae',
     },
   ];
+  public imagess = [
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029853/PC_Creative%20refresh/3D_bau/banners_new/Paratha.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029859/PC_Creative%20refresh/3D_bau/banners_new/Salad.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1675667625/PC_Creative%20refresh/Biryani_2.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029852/PC_Creative%20refresh/3D_bau/banners_new/Momos.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029858/PC_Creative%20refresh/3D_bau/banners_new/Rolls.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1675667626/PC_Creative%20refresh/South_Indian_4.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1675667630/PC_Creative%20refresh/Desserts_2.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029854/PC_Creative%20refresh/3D_bau/banners_new/Pav_Bhaji.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029853/PC_Creative%20refresh/3D_bau/banners_new/Kebabs.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029845/PC_Creative%20refresh/3D_bau/banners_new/Cakes.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029858/PC_Creative%20refresh/3D_bau/banners_new/Pure_Veg.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029855/PC_Creative%20refresh/3D_bau/banners_new/Noodles.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029851/PC_Creative%20refresh/3D_bau/banners_new/Ice_Creams.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029846/PC_Creative%20refresh/3D_bau/banners_new/Idli.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029850/PC_Creative%20refresh/3D_bau/banners_new/Dosa.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1675667625/PC_Creative%20refresh/North_Indian_4.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1675667625/PC_Creative%20refresh/North_Indian_4.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029859/PC_Creative%20refresh/3D_bau/banners_new/Shawarma.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029848/PC_Creative%20refresh/3D_bau/banners_new/Chinese.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029845/PC_Creative%20refresh/3D_bau/banners_new/Burger.png',
+    },
+    {
+      image:
+        'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029856/PC_Creative%20refresh/3D_bau/banners_new/Pizza.png',
+    },
+  ];
   restaurantList: any[];
   subscription: Subscription;
   isAscending: any;
+  userData: any;
+  namee: any;
   constructor(private router: Router, private userService: UserService) {}
- 
+
   ngOnInit(): void {
     console.warn(localStorage.getItem('id'));
+    const userString = localStorage.getItem('user');
+    this.userData = JSON.parse(userString);
     // this.subInterval = setInterval(() => {
-      this.subscription = this.userService.getRestrauntDetails().subscribe(
-        (response) => {
-          this.restaurantList = response;
-          console.log(response);
-        },
-        (error) => {
-          console.log('Error in fetching restaurant details', error);
-        }
-      );
+    this.subscription = this.userService.getRestrauntDetails().subscribe(
+      (response) => {
+        this.restaurantList = response;
+        console.log(response);
+      },
+      (error) => {
+        console.log('Error in fetching restaurant details', error);
+      }
+    );
     // }, 5000);
-   
   }
-
 
   toggleSortByRating(): void {
     const isAscending =

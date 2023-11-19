@@ -35,6 +35,35 @@
                                 </ng-template>
                         </p-carousel>
                 </p-carousel>
+                <h2 class="ms-5"><b>{{ userData.userName }}, What's on your mind?</b></h2>
+                <p-carousel [value]="imagess" [numVisible]="6" [numScroll]="3" [circular]="true"
+                        [autoplayInterval]="3000">
+                        <ng-template let-image pTemplate="item">
+                                <div style="padding-right: 16px;">
+                                        <img [src]="image.image" class="carouse-image" />
+                                </div>
+                        </ng-template>
+
+                        <p-carousel [numVisible]="1" [autoplayInterval]="5500" [responsiveOptions]="[
+                  {
+                    breakpoint: '1024px',
+                    numVisible: 2,
+                    numScroll: 2
+                  },
+                  {
+                    breakpoint: '768px',
+                    numVisible: 1,
+                    numScroll: 1
+                  }
+                ]">
+                                <ng-template let-image pTemplate="item">
+                                        <div class="carousel-image-container">
+                                                <img [src]="image.image" class="carousel-image" />
+                                        </div>
+                                </ng-template>
+                        </p-carousel>
+                </p-carousel>
+
         </div>
 
         <h2 class="ms-5 mb-2" style="padding-left: 20px;"><b>Restaurants with online food delivery in Delhi</b></h2>
@@ -45,7 +74,7 @@
                 <button pButton pRipple type="button" label="Sort by no. of ratings"
                         class="p-button-raised p-button-secondary p-button-text category-btn "
                         (click)="toggleSortBynoofRatings()"></button>
-               
+
         </div>
 
         <div class="col-lg-12 d-flex justify-content-center mt-2">

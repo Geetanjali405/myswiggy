@@ -22,6 +22,10 @@ const routes: Routes = [
     component: MainhomeComponent,
   },
   {
+    path: 'mainhome',
+    component: MainhomeComponent,
+  },
+  {
     path: 'dashboard',
     canActivate: [authGuard],
     component: DashboardComponent,
