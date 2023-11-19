@@ -5,6 +5,8 @@
                         <div class="details">
                                 <h1><b>{{restaurant?.name}}</b></h1>
                                 <!-- Add more details here -->
+                                <h3>{{restaurant?.locality}}</h3>
+                                <h3>{{ restaurant?.cuisines.join(', ') }}</h3>
                         </div>
                         <div class="restaurant-image">
                                 <img alt="Card" [src]="imgSrc" class="imgg">

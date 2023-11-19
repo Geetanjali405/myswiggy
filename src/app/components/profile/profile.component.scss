@@ -8,16 +8,23 @@
 }
 
 .profile {
-    width: 80%;
+    width: 40%;
     margin: 50px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+ 
+}
+
+.pro{
+    display: flex;
+    justify-content: center
 }
 
 .profile ul {
     list-style-type: none;
+   
 }
 
 .profile ul li {
