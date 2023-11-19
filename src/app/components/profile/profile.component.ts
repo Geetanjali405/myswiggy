@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService ,ConfirmEventType } from 'primeng/api';
+import {
+  ConfirmationService,
+  MessageService,
+  ConfirmEventType,
+} from 'primeng/api';
 
 import { UserService } from 'src/shared/services/user.service';
 
@@ -10,7 +14,12 @@ import { UserService } from 'src/shared/services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private userService: UserService, private router: Router,private confirmationService: ConfirmationService,private messageService: MessageService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
   userId: string;
   userData: any;
   email: any;
@@ -43,28 +52,28 @@ export class ProfileComponent implements OnInit {
   //   );
   // }
 
-  confirm1() {
-    this.confirmationService.confirm({
-        message: 'Are you sure that you want to proceed?',
-        header: 'Confirmation',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted to log out' });
-        },
-        reject: (type) => {
-            switch (type: ConfirmEventType) {
-                case ConfirmEventType.REJECT:
-                    this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
-                    break;
-                case ConfirmEventType.CANCEL:
-                    this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
-                    break;
-                default:
-  
-            }
-        }
-    });
-}
+  //   confirm1() {
+  //     this.confirmationService.confirm({
+  //         message: 'Are you sure that you want to proceed?',
+  //         header: 'Confirmation',
+  //         icon: 'pi pi-exclamation-triangle',
+  //         accept: () => {
+  //             this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted to log out' });
+  //         },
+  //         reject: (type) => {
+  //             switch (type: ConfirmEventType) {
+  //                 case ConfirmEventType.REJECT:
+  //                     this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+  //                     break;
+  //                 case ConfirmEventType.CANCEL:
+  //                     this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
+  //                     break;
+  //         default:
+
+  //             }
+  //         }
+  //     });
+  // }
 
   logout() {
     localStorage.clear();
