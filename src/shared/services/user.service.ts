@@ -97,6 +97,12 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  getMenubyId(id:string): Observable<any> {
+    return this.httpclient
+    .get<any>(`${getMenu}/${id}`)
+    .pipe(retry(1), catchError(this.handleError));
+  }
+
   getMenuDetailsofRestaurant(restId: string): Observable<any> {
     return this.httpclient
       .get<any>(`${getMenubyRes}/${restId}`)

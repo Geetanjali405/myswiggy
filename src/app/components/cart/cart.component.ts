@@ -20,7 +20,9 @@ export class CartComponent implements OnInit{
   status: string;
   statusorder: string;
   orderStatusInterval = null;
+  menu: any;
   rou = null;
+  itemNames: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -40,6 +42,7 @@ export class CartComponent implements OnInit{
     // this.orderStatusInterval = setInterval(() => {
       
     // }, 5000);
+    
     this.invokeStripe();
     
   }
@@ -55,13 +58,23 @@ export class CartComponent implements OnInit{
         this.cartId = this.cart.id;
         localStorage.setItem('cartId', this.cartId);
         // this.statusorder = this.getOrderStatus(this.cartId);
+        for (let itemId in this.cart.items) {
+          this.menu = this.getItembyId(itemId);
+          // this.menu=JSON.parse(this.menu);
+
+      
+          
+          // console.log(this.getItem(itemId));
+
+        }
+        console.log(this.cart.items);
+        console.log(this.cart);
       },
       (error) => {
         console.error('Error fetching cart: ', error);
       }
     );
   }
-
   removeItem(menuId: any) {
     this.userService.removeItem(this.userId, menuId).subscribe(
       (cart) => {
@@ -98,7 +111,7 @@ export class CartComponent implements OnInit{
       }
     );
   }
-  makePayment(amount: any, id: any) {
+  makePayment(amount: any, id: any){
     this.userService.addToDelivery(id).subscribe({
       next: (res) => {
        this.rou= setTimeout(() => {
@@ -145,12 +158,11 @@ export class CartComponent implements OnInit{
       window.document.body.appendChild(script);
     }
   }
-
   getOrderStatus(cartId: string) {
     console.warn('inside get order status');
     this.userService.getOrderStatuss(this.cartId).subscribe({
       next: (response) => {
-        console.log(response.body);
+        // console.log(response.body);
         this.status = response;
         this.statusorder = response;
         if (this.status === 'Order Placed') {
@@ -164,5 +176,19 @@ export class CartComponent implements OnInit{
         console.error('Error parsing JSON', error);
       },
     });
+  }
+
+  getItembyId(id:string) {
+    this.subscription = this.userService.getMenubyId(id).subscribe(
+      (response) => {
+        this.menu = response;
+        console.log(response);
+        this.itemNames.push(this.menu.name);
+        console.log(this.itemNames);
+      },
+      (error) => {
+        console.log('Error in fetching menu id details', error);
+      }
+    );
   }
 }

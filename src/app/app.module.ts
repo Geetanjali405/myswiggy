@@ -40,6 +40,7 @@ import { ConfirmationService,MessageService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
+import { NameComponent } from './components/name/name.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ToastModule } from 'primeng/toast';
     RestaurantdetailsComponent,
     DeliverydashboardComponent,
     OrderstatusComponent,
+    NameComponent,
   ],
   imports: [
     BrowserModule,
