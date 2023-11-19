@@ -68,7 +68,10 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
               console.error(err);
             },
           });
+         
           this.router.navigate(['/dashboard']);
+          //dialog popup
+          
         }
         // this.router.navigate(['/dashboard']);
       },

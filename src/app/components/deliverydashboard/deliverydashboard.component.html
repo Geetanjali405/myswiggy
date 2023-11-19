@@ -5,7 +5,7 @@
                 <h1 ><b>WELCOME ALEX TO SWIGGY DELIVERY</b></h1>
         </div>
       
-        <div class="delivery-details" >
+        <div class="delivery-details"  >
                 <h2><b>DELIVERY DETAILS</b></h2>
                 <table>
                         <thead>
@@ -19,7 +19,7 @@
                                 <tr *ngFor="let orderIdStatus of delivery.orderIdAndStatus | keyvalue">
                                         <td>{{orderIdStatus.key}}</td>
                                         <td>{{orderIdStatus.value}}</td>
-                                        <td><button (click)="showUpdateStatusPopup(orderIdStatus.key)">Update Status</button>
+                                        <td><button (click)="showUpdateStatusPopup(orderIdStatus.key)" style="margin-left: 140px;">UPDATE ORDER STATUS</button>
                                         </td>
                                 </tr>
                         </tbody>

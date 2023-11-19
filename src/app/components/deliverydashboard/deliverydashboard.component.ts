@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { DeliveryData } from 'src/shared/model/delivery';
@@ -16,13 +17,16 @@ export class DeliverydashboardComponent implements OnInit {
   modalCloseSpan: HTMLElement;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.populateCart();
   }
-
+  openSnackBar(message: string, action: string,) {
+    this._snackBar.open(message, action);
+  }
   populateCart() {
     this.userService.getDelivery().subscribe(
       (delivery) => {
@@ -40,6 +44,7 @@ export class DeliverydashboardComponent implements OnInit {
     this.userService.updateStatusofOrder(orderId).subscribe(
       (delivery) => {
         console.log(delivery);
+        this.openSnackBar("Order status updated successfully!", "OK")
         this.populateCart();
       },
       (error) => {
