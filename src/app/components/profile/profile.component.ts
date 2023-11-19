@@ -6,7 +6,11 @@ import { Router } from '@angular/router';
 //   ConfirmEventType,
 // } from 'primeng/api';
 
-import { ConfirmationService, MessageService,ConfirmEventType } from 'primeng/api';
+import {
+  ConfirmationService,
+  MessageService,
+  ConfirmEventType,
+} from 'primeng/api';
 import { UserService } from 'src/shared/services/user.service';
 
 @Component({
@@ -53,20 +57,27 @@ export class ProfileComponent implements OnInit {
   //   );
   // }
   confirm(event: Event) {
-    localStorage.clear();
     this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'Are you sure that you want to logout ?',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-            this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have succesfully logged out' });
-        },
-        reject: () => {
-          this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You are still logged in' });
-          
-        }
+      target: event.target as EventTarget,
+      message: 'Are you sure that you want to logout ?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        localStorage.clear();
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Confirmed',
+          detail: 'You have succesfully logged out',
+        });
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rejected',
+          detail: 'You are still logged in',
+        });
+      },
     });
-}
+  }
 
   logout() {
     localStorage.clear();

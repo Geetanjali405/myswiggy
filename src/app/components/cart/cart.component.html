@@ -38,9 +38,11 @@
                                 <li *ngIf="cart?.orderPlaced">Order Placed: {{ cart.orderPlaced }}</li>
                                 <li *ngIf="cart?.total">Total: Rs. {{ cart.total }}</li>
                         </ul>
+                        <p-toast></p-toast>
+                        <p-confirmPopup></p-confirmPopup>
                         <button pButton pRipple type="button" class="p-button-rounded p-button-warning"
                                 *ngIf="cart?.items" [disabled]="statusorder === 'Order Placed'"
-                                (click)="makePayment(cart.total, cart.id)">Place
+                                (click)="confirm($event)">Place
                                 order now</button>
 
                         <div *ngIf="!cart?.items" style="display: flex; justify-content: center;">
