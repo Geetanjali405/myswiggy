@@ -18,6 +18,8 @@ export class RestaurantdetailsComponent implements OnInit{
   menuList: any[];
   filtered: any[];
   userId: string;
+  imageSrc: string;
+
   cloudinaryBaseURL =
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
   imgSrc: string;

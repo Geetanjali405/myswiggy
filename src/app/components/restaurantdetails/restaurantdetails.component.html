@@ -28,7 +28,7 @@
                                                 <p><b>Price:Rs. {{ menuItem.price / 100 }}</b></p>
                                         </div>
                                         <div class="img-container">
-                                                <img alt="Card" src="https://picsum.photos/200/300" class="img">
+                                                <img alt="Card" src="{{cloudinaryBaseURL}}{{menuItem.imageId}}" class="img">
                                                 <div class="myButton">
                                                         <a class="add-to-cart" (click)="addIteminCart(menuItem.id)">Add
                                                                 to cart</a>

@@ -33,15 +33,15 @@ export class FoodcardComponent {
     'https://images.unsplash.com/photo-1542528180-a1208c5169a5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fGZvb2QlMjBtZW51fGVufDB8fDB8fHww',
   ];
   cloudinaryBaseURL =
-    'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
+    'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/';
 
   ngOnInit() {
     console.log('Current FOOD ITEM:', this.res);
-    this.imgSrc = `${this.cloudinaryBaseURL}${this.res.restId}`;
+    this.imgSrc = `${this.cloudinaryBaseURL}${this.res.imageId}`;
   }
 
-  getRandomImageUrl(): string {
-    return this.imageUrls[Math.floor(Math.random() * this.imageUrls.length)];
-  }
+  // getRandomImageUrl(): string {
+  //   return this.imageUrls[Math.floor(Math.random() * this.imageUrls.length)];
+  // }
 
 }
