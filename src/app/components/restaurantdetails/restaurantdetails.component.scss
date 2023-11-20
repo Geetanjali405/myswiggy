@@ -19,11 +19,13 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     margin-bottom: 20px;
+    background: linear-gradient(45deg, whitesmoke, white);
 }
 
 .details {
     // flex: 1;
     margin-right: 20px;
+   
 }
 
 .details h1 {
@@ -59,6 +61,7 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 10px;
+    background: linear-gradient(45deg, whitesmoke, white);
 }
 
 .main:hover{
@@ -99,6 +102,7 @@
     align-items: center;
     justify-content: center;
     padding: 16px;
+   
 }
 
 .img-container .img {
