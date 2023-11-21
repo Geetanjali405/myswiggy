@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
@@ -43,17 +43,6 @@ export class CartComponent implements OnInit {
     this.populateCart();
     this.getOrderStatus(this.cartId);
     this.invokeStripe();
-  }
-
-  /**
-   *
-   * @function openSnackBar Opens a snackbar with the specified message and action text.
-   * @param {string} message - The message to display in the snackbar.
-   * @param {string} action - The text to display on the action button of the snackbar.
-   * @returns {void}
-   */
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
   }
 
   /**
@@ -87,7 +76,7 @@ export class CartComponent implements OnInit {
     this.userService.removeItem(this.userId, menuId).subscribe(
       (cart) => {
         console.log('Removed item from cart');
-        this.openSnackBar('Item removed from cart', 'OK');
+        this.snackBar.open('Item removed from cart', 'OK');
         this.cart = cart;
         this.populateCart();
       },
@@ -107,7 +96,9 @@ export class CartComponent implements OnInit {
     this.userService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item increased by 1 successfully!');
-        this.openSnackBar('Cart Updated', 'OK');
+        this.snackBar.open('Cart Updated', 'OK', {
+          duration: 3000
+        });
         this.populateCart();
       },
       (error) => {

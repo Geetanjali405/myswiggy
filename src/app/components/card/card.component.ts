@@ -21,7 +21,7 @@ export class CardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private _snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {}
   fav = null;
   ngOnInit() {
@@ -31,16 +31,6 @@ export class CardComponent implements OnInit {
 
     this.imgSrc = `${this.cloudinaryBaseURL}${this.res.cloudinaryImageId}`;
     console.log(this.imgSrc);
-  }
-
-  /**
-   *
-   * @function
-   * @param message the message user wants to show in the completed action
-   * @param action the action to remove snackbar
-   */
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
   }
 
   /**
@@ -71,7 +61,9 @@ export class CardComponent implements OnInit {
     this.userService.addToFav(id, restId).subscribe({
       next: (res) => {
         console.log(res);
-        this.openSnackBar('Added to favourites !!', 'OK');
+        this.snackBar.open('Added to favourites !!', 'OK', {
+          duration: 3000
+        });
         this.getFav(id);
       },
       error: (er) => {
@@ -90,7 +82,9 @@ export class CardComponent implements OnInit {
     this.userService.removeFromFav(id, restId).subscribe({
       next: (res) => {
         console.log(res);
-        this.openSnackBar('Removed from favourites !!', 'OK');
+        this.snackBar.open('Removed from favourites !!', 'OK', {
+          duration: 3000
+        });
         this.getFav(id);
       },
       error: (er) => {

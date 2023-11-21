@@ -1,4 +1,4 @@
-import { Component ,AfterViewInit, OnInit} from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
@@ -11,8 +11,7 @@ import { Restaurant } from 'src/shared/model/restaurant';
   templateUrl: './restaurantdetails.component.html',
   styleUrls: ['./restaurantdetails.component.scss'],
 })
-  
-export class RestaurantdetailsComponent implements OnInit{
+export class RestaurantdetailsComponent implements OnInit {
   resId: number;
   subscription: Subscription;
   sub: Subscription;
@@ -31,12 +30,8 @@ export class RestaurantdetailsComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private _snackBar: MatSnackBar
-  ) { }
-  
-  openSnackBar(message: string, action: string,) {
-    this._snackBar.open(message, action);
-  }
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.resId = this.route.snapshot.params['id'];
@@ -77,7 +72,7 @@ export class RestaurantdetailsComponent implements OnInit{
       });
     });
   }
-  
+
   toggleVegFilter() {
     this.filtered = this.menuList.filter((item) => item.isVeg === '1');
   }
@@ -89,7 +84,9 @@ export class RestaurantdetailsComponent implements OnInit{
     this.userService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item added to cart successfully!');
-        this.openSnackBar("Item added to cart", "OK")
+        this.snackBar.open('Item added to cart', 'OK', {
+          duration: 3000,
+        });
       },
       (error) => {
         console.error('Error while adding item to cart: ');
@@ -97,7 +94,4 @@ export class RestaurantdetailsComponent implements OnInit{
       }
     );
   }
-
- 
-
 }

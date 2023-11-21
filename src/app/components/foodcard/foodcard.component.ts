@@ -40,14 +40,11 @@ export class FoodcardComponent {
   cloudinaryBaseURL =
     'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/';
 
-  constructor(private userService:UserService, private _snackBar: MatSnackBar){}
+  constructor(private userService:UserService, private snackBar: MatSnackBar){}
   ngOnInit() {
     this.userId = localStorage.getItem('id');
     console.log('Current FOOD ITEM:', this.res);
     this.imgSrc = `${this.cloudinaryBaseURL}${this.res.imageId}`;
-  }
-  openSnackBar(message: string, action: string,) {
-    this._snackBar.open(message, action);
   }
   addIteminCart(menuId: string) {
     // console.log(menuId);
@@ -55,7 +52,9 @@ export class FoodcardComponent {
     this.userService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item added to cart successfully!');
-        this.openSnackBar("Item added to cart", "OK")
+        this.snackBar.open("Item added to cart", "OK", {
+          duration: 3000
+        })
       },
       (error) => {
         console.error('Error while adding item to cart: ');

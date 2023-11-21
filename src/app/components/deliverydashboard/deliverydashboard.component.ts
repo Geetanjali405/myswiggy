@@ -18,14 +18,11 @@ export class DeliverydashboardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private _snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.populateCart();
-  }
-  openSnackBar(message: string, action: string,) {
-    this._snackBar.open(message, action);
   }
   populateCart() {
     this.userService.getDelivery().subscribe(
@@ -44,7 +41,9 @@ export class DeliverydashboardComponent implements OnInit {
     this.userService.updateStatusofOrder(orderId).subscribe(
       (delivery) => {
         console.log(delivery);
-        this.openSnackBar("Order status updated successfully!", "OK")
+        this.snackBar.open("Order status updated successfully!", "OK", {
+          duration: 3000
+        })
         this.populateCart();
       },
       (error) => {
