@@ -1,8 +1,7 @@
 
 .delivery-details {
   background-image: url('https://th.bing.com/th/id/OIP.OIrdAqyYMLNG5dCpx-UIqgHaFj?w=216&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7');
-  background-size: contain; /* This will make sure your image covers the whole div */
-  // background-repeat: no-repeat; /* This will prevent your image from repeating */
+  background-size: contain; 
   width: 85%;
   margin-left:70px;
   border-radius: 20px;
@@ -17,7 +16,7 @@
 
 .delivery-details h2 {
   margin-bottom: 20px;
-  color: #fc8019; /* Swiggy's orange color */
+  color: #fc8019; 
 }
 
 .delivery-details table {
@@ -33,7 +32,7 @@
 }
 
 .delivery-details th {
-  background-color: #fc8019; /* Swiggy's orange color */
+  background-color: #fc8019; 
   color: white;
 }
 
@@ -48,7 +47,7 @@
 }
 
 .delivery-details button {
-  background-color: #fc8019; /* Swiggy's orange color */
+  background-color: #f79e65; 
   color: white;
   border: none;
   padding: 10px 20px;
@@ -62,7 +61,7 @@
 }
 
 .delivery-details button:hover {
-  background-color: #ce6c00; /* Darker shade of Swiggy's orange color */
+  background-color: #ce6c00;
 }
 
 h1 { font-size: 3em; font-weight: bold; color: #fff; opacity: 0.9; margin-left: 70px; }
