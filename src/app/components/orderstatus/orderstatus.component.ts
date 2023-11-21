@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { CartService } from 'src/shared/services/cart.service';
 import { UserService } from 'src/shared/services/user.service';
 
 @Component({
@@ -11,14 +12,15 @@ import { UserService } from 'src/shared/services/user.service';
 export class OrderstatusComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   userId: string;
-  cartId: any;
+  cartId: string;
   status: string;
   orderStatusInterval = null;
   cart: import('c:/Users/GEBGS00/Desktop/Capstone/myswiggy/src/shared/model/cart').Cart;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private cartService:CartService
   ) {}
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
@@ -35,7 +37,7 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
     clearInterval(this.orderStatusInterval);
   }
   getcartid() {
-    this.userService.getCart(this.userId).subscribe((cart) => {
+    this.cartService.getCart(this.userId).subscribe((cart) => {
       this.cart = cart;
       this.cartId = this.cart.id;
     });
@@ -47,11 +49,11 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
       next: (response) => {
         this.status = response;
         if (this.status === 'Delivered') {
-          this.userService.deleteCart(this.userId).subscribe({
+          this.cartService.deleteCart(this.userId).subscribe({
             next: (response) => {
               console.log(response);
 
-              this.userService.createCart(this.userId).subscribe({
+              this.cartService.createCart(this.userId).subscribe({
                 next: (newcart) => {
                   console.log('New Cart created: ', newcart);
                   this.cart = newcart;

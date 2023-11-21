@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Menu } from 'src/shared/model/menu';
+import { RestaurantService } from 'src/shared/services/restaurant.service';
 import { UserService } from 'src/shared/services/user.service';
 
 @Component({
@@ -73,10 +74,11 @@ export class SearchComponent {
   constructor(
     private router: Router,
     private userService: UserService,
+    private restaurantService:RestaurantService,
     private fb: FormBuilder
   ) {}
   ngOnInit(): void {
-    this.subscription = this.userService.getMenuDetails().subscribe(
+    this.subscription = this.restaurantService.getMenuDetails().subscribe(
       (response) => {
         this.menuList = response;
         console.log(response);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { RestaurantService } from 'src/shared/services/restaurant.service';
 
 import { UserService } from 'src/shared/services/user.service';
 
@@ -14,22 +15,23 @@ export class FavouritesComponent implements OnInit {
   favList: string[];
   id: string;
   restaurantList = [];
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private restaurantService: RestaurantService,
+    private userService: UserService
+  ) {}
   ngOnInit(): void {
     this.id = localStorage.getItem('id');
-     // this.fav = setInterval(() => {
     this.getFav(this.id);
-     // }, 2000);
- 
   }
 
   getFav(id: string) {
-    this.userService.getFav(this.id).subscribe({
+    this.restaurantService.getFav(this.id).subscribe({
       next: (response) => {
         this.favList = response;
         console.log(response);
         this.favList.forEach((fav) => {
-          this.userService.getRestaurantsbyId(fav).subscribe({
+          this.restaurantService.getRestaurantsbyId(fav).subscribe({
             next: (restaurant) => {
               // console.warn(restaurant);
               this.restaurantList.push(restaurant);
@@ -46,6 +48,4 @@ export class FavouritesComponent implements OnInit {
       },
     });
   }
-
-
 }

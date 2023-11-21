@@ -4,11 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Cart } from 'src/shared/model/cart';
 import { UserService } from 'src/shared/services/user.service';
+
 import {
   ConfirmationService,
   MessageService,
   ConfirmEventType,
 } from 'primeng/api';
+import { CartService } from 'src/shared/services/cart.service';
+import { RestaurantService } from 'src/shared/services/restaurant.service';
+import { Menu } from 'src/shared/model/menu';
 
 @Component({
   selector: 'app-cart',
@@ -25,13 +29,14 @@ export class CartComponent implements OnInit {
   status: string;
   statusorder: string;
   orderStatusInterval = null;
-  menu: any;
+  menu: Menu;
   rou = null;
-  itemNames: any[] = [];
+  itemNames: string[] = [];
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
+    private cartService: CartService,
+    private restaurantService:RestaurantService,
     private snackBar: MatSnackBar,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
@@ -49,13 +54,13 @@ export class CartComponent implements OnInit {
    * @function populateCart to render cart in DOM
    */
   populateCart() {
-    this.userService.getCart(this.userId).subscribe(
+    this.cartService.getCart(this.userId).subscribe(
       (cart) => {
         this.cart = cart;
         this.cartId = this.cart.id;
         localStorage.setItem('cartId', this.cartId);
         for (let itemId in this.cart.items) {
-          this.menu = this.getItembyId(itemId);
+           this.getItembyId(itemId);
         }
         console.log(this.cart.items);
         console.log(this.cart);
@@ -68,12 +73,12 @@ export class CartComponent implements OnInit {
 
   /**
    * @function removeItem removes an item from the cart based on the given menuId.
-   * It calls the removeItem method from the userService and updates the cart.
+   * It calls the removeItem method from the cartService and updates the cart.
    * @param {string} menuId - The id of the menu item to be removed from the cart.
    * @return {void} - This method does not return anything. */
 
   removeItem(menuId: string) {
-    this.userService.removeItem(this.userId, menuId).subscribe(
+    this.cartService.removeItem(this.userId, menuId).subscribe(
       (cart) => {
         console.log('Removed item from cart');
         this.snackBar.open('Item removed from cart', 'OK');
@@ -88,16 +93,16 @@ export class CartComponent implements OnInit {
 
   /**
    * @function increaseItem the quantity of the item with the given menuId in the user's cart by one.
-   * The function calls the addItemToCart method from the userService and updates the cart accordingly.
+   * The function calls the addItemToCart method from the cartService and updates the cart accordingly.
    * If successful, it displays a message and repopulates the cart with updated data.
    * @param menuId The id of the menu item to be increased in the cart.
    */
   increaseItem(menuId: string) {
-    this.userService.addItemToCart(this.userId, menuId).subscribe(
+    this.cartService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item increased by 1 successfully!');
         this.snackBar.open('Cart Updated', 'OK', {
-          duration: 3000
+          duration: 3000,
         });
         this.populateCart();
       },
@@ -108,11 +113,11 @@ export class CartComponent implements OnInit {
   }
 
   /**
-   * @function decreaseItem Decreases the quantity of the item with the given menuId in the user's cart by one. The function calls the decreaseItem method from the userService and updates the cart accordingly.If successful, it repopulates the cart with updated data.
+   * @function decreaseItem Decreases the quantity of the item with the given menuId in the user's cart by one. The function calls the decreaseItem method from the cartService and updates the cart accordingly.If successful, it repopulates the cart with updated data.
    * @param menuId  The id of the menu item to be decreased in the cart.
    */
   decreaseItem(menuId: string) {
-    this.userService.decreaseItem(this.userId, menuId).subscribe(
+    this.cartService.decreaseItem(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item decresed by 1 successfully!');
         this.populateCart();
@@ -204,12 +209,10 @@ export class CartComponent implements OnInit {
    * @param id  itemId
    */
   getItembyId(id: string) {
-    this.subscription = this.userService.getMenubyId(id).subscribe(
+    this.subscription = this.restaurantService.getMenubyId(id).subscribe(
       (response) => {
         this.menu = response;
-        console.log(response);
         this.itemNames.push(this.menu.name);
-        console.log(this.itemNames);
       },
       (error) => {
         console.log('Error in fetching menu id details', error);

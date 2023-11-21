@@ -11,6 +11,7 @@ import {
   MessageService,
   ConfirmEventType,
 } from 'primeng/api';
+import { User } from 'src/shared/model/user';
 import { UserService } from 'src/shared/services/user.service';
 
 @Component({
@@ -26,8 +27,8 @@ export class ProfileComponent implements OnInit {
     private messageService: MessageService
   ) {}
   userId: string;
-  userData: any;
-  email: any;
+  userData: User;
+  email: string;
 
   ngOnInit(): void {
     this.email = localStorage.getItem('email');

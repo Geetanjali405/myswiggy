@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/shared/model/user';
 import { UserService } from 'src/shared/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CartService } from 'src/shared/services/cart.service';
 
 @Component({
   selector: 'app-mainhome',
@@ -30,6 +31,7 @@ export class MainhomeComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
+    private cartService:CartService,
     private snackbar: MatSnackBar
   ) { }
   
@@ -105,7 +107,7 @@ export class MainhomeComponent implements OnInit {
 
           //creating cart for user
           this.userId = localStorage.getItem('id');
-          this.userService.createCart(this.userId).subscribe(
+          this.cartService.createCart(this.userId).subscribe(
             (cart) => {
               console.log('Cart created: ', cart);
             },

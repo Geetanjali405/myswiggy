@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Menu } from 'src/shared/model/menu';
 import { Restaurant } from 'src/shared/model/restaurant';
+import { CartService } from 'src/shared/services/cart.service';
 import { UserService } from 'src/shared/services/user.service';
 
 @Component({
@@ -36,11 +37,15 @@ export class FoodcardComponent {
     'https://plus.unsplash.com/premium_photo-1661265874417-f9a2f1981eda?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fGZvb2QlMjBtZW51fGVufDB8fDB8fHww',
     'https://images.unsplash.com/photo-1542528180-a1208c5169a5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fGZvb2QlMjBtZW51fGVufDB8fDB8fHww',
   ];
-  userId: any;
+  userId: string;
   cloudinaryBaseURL =
     'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/';
 
-  constructor(private userService:UserService, private snackBar: MatSnackBar){}
+  constructor(
+    private userService: UserService,
+    private cartService:CartService,
+    private snackBar: MatSnackBar
+  ) {}
   ngOnInit() {
     this.userId = localStorage.getItem('id');
     console.log('Current FOOD ITEM:', this.res);
@@ -49,12 +54,12 @@ export class FoodcardComponent {
   addIteminCart(menuId: string) {
     // console.log(menuId);
     // console.log(this.userId);
-    this.userService.addItemToCart(this.userId, menuId).subscribe(
+    this.cartService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item added to cart successfully!');
-        this.snackBar.open("Item added to cart", "OK", {
-          duration: 3000
-        })
+        this.snackBar.open('Item added to cart', 'OK', {
+          duration: 3000,
+        });
       },
       (error) => {
         console.error('Error while adding item to cart: ');
@@ -66,5 +71,4 @@ export class FoodcardComponent {
   // getRandomImageUrl(): string {
   //   return this.imageUrls[Math.floor(Math.random() * this.imageUrls.length)];
   // }
-
 }

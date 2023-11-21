@@ -7,6 +7,7 @@ import { UserService } from 'src/shared/services/user.service';
 import * as $ from 'jquery';
 import { Restaurant } from 'src/shared/model/restaurant';
 import { User } from 'src/shared/model/user';
+import { RestaurantService } from 'src/shared/services/restaurant.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -138,14 +139,18 @@ export class DashboardComponent implements OnInit {
   subscription: Subscription;
   isAscending: boolean;
   userData: User;
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private restaurantService: RestaurantService
+  ) {}
 
   ngOnInit(): void {
     console.warn(localStorage.getItem('id'));
     const userString = localStorage.getItem('user');
     this.userData = JSON.parse(userString);
     // this.subInterval = setInterval(() => {
-    this.subscription = this.userService.getRestrauntDetails().subscribe(
+    this.subscription = this.restaurantService.getRestrauntDetails().subscribe(
       (response) => {
         this.restaurantList = response;
         console.log(response);

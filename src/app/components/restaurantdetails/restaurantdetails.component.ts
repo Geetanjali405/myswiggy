@@ -5,6 +5,8 @@ import { UserService } from 'src/shared/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Menu } from 'src/shared/model/menu';
 import { Restaurant } from 'src/shared/model/restaurant';
+import { CartService } from 'src/shared/services/cart.service';
+import { RestaurantService } from 'src/shared/services/restaurant.service';
 
 @Component({
   selector: 'app-restaurantdetails',
@@ -30,6 +32,8 @@ export class RestaurantdetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
+    private cartService: CartService,
+    private restaurantService:RestaurantService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -40,7 +44,7 @@ export class RestaurantdetailsComponent implements OnInit {
     console.log(this.userId);
     // console.log(this.resId);
 
-    this.subscription = this.userService
+    this.subscription = this.restaurantService
       .getRestaurantsbyId(this.resId.toString())
       .subscribe(
         (response) => {
@@ -53,7 +57,7 @@ export class RestaurantdetailsComponent implements OnInit {
         }
       );
 
-    this.sub = this.userService
+    this.sub = this.restaurantService
       .getMenuDetailsofRestaurant(this.resId.toString())
       .subscribe(
         (response) => {
@@ -81,7 +85,7 @@ export class RestaurantdetailsComponent implements OnInit {
   }
 
   addIteminCart(menuId: string) {
-    this.userService.addItemToCart(this.userId, menuId).subscribe(
+    this.cartService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item added to cart successfully!');
         this.snackBar.open('Item added to cart', 'OK', {

@@ -3,6 +3,7 @@ import { UserService } from 'src/shared/services/user.service';
 import { ButtonModule } from 'primeng/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Restaurant } from 'src/shared/model/restaurant';
+import { RestaurantService } from 'src/shared/services/restaurant.service';
 
 @Component({
   selector: 'app-card',
@@ -20,6 +21,7 @@ export class CardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private restaurantService:RestaurantService,
     private snackBar: MatSnackBar
   ) {}
   fav = null;
@@ -39,7 +41,7 @@ export class CardComponent implements OnInit {
    *                    property of the current object and logs the result to the console.
    */
   getFav(id: string) {
-    this.userService.getFav(id).subscribe({
+    this.restaurantService.getFav(id).subscribe({
       next: (data) => {
         this.favarr = data;
         console.log(this.favarr);
@@ -57,7 +59,7 @@ export class CardComponent implements OnInit {
    * @returns {void} - This function does not return a value, but logs the result to the console, opens a snack bar with a message,  and calls the `getFav` function to update the favorite items list.
    */
   addToFav(id: string, restId: string) {
-    this.userService.addToFav(id, restId).subscribe({
+    this.restaurantService.addToFav(id, restId).subscribe({
       next: (res) => {
         console.log(res);
         this.snackBar.open('Added to favourites !!', 'OK', {
@@ -78,7 +80,7 @@ export class CardComponent implements OnInit {
    * @returns {void} - This function does not return a value, but logs the result to the console, opens a snack bar with a message,and calls the `getFav` function to update the favorite items list.
    */
   removeFromFav(id: string, restId: string) {
-    this.userService.removeFromFav(id, restId).subscribe({
+    this.restaurantService.removeFromFav(id, restId).subscribe({
       next: (res) => {
         console.log(res);
         this.snackBar.open('Removed from favourites !!', 'OK', {
