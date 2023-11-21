@@ -38,24 +38,8 @@ export class ProfileComponent implements OnInit {
     console.log(this.userData);
     this.userId = localStorage.getItem('id');
 
-    // this.profile(this.userId);
   }
 
-  // profile(userId: string) {
-  //   this.userService.getUserById(userId).subscribe(
-  //     (data) => {
-  //       console.log(data);
-  //       this.userData = data;
-  //       console.log(data.id);
-  //       console.log(this.userData);
-  //       console.log(this.userData.id);
-  //       console.log(this.userData.password);
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }
   confirm(event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Menu } from 'src/shared/model/menu';
 import { UserService } from 'src/shared/services/user.service';
 
 @Component({
@@ -10,8 +11,8 @@ import { UserService } from 'src/shared/services/user.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  menuList: any[];
-  filteredProducts: any[];
+  menuList: Menu[];
+  filteredProducts: Menu[];
   subscription: Subscription;
   searchForm: FormGroup;
 

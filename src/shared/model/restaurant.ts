@@ -1,5 +1,9 @@
 export class Restaurant {
-  id: String = '';
-  name: String = '';
-  address: String = '';
+   id:string;
+  name:string;
+  cloudinaryImageId:string;
+  locality:string;
+ cuisines:string[];
+ avgRatingString:string;
+ totalRatingsString:string;
 }

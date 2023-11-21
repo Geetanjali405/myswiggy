@@ -5,6 +5,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
 import * as $ from 'jquery';
+import { Restaurant } from 'src/shared/model/restaurant';
+import { User } from 'src/shared/model/user';
 
 @Component({
   selector: 'app-dashboard',
@@ -132,11 +134,10 @@ export class DashboardComponent implements OnInit {
         'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029856/PC_Creative%20refresh/3D_bau/banners_new/Pizza.png',
     },
   ];
-  restaurantList: any[];
+  restaurantList: Restaurant[];
   subscription: Subscription;
-  isAscending: any;
-  userData: any;
-  namee: any;
+  isAscending: boolean;
+  userData: User;
   constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {

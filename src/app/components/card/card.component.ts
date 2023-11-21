@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from 'src/shared/services/user.service';
 import { ButtonModule } from 'primeng/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Restaurant } from 'src/shared/model/restaurant';
 
 @Component({
   selector: 'app-card',
@@ -9,11 +10,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  @Input() res: any;
+  @Input() res: Restaurant;
   imgSrc: string;
   id: string;
   isFav: boolean = false;
-  favarr: any;
+  favarr: string[];
   // const snackBarRef = snackBar.open('Message archived', 'Undo');
   cloudinaryBaseURL =
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
@@ -26,8 +27,10 @@ export class CardComponent implements OnInit {
     // this.fav = setInterval(() => {
       this.getFav(this.id);
     // }, 1000);
+  
 
     this.imgSrc = `${this.cloudinaryBaseURL}${this.res.cloudinaryImageId}`;
+    console.log(this.imgSrc);
   }
 
   // ngOnDestroy(): void {

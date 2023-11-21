@@ -31,7 +31,7 @@
                                                 <h3><b>{{ menuItem.name }}</b></h3>
                                                 <p>Category: {{ menuItem.category }}</p>
                                                 <p>{{ menuItem.description }}</p>
-                                                <p><b>Price:Rs. {{ menuItem.price / 100 }}</b></p>
+                                                <p ><b>Price:Rs. {{menuItem.price.substring(0, 3)}}</b></p>
                                         </div>
                                         <div class="img-container">
                                                 <img alt="{{ menuItem.name }}"

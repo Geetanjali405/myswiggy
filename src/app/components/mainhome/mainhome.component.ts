@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { User } from 'src/shared/model/user';
 import { UserService } from 'src/shared/services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-mainhome',
@@ -28,10 +29,10 @@ export class MainhomeComponent implements OnInit {
     private offcanvasService: NgbOffcanvas,
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private snackbar: MatSnackBar
   ) {}
   ngOnInit(): void {
-
     if (localStorage.getItem('user')) {
       this.router.navigate(['dashboard']);
     }
@@ -84,37 +85,49 @@ export class MainhomeComponent implements OnInit {
   onSubmitIn() {
     this.user = this.signInForm.value;
     console.log(this.user);
-    this.userService.loginUser(this.user).subscribe((response) => {
-      // this.userService.isuser$.next(true);
-      this.userInfo = response;
+    this.userService.loginUser(this.user).subscribe({
+      next: (response) => {
+        // this.userService.isuser$.next(true);
+        if (response) {
+          this.userInfo = response;
 
-      this.userService.setUser(true);
-      localStorage.setItem('user', JSON.stringify(this.userInfo));
-      console.warn(localStorage.getItem('user'));
-      localStorage.setItem('email', this.userInfo.email);
-      localStorage.setItem('id', this.userInfo.id);
+          this.userService.setUser(true);
+          localStorage.setItem('user', JSON.stringify(this.userInfo));
+          console.warn(localStorage.getItem('user'));
+          localStorage.setItem('email', this.userInfo.email);
+          localStorage.setItem('id', this.userInfo.id);
 
-      //creating cart for user
-      this.userId = localStorage.getItem('id');
-      this.userService.createCart(this.userId).subscribe(
-        (cart) => {
-          console.log('Cart created: ', cart);
-        },
-        (error) => {
-          console.error('Error creating cart: ', error);
+          //creating cart for user
+          this.userId = localStorage.getItem('id');
+          this.userService.createCart(this.userId).subscribe(
+            (cart) => {
+              console.log('Cart created: ', cart);
+            },
+            (error) => {
+              console.error('Error creating cart: ', error);
+            }
+          );
+
+          console.log(this.userInfo.userType);
+
+          if (this.userInfo.userType === 'Delivery') {
+            localStorage.setItem('delId', this.userInfo.id);
+            console.warn(this.delId);
+
+            this.router.navigate(['/deliverydashboard']);
+          } else {
+            this.router.navigate(['/dashboard']);
+          }
         }
-      );
-
-      console.log(this.userInfo.userType);
-
-      if (this.userInfo.userType === 'Delivery') {
-        localStorage.setItem('delId', this.userInfo.id);
-        console.warn(this.delId);
-
-        this.router.navigate(['/deliverydashboard']);
-      } else {
-        this.router.navigate(['/dashboard']);
-      }
+        else {
+          this.snackbar.open("Wrong credentials", "Try again", {
+            duration: 3000
+          });
+        }
+      },
+      error: (er) => {
+        console.error('some error subscribing');
+      },
     });
   }
 

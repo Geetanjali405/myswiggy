@@ -45,7 +45,6 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
     console.warn('inside get order status');
     this.userService.getOrderStatuss(this.cartId).subscribe({
       next: (response) => {
-        console.log(response.body);
         this.status = response;
         if (this.status === 'Delivered') {
           this.userService.deleteCart(this.userId).subscribe({

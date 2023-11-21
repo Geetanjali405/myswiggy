@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Menu } from 'src/shared/model/menu';
+import { Restaurant } from 'src/shared/model/restaurant';
 
 @Component({
   selector: 'app-restaurantdetails',
@@ -14,9 +16,9 @@ export class RestaurantdetailsComponent implements OnInit{
   resId: number;
   subscription: Subscription;
   sub: Subscription;
-  restaurant: any;
-  menuList: any[];
-  filtered: any[];
+  restaurant: Restaurant;
+  menuList: Menu[];
+  filtered: Menu[];
   userId: string;
   imageSrc: string;
 
@@ -84,8 +86,6 @@ export class RestaurantdetailsComponent implements OnInit{
   }
 
   addIteminCart(menuId: string) {
-    // console.log(menuId);
-    // console.log(this.userId);
     this.userService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item added to cart successfully!');
@@ -98,5 +98,6 @@ export class RestaurantdetailsComponent implements OnInit{
     );
   }
 
+ 
 
 }

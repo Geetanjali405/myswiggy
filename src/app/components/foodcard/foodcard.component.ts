@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Menu } from 'src/shared/model/menu';
+import { Restaurant } from 'src/shared/model/restaurant';
 import { UserService } from 'src/shared/services/user.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { UserService } from 'src/shared/services/user.service';
   styleUrls: ['./foodcard.component.scss'],
 })
 export class FoodcardComponent {
-  @Input() res: any;
+  @Input() res: Menu;
   imgSrc: string;
   imageUrls: string[] = [
     'https://images.news18.com/ibnlive/uploads/2022/01/shutterstock_649541308-1.jpg',

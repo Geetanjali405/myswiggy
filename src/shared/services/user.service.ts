@@ -12,6 +12,7 @@ import { Restaurant } from '../model/restaurant';
 import { User } from '../model/user';
 import { Cart } from '../model/cart';
 import { DeliveryData } from '../model/delivery';
+import { Menu } from '../model/menu';
 
 const baseURL = 'http://localhost:8080';
 const signUpEndPoint: string = `${baseURL}/signup`;
@@ -79,36 +80,41 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getRestaurantsbyId(id: string): Observable<any> {
+  //get restaurant by their id
+  getRestaurantsbyId(id: string): Observable<Restaurant> {
     return this.httpclient
-      .get<any>(`${getRestaurantsbyId}/${id}`)
+      .get<Restaurant>(`${getRestaurantsbyId}/${id}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getRestrauntDetails(): Observable<any> {
+  //get all restaurants
+  getRestrauntDetails(): Observable<Restaurant[]> {
     return this.httpclient
-      .get<any>(`${getRestaurants}`)
+      .get<Restaurant[]>(`${getRestaurants}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getMenuDetails(): Observable<any> {
+  getMenuDetails(): Observable<Menu[]> {
     return this.httpclient
-      .get<any>(`${getMenu}`)
+      .get<Menu[]>(`${getMenu}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getMenubyId(id:string): Observable<any> {
+  //get food item details
+  getMenubyId(id: string): Observable<Menu> {
     return this.httpclient
-    .get<any>(`${getMenu}/${id}`)
-    .pipe(retry(1), catchError(this.handleError));
-  }
-
-  getMenuDetailsofRestaurant(restId: string): Observable<any> {
-    return this.httpclient
-      .get<any>(`${getMenubyRes}/${restId}`)
+      .get<Menu>(`${getMenu}/${id}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  //get Menu of specific restaurant
+  getMenuDetailsofRestaurant(restId: string): Observable<Menu[]> {
+    return this.httpclient
+      .get<Menu[]>(`${getMenubyRes}/${restId}`)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  //add restraunt to favourites
   addToFav(id: string, restId: string): Observable<string> {
     const headers = new HttpHeaders().set('Response-Type', 'text/plain');
     // console.log(`${addtofav}/${id}/${restId}`);
@@ -119,6 +125,7 @@ export class UserService {
     );
   }
 
+  //remove from favourites
   removeFromFav(id: string, restId: string): Observable<string> {
     const headers = new HttpHeaders().set('Response-Type', 'text/plain');
     // console.log(`${addtofav}/${id}/${restId}`);
@@ -129,12 +136,14 @@ export class UserService {
     );
   }
 
-  getFav(id: string): Observable<any> {
+  //get favourites restaurant array
+  getFav(id: string): Observable<string[]> {
     return this.httpclient
-      .get<any>(`${getfav}/${id}`)
+      .get<string[]>(`${getfav}/${id}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  //create cart for user
   createCart(userId: string): Observable<Cart> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -145,10 +154,13 @@ export class UserService {
     return this.httpclient.post<Cart>(`${createuserCart}`, body, httpOptions);
   }
 
+  //get cart details
   getCart(userId: string): Observable<Cart> {
     console.warn(`${showCart}/${userId}`);
     return this.httpclient.get<Cart>(`${showCart}/${userId}`);
   }
+
+  //delete cart
   deleteCart(userId: string): Observable<String> {
     console.warn(`${showCart}/${userId}`);
     return this.httpclient
@@ -156,6 +168,7 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  //add item in cart
   addItemToCart(userId: string, itemId: string): Observable<Cart> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -169,6 +182,7 @@ export class UserService {
     );
   }
 
+  //decrease item from cart
   decreaseItem(userId: string, itemId: string): Observable<Cart> {
     return this.httpclient
       .put<Cart>(`${decItem}/${userId}/${itemId}`, null)
@@ -182,6 +196,7 @@ export class UserService {
       );
   }
 
+  //remove item from cart
   removeItem(userId: string, itemId: string): Observable<Cart> {
     return this.httpclient.delete<Cart>(`${remoItem}/${userId}/${itemId}`).pipe(
       catchError((error) => {
@@ -191,6 +206,7 @@ export class UserService {
     );
   }
 
+  //add order to delivery
   addToDelivery(cartId: string): Observable<DeliveryData> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -204,6 +220,7 @@ export class UserService {
     );
   }
 
+  //get delivery id on the delivery side
   getDelivery(): Observable<DeliveryData> {
     return this.httpclient.get<DeliveryData>(`${getdel}`);
   }
@@ -217,6 +234,7 @@ export class UserService {
   //   });
   // }
 
+  //update status of order from accepted->processing->delivered
   updateStatusofOrder(orderId: string): Observable<DeliveryData> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -230,12 +248,13 @@ export class UserService {
     );
   }
 
-  getOrderStatuss(orderId: string): Observable<any> {
+  //get current order status of user
+  getOrderStatuss(orderId: string): Observable<string> {
     // const headers = new HttpHeaders().set('Response-Type', 'text/plain');
     // console.log(' inside getorderstatus service function');
     // console.log(`${getStatus}/${orderId}`);
     return this.httpclient
-      .get<any>(`${getStatus}/${orderId}`, this.httpOptions)
+      .get<string>(`${getStatus}/${orderId}`, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -265,12 +284,14 @@ export class UserService {
   //   });
   // }
 
+  //get user by id
   getUserById(userId: string): Observable<any> {
     return this.httpclient
       .get<any>(`${getUser}/${userId}`, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  //handle any error
   handleError(err: any) {
     return throwError(() => {
       console.log(err);

@@ -11,7 +11,7 @@ import { UserService } from 'src/shared/services/user.service';
 })
 export class FavouritesComponent implements OnInit {
   subscription: Subscription;
-  favList: any[];
+  favList: string[];
   id: string;
   restaurantList = [];
   constructor(private router: Router, private userService: UserService) {}

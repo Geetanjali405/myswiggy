@@ -14,7 +14,7 @@ export class DeliverydashboardComponent implements OnInit {
   subscription: Subscription;
   cartId: string;
   delivery: DeliveryData;
-  modalCloseSpan: HTMLElement;
+  // modalCloseSpan: HTMLElement;
 
   constructor(
     private userService: UserService,
