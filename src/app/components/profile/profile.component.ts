@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         localStorage.clear();
-       
+        this.router.navigate(['/mainhome']);
         this.messageService.add({
           severity: 'info',
           summary: 'Confirmed',

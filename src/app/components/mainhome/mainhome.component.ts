@@ -31,6 +31,10 @@ export class MainhomeComponent implements OnInit {
     private userService: UserService
   ) {}
   ngOnInit(): void {
+
+    if (localStorage.getItem('user')) {
+      this.router.navigate(['dashboard']);
+    }
     this.signUpForm = this.fb.group({
       userName: new FormControl('', [
         Validators.required,
