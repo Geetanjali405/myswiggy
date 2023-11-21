@@ -15,7 +15,6 @@ export class CardComponent implements OnInit {
   id: string;
   isFav: boolean = false;
   favarr: string[];
-  // const snackBarRef = snackBar.open('Message archived', 'Undo');
   cloudinaryBaseURL =
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
 
