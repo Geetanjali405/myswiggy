@@ -38,6 +38,7 @@ import { ConfirmationService,MessageService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { NameComponent } from './components/name/name.component';
 import { DialogModule } from 'primeng/dialog';
 
@@ -84,7 +85,8 @@ import { DialogModule } from 'primeng/dialog';
     ToastModule,
     ConfirmPopupModule,
     MessagesModule,
-    DialogModule
+    DialogModule,
+    MatPaginatorModule
     
   ],
    providers: [ConfirmationService,MessageService],

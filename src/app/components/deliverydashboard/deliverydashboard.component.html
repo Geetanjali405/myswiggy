@@ -1,11 +1,10 @@
-
-
-<div class="delivery " style="background: url('https://img.freepik.com/premium-vector/stylish-seamless-pattern-with-oranges-linear-shapes_697711-47.jpg'); background-size: cover;  min-width: 100vw; min-height: 100vh;">
+<div class="delivery "
+        style="background: url('https://img.freepik.com/premium-vector/stylish-seamless-pattern-with-oranges-linear-shapes_697711-47.jpg'); background-size: cover;  min-width: 100vw; min-height: 100vh;">
         <div class="mb-5">
-                <h1 ><b>WELCOME ALEX TO SWIGGY DELIVERY</b></h1>
+                <h1><b>WELCOME ALEX TO SWIGGY DELIVERY</b></h1>
         </div>
-      
-        <div class="delivery-details"  >
+
+        <div class="delivery-details">
                 <h2><b>DELIVERY DETAILS</b></h2>
                 <table>
                         <thead>
@@ -16,14 +15,17 @@
                                 </tr>
                         </thead>
                         <tbody>
-                                <tr *ngFor="let orderIdStatus of delivery.orderIdAndStatus | keyvalue">
+                                <tr *ngFor="let orderIdStatus of paginatedDelivery | keyvalue">
                                         <td>{{orderIdStatus.key}}</td>
                                         <td>{{orderIdStatus.value}}</td>
-                                        <td><button (click)="showUpdateStatusPopup(orderIdStatus.key)" style="margin-left: 140px;">UPDATE ORDER STATUS</button>
+                                        <td><button (click)="showUpdateStatusPopup(orderIdStatus.key)"
+                                                        style="margin-left: 140px;">UPDATE ORDER STATUS</button>
                                         </td>
                                 </tr>
                         </tbody>
                 </table>
+
+                  <mat-paginator [pageSizeOptions]="[2, 5, 10, 25, 50]" [pageSize]="pageSize" (page)="handlePageChange($event)" [length]="totalOrders"
+    showFirstLastButtons></mat-paginator>
         </div>
 </div>
-
