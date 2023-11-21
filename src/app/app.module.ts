@@ -15,7 +15,6 @@ import { CartComponent } from './components/cart/cart.component';
 import { FavouritesComponent } from './components/favourites/favourites.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SupportComponent } from './components/support/support.component';
-import { NavbarComponent } from 'src/shared/sharedcomp/navbar/navbar.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { CarouselModule } from 'primeng/carousel';
 import { LogoutComponent } from './components/logout/logout.component';
