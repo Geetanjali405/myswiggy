@@ -4,9 +4,8 @@ import { map } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
 
 export const authGuard: CanActivateFn = 
- (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    console.log("authguardddDDDDDDDDDDDDDDDDDdd")
-    console.warn('inside authguard');
+  (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+   
     const userService = inject(UserService);
     const router = inject(Router);
     return userService.getUser().pipe(

@@ -9,7 +9,8 @@
                                 <h3>{{restaurant?.locality}}</h3>
                                 <h3>{{ restaurant?.cuisines.join(', ') }}</h3>
                                 <p style="margin-bottom: -12px;" class="ms-1"><b><i class="bi bi-star-fill me-1"
-                                        style="color: rgb(255,188,55);"></i>{{restaurant?.avgRatingString}}</b></p>
+                                                        style="color: rgb(255,188,55);"></i>{{restaurant?.avgRatingString}}</b>
+                                </p>
                         </div>
                         <div class="restaurant-image">
                                 <img alt="Card" [src]="imgSrc" class="imgg">
@@ -33,7 +34,8 @@
                                                 <p><b>Price:Rs. {{ menuItem.price / 100 }}</b></p>
                                         </div>
                                         <div class="img-container">
-                                                <img alt="Card" src="{{cloudinaryBaseURL}}{{menuItem.imageId}}" class="img">
+                                                <img alt="{{ menuItem.name }}"
+                                                        src="{{cloudinaryBaseURL}}{{menuItem.imageId}}" class="img">
                                                 <div class="myButton">
                                                         <a class="add-to-cart" (click)="addIteminCart(menuItem.id)">Add
                                                                 to cart</a>
