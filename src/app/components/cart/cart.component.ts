@@ -37,38 +37,36 @@ export class CartComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
-  }
-
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
     console.log('hi');
     this.populateCart();
     this.getOrderStatus(this.cartId);
-    // this.orderStatusInterval = setInterval(() => {
-
-    // }, 5000);
-
     this.invokeStripe();
   }
 
-  // ngOnDestroy(): void {
-  //   clearInterval(this.rou);
-  // }
+  /**
+   *
+   * @function openSnackBar Opens a snackbar with the specified message and action text.
+   * @param {string} message - The message to display in the snackbar.
+   * @param {string} action - The text to display on the action button of the snackbar.
+   * @returns {void}
+   */
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
 
+  /**
+   * @function populateCart to render cart in DOM
+   */
   populateCart() {
     this.userService.getCart(this.userId).subscribe(
       (cart) => {
         this.cart = cart;
         this.cartId = this.cart.id;
         localStorage.setItem('cartId', this.cartId);
-        // this.statusorder = this.getOrderStatus(this.cartId);
         for (let itemId in this.cart.items) {
           this.menu = this.getItembyId(itemId);
-          // this.menu=JSON.parse(this.menu);
-
-          // console.log(this.getItem(itemId));
         }
         console.log(this.cart.items);
         console.log(this.cart);
@@ -78,7 +76,14 @@ export class CartComponent implements OnInit {
       }
     );
   }
-  removeItem(menuId: any) {
+
+  /**
+   * @function removeItem removes an item from the cart based on the given menuId.
+   * It calls the removeItem method from the userService and updates the cart.
+   * @param {string} menuId - The id of the menu item to be removed from the cart.
+   * @return {void} - This method does not return anything. */
+
+  removeItem(menuId: string) {
     this.userService.removeItem(this.userId, menuId).subscribe(
       (cart) => {
         console.log('Removed item from cart');
@@ -91,7 +96,14 @@ export class CartComponent implements OnInit {
       }
     );
   }
-  increaseItem(menuId: any) {
+
+  /**
+   * @function increaseItem the quantity of the item with the given menuId in the user's cart by one.
+   * The function calls the addItemToCart method from the userService and updates the cart accordingly.
+   * If successful, it displays a message and repopulates the cart with updated data.
+   * @param menuId The id of the menu item to be increased in the cart.
+   */
+  increaseItem(menuId: string) {
     this.userService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item increased by 1 successfully!');
@@ -103,7 +115,12 @@ export class CartComponent implements OnInit {
       }
     );
   }
-  decreaseItem(menuId: any) {
+
+  /**
+   * @function decreaseItem Decreases the quantity of the item with the given menuId in the user's cart by one. The function calls the decreaseItem method from the userService and updates the cart accordingly.If successful, it repopulates the cart with updated data.
+   * @param menuId  The id of the menu item to be decreased in the cart.
+   */
+  decreaseItem(menuId: string) {
     this.userService.decreaseItem(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item decresed by 1 successfully!');
@@ -114,7 +131,13 @@ export class CartComponent implements OnInit {
       }
     );
   }
-  makePayment(amount: any, id: any) {
+
+  /**
+   * @function makePayment calls the integrated stripe connection
+   * @param amount takes amount for payment
+   * @param id  takes the cartId/orderId
+   */
+  makePayment(amount: number, id: any) {
     this.userService.addToDelivery(id).subscribe({
       next: (res) => {
         this.rou = setTimeout(() => {
@@ -160,6 +183,13 @@ export class CartComponent implements OnInit {
       window.document.body.appendChild(script);
     }
   }
+
+  /**
+   * @function getOrderStatusRetrieves the status of the order with the given cartId.
+   *
+   * The function calls the getOrderStatuss method from the userService and assigns the response to this.*status variable.If the order status is 'Order Placed', it redirects the user to the OrderStatusComp *component.
+   * @param cartId
+   */
   getOrderStatus(cartId: string) {
     console.warn('inside get order status');
     this.userService.getOrderStatuss(this.cartId).subscribe({
@@ -178,6 +208,10 @@ export class CartComponent implements OnInit {
     });
   }
 
+  /**
+   * @function getItembyId Retrieves the details of the menu item with the given id from the userService If successful, it assigns the response to the this.menu variable, adds the item name to the this.itemNames array, and logs the response and item names to the console
+   * @param id  itemId
+   */
   getItembyId(id: string) {
     this.subscription = this.userService.getMenubyId(id).subscribe(
       (response) => {
@@ -192,6 +226,10 @@ export class CartComponent implements OnInit {
     );
   }
 
+  /**
+   *
+   * @param event ng prime confirm popup
+   */
   confirm(event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,

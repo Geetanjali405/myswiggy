@@ -34,7 +34,6 @@ import { OrderstatusComponent } from './components/orderstatus/orderstatus.compo
 import { SplitterModule } from 'primeng/splitter';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService,MessageService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';

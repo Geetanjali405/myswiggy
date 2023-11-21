@@ -19,27 +19,36 @@ export class CardComponent implements OnInit {
   cloudinaryBaseURL =
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
 
-  constructor(private userService: UserService,private _snackBar: MatSnackBar) {}
+  constructor(
+    private userService: UserService,
+    private _snackBar: MatSnackBar
+  ) {}
   fav = null;
   ngOnInit() {
     this.id = localStorage.getItem('id');
 
-    // this.fav = setInterval(() => {
-      this.getFav(this.id);
-    // }, 1000);
-  
+    this.getFav(this.id);
 
     this.imgSrc = `${this.cloudinaryBaseURL}${this.res.cloudinaryImageId}`;
     console.log(this.imgSrc);
   }
 
-  // ngOnDestroy(): void {
-  //   clearInterval(this.fav);
-  // }
-  openSnackBar(message: string, action: string,) {
+  /**
+   *
+   * @function
+   * @param message the message user wants to show in the completed action
+   * @param action the action to remove snackbar
+   */
+  openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
   }
-  //favarr<=array of favourites
+
+  /**
+   * Retrieves the favorite items for a user with the specified ID.
+   * @param {string} id - The ID of the user to retrieve favorite items for.
+   * @returns {void} - This function does not return a value, but sets the `favarr`
+   *                    property of the current object and logs the result to the console.
+   */
   getFav(id: string) {
     this.userService.getFav(id).subscribe({
       next: (data) => {
@@ -52,26 +61,36 @@ export class CardComponent implements OnInit {
     });
   }
 
+  /**
+   * Adds a restaurant with the specified ID to the favorite items for the user with the specified ID.
+   * @param  id - The ID of the user to add the favorite item to.
+   * @param  restId - The ID of the restaurant to add to favorites.
+   * @returns {void} - This function does not return a value, but logs the result to the console, opens a snack bar with a message,  and calls the `getFav` function to update the favorite items list.
+   */
   addToFav(id: string, restId: string) {
     this.userService.addToFav(id, restId).subscribe({
       next: (res) => {
         console.log(res);
-        this.openSnackBar("Added to favourites !!", "💖")
-        // this._snackBar.dismiss();
-      
+        this.openSnackBar('Added to favourites !!', 'OK');
         this.getFav(id);
       },
       error: (er) => {
         console.warn(er);
       },
     });
-
   }
+
+  /**
+   * @function Removes a restaurant with the specified ID from the favorite items for the user with the specified ID.
+   * @param {string} id - The ID of the user to remove the favorite item from.
+   * @param {string} restId - The ID of the restaurant to remove from favorites.
+   * @returns {void} - This function does not return a value, but logs the result to the console, opens a snack bar with a message,and calls the `getFav` function to update the favorite items list.
+   */
   removeFromFav(id: string, restId: string) {
     this.userService.removeFromFav(id, restId).subscribe({
       next: (res) => {
         console.log(res);
-        this.openSnackBar("Removed from favourites !!", "OK")
+        this.openSnackBar('Removed from favourites !!', 'OK');
         this.getFav(id);
       },
       error: (er) => {
@@ -80,6 +99,12 @@ export class CardComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   * @function issFav Checks whether a restaurant with the specified ID is in the list of favorite items.
+   * @param {string} resId - The ID of the restaurant to check.
+   * @returns {boolean} - `true` if the restaurant is in the list of favorite items, `false` otherwise.
+   */
   issFav(resId: string): boolean {
     // console.log(this.favarr);
     if (this.favarr && this.favarr.includes(resId)) {

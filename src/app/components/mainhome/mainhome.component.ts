@@ -31,7 +31,9 @@ export class MainhomeComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private snackbar: MatSnackBar
-  ) {}
+  ) { }
+  
+
   ngOnInit(): void {
     if (localStorage.getItem('user')) {
       this.router.navigate(['dashboard']);
@@ -61,6 +63,8 @@ export class MainhomeComponent implements OnInit {
       this.router.navigate['/dashboard'];
     }
   }
+
+
   onSubmit() {
     console.warn(this.signUpForm.value);
     const formValue = this.signUpForm.value;
@@ -82,6 +86,8 @@ export class MainhomeComponent implements OnInit {
       this.visible = true;
     });
   }
+
+  
   onSubmitIn() {
     this.user = this.signInForm.value;
     console.log(this.user);

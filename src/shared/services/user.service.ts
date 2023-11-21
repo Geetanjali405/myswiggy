@@ -94,6 +94,7 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  //get all menu details.
   getMenuDetails(): Observable<Menu[]> {
     return this.httpclient
       .get<Menu[]>(`${getMenu}`)
