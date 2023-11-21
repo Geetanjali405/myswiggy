@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { DeliveryData } from 'src/shared/model/delivery';
 import { UserService } from 'src/shared/services/user.service';
+import {
+  ConfirmationService,
+  MessageService,
+  ConfirmEventType,
+} from 'primeng/api';
 
 @Component({
   selector: 'app-deliverydashboard',
@@ -12,33 +14,33 @@ import { UserService } from 'src/shared/services/user.service';
   styleUrls: ['./deliverydashboard.component.scss'],
 })
 export class DeliverydashboardComponent implements OnInit {
-
-  subscription: Subscription;
   cartId: string;
   delivery: DeliveryData;
   paginatedDelivery: any;
-  pageSize: number = 5; // default page size
-  currentPageIndex: number = 0; // default current page index
+  pageSize: number = 5;
+  currentPageIndex: number = 0;
   pageLength: number;
   filteredDelievery;
-  totalOrders:number = 0;
-  // modalCloseSpan: HTMLElement;
+  totalOrders: number = 0;
 
   constructor(
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    this.populateCart();
+    this.populateDelivery();
   }
 
-  
-  populateCart() {
+  populateDelivery() {
     this.userService.getDelivery().subscribe(
       (delivery) => {
         this.delivery = delivery;
-        this.totalOrders = Object.keys(this.delivery?.orderIdAndStatus || {}).length;
+        this.totalOrders = Object.keys(
+          this.delivery?.orderIdAndStatus || {}
+        ).length;
         this.paginateDelivery();
       },
       (error) => {
@@ -63,24 +65,63 @@ export class DeliverydashboardComponent implements OnInit {
     this.totalOrders = totalOrders;
   }
 
-handlePageChange(event: any) {
-  this.currentPageIndex = event.pageIndex;
-  this.pageSize = event.pageSize;
-  this.paginateDelivery();
-}
+  handlePageChange(event: any) {
+    this.currentPageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.paginateDelivery();
+  }
 
   showUpdateStatusPopup(orderId: any) {
     this.userService.updateStatusofOrder(orderId).subscribe(
       (delivery) => {
         console.log(delivery);
-        this.snackBar.open("Order status updated successfully!", "OK", {
-          duration: 3000
-        })
-        this.populateCart();
+        this.snackBar.open('Order status updated successfully!', 'OK', {
+          duration: 3000,
+        });
+        this.populateDelivery();
       },
       (error) => {
         console.log(error);
       }
     );
   }
+
+  confirm(event: Event, orderId:any) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Do you want to reject the order?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.rejectOrder(orderId);
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Confirmed',
+          detail: 'Order Rejected !',
+        });
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rejected',
+          detail: 'Order Not Rejected !',
+        });
+      },
+    });
+  }
+  rejectOrder(orderId: any) {
+    this.userService.rejectorder(orderId).subscribe(
+        (delivery) => {
+            console.log(delivery);
+            this.snackBar.open('Order rejected successfully!', 'OK', {
+              duration: 3000,
+            });
+            this.populateDelivery();
+        },
+        (error) => {
+            console.log(error);
+        }
+    );
+  }
+  
+  
 }

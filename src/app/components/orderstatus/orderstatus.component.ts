@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router, defaultUrlMatcher } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Cart } from 'src/shared/model/cart';
 import { CartService } from 'src/shared/services/cart.service';
 import { UserService } from 'src/shared/services/user.service';
 
@@ -15,12 +17,13 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
   cartId: string;
   status: string;
   orderStatusInterval = null;
-  cart: import('c:/Users/GEBGS00/Desktop/Capstone/myswiggy/src/shared/model/cart').Cart;
+  cart:Cart;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private cartService:CartService
+    private cartService: CartService,
+    private matSnackbar:MatSnackBar
   ) {}
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
@@ -48,7 +51,17 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
     this.userService.getOrderStatuss(this.cartId).subscribe({
       next: (response) => {
         this.status = response;
-        if (this.status === 'Delivered') {
+        if (this.status === 'Delivered' || this.status === 'Order Rejected') {
+          if (this.status === 'Delivered') {
+            this.matSnackbar.open("You're Order is Delivered !!", "OK", {
+              duration: 5000,
+            })
+          }
+          else {
+            this.matSnackbar.open("You're Order was Cancelled !!", "Try Again", {
+              duration: 5000,
+            })
+          }
           this.cartService.deleteCart(this.userId).subscribe({
             next: (response) => {
               console.log(response);
@@ -71,10 +84,8 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
           });
          
           this.router.navigate(['/dashboard']);
-          //dialog popup
-          
+
         }
-        // this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error(error);

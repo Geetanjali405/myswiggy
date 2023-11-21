@@ -19,13 +19,16 @@
                                         <td>{{orderIdStatus.key}}</td>
                                         <td>{{orderIdStatus.value}}</td>
                                         <td><button (click)="showUpdateStatusPopup(orderIdStatus.key)"
-                                                        style="margin-left: 140px;">UPDATE ORDER STATUS</button>
+                                                        style="margin-left: 140px;border-radius: 12px;">UPDATE ORDER STATUS</button>
+                                                        <p-toast></p-toast>
+                                                        <p-confirmPopup></p-confirmPopup>
+                                                <button (click)="confirm($event , orderIdStatus.key)" style="margin-left: 140px;border-radius: 12px;">REJECT</button>
                                         </td>
                                 </tr>
                         </tbody>
                 </table>
 
-                  <mat-paginator [pageSizeOptions]="[2, 5, 10, 25, 50]" [pageSize]="pageSize" (page)="handlePageChange($event)" [length]="totalOrders"
-    showFirstLastButtons></mat-paginator>
+                <mat-paginator [pageSizeOptions]="[2, 5, 10, 25, 50]" [pageSize]="pageSize"
+                        (page)="handlePageChange($event)" [length]="totalOrders" showFirstLastButtons></mat-paginator>
         </div>
 </div>

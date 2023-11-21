@@ -149,7 +149,6 @@ export class DashboardComponent implements OnInit {
     console.warn(localStorage.getItem('id'));
     const userString = localStorage.getItem('user');
     this.userData = JSON.parse(userString);
-    // this.subInterval = setInterval(() => {
     this.subscription = this.restaurantService.getRestrauntDetails().subscribe(
       (response) => {
         this.restaurantList = response;
@@ -159,7 +158,6 @@ export class DashboardComponent implements OnInit {
         console.log('Error in fetching restaurant details', error);
       }
     );
-    // }, 5000);
   }
 
   toggleSortByRating(): void {

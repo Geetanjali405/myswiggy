@@ -13,12 +13,7 @@
                                         <ul class="item-details">
                                                 <li *ngFor="let item of cart.items | keyvalue; let i = index">
                                                         <div class="item">
-                                                                <!-- <span class="item-name">{{ item.key }}</span> -->
                                                                 <span class="item-name">{{ itemNames[i] }}</span>
-                                                                <!-- <span>{{getItembyId(item.key).name}}</span> -->
-                                                                <!-- <span class="item-name">{{ item.value.details.name }}</span> -->
-
-                                                                <!-- <span>{{item.value}}</span> -->
                                                                 <div class="item-controls">
                                                                         <button class="quan me-2"
                                                                                 (click)="decreaseItem(item.key)">-</button>
