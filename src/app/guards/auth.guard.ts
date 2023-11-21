@@ -11,7 +11,6 @@ export const authGuard: CanActivateFn =
     return userService.getUser().pipe(
       map((user) => {
         if (localStorage.getItem('user')) {
-          console.log(localStorage.getItem('user'));
           return true;
         }
         router.navigate(['/']);
