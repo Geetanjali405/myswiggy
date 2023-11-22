@@ -41,9 +41,9 @@ const routes: Routes = [
   //   component: MainhomeComponent,
   // },
 
-  { path: 'cart', component: CartComponent },
+  { path: 'cart', canActivate: [authGuard], component: CartComponent },
   { path: 'profile', canActivate: [authGuard], component: ProfileComponent },
-  { path: 'favourites', component: FavouritesComponent },
+  { path: 'favourites', canActivate: [authGuard], component: FavouritesComponent },
   { path: 'customersupport', component: SupportComponent },
   { path: 'search', component: SearchComponent },
   { path: 'restaurant/:id', component: RestaurantdetailsComponent },

@@ -35,18 +35,18 @@ export class DeliverydashboardComponent implements OnInit {
   }
 
   populateDelivery() {
-    this.userService.getDelivery().subscribe(
-      (delivery) => {
+    this.userService.getDelivery().subscribe({
+      next: (delivery) => {
         this.delivery = delivery;
         this.totalOrders = Object.keys(
           this.delivery?.orderIdAndStatus || {}
         ).length;
         this.paginateDelivery();
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching delivery: ', error);
-      }
-    );
+      },
+    });
   }
 
   paginateDelivery() {
@@ -72,21 +72,21 @@ export class DeliverydashboardComponent implements OnInit {
   }
 
   showUpdateStatusPopup(orderId: any) {
-    this.userService.updateStatusofOrder(orderId).subscribe(
-      (delivery) => {
+    this.userService.updateStatusofOrder(orderId).subscribe({
+      next: (delivery) => {
         console.log(delivery);
         this.snackBar.open('Order status updated successfully!', 'OK', {
           duration: 3000,
         });
         this.populateDelivery();
       },
-      (error) => {
+      error: (error) => {
         console.log(error);
-      }
-    );
+      },
+    });
   }
 
-  confirm(event: Event, orderId:any) {
+  confirm(event: Event, orderId: any) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Do you want to reject the order?',
@@ -109,19 +109,17 @@ export class DeliverydashboardComponent implements OnInit {
     });
   }
   rejectOrder(orderId: any) {
-    this.userService.rejectorder(orderId).subscribe(
-        (delivery) => {
-            console.log(delivery);
-            this.snackBar.open('Order rejected successfully!', 'OK', {
-              duration: 3000,
-            });
-            this.populateDelivery();
-        },
-        (error) => {
-            console.log(error);
-        }
-    );
+    this.userService.rejectorder(orderId).subscribe({
+      next: (delivery) => {
+        console.log(delivery);
+        this.snackBar.open('Order rejected successfully!', 'OK', {
+          duration: 3000,
+        });
+        this.populateDelivery();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
-  
-  
 }

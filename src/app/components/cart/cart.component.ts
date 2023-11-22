@@ -36,7 +36,7 @@ export class CartComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private cartService: CartService,
-    private restaurantService:RestaurantService,
+    private restaurantService: RestaurantService,
     private snackBar: MatSnackBar,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
@@ -44,7 +44,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('id');
-    console.log('hi');
     this.populateCart();
     this.getOrderStatus(this.cartId);
     this.invokeStripe();
@@ -54,21 +53,21 @@ export class CartComponent implements OnInit {
    * @function populateCart to render cart in DOM
    */
   populateCart() {
-    this.cartService.getCart(this.userId).subscribe(
-      (cart) => {
+    this.cartService.getCart(this.userId).subscribe({
+      next: (cart) => {
         this.cart = cart;
         this.cartId = this.cart.id;
         localStorage.setItem('cartId', this.cartId);
         for (let itemId in this.cart.items) {
-           this.getItembyId(itemId);
+          this.getItembyId(itemId);
         }
         console.log(this.cart.items);
         console.log(this.cart);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching cart: ', error);
-      }
-    );
+      },
+    });
   }
 
   /**
@@ -76,19 +75,18 @@ export class CartComponent implements OnInit {
    * It calls the removeItem method from the cartService and updates the cart.
    * @param {string} menuId - The id of the menu item to be removed from the cart.
    * @return {void} - This method does not return anything. */
-
   removeItem(menuId: string) {
-    this.cartService.removeItem(this.userId, menuId).subscribe(
-      (cart) => {
+    this.cartService.removeItem(this.userId, menuId).subscribe({
+      next: (cart) => {
         console.log('Removed item from cart');
         this.snackBar.open('Item removed from cart', 'OK');
         this.cart = cart;
         this.populateCart();
       },
-      (error) => {
+      error: (error) => {
         console.log(error);
-      }
-    );
+      },
+    });
   }
 
   /**
@@ -98,18 +96,18 @@ export class CartComponent implements OnInit {
    * @param menuId The id of the menu item to be increased in the cart.
    */
   increaseItem(menuId: string) {
-    this.cartService.addItemToCart(this.userId, menuId).subscribe(
-      (data) => {
+    this.cartService.addItemToCart(this.userId, menuId).subscribe({
+      next: (data) => {
         console.log('Item increased by 1 successfully!');
         this.snackBar.open('Cart Updated', 'OK', {
           duration: 3000,
         });
         this.populateCart();
       },
-      (error) => {
+      error: (error) => {
         console.error('Error while increasing item in cart: ' + error);
-      }
-    );
+      },
+    });
   }
 
   /**
@@ -209,15 +207,15 @@ export class CartComponent implements OnInit {
    * @param id  itemId
    */
   getItembyId(id: string) {
-    this.subscription = this.restaurantService.getMenubyId(id).subscribe(
-      (response) => {
+    this.subscription = this.restaurantService.getMenubyId(id).subscribe({
+      next: (response) => {
         this.menu = response;
         this.itemNames.push(this.menu.name);
       },
-      (error) => {
+      error: (error) => {
         console.log('Error in fetching menu id details', error);
-      }
-    );
+      },
+    });
   }
 
   /**
