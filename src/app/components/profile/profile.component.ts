@@ -37,8 +37,9 @@ export class ProfileComponent implements OnInit {
   deliveredCount = 0;
   rejectedCount = 0;
   basicData: any;
-
   basicOptions: any;
+  basicDataa: any;
+  basicOptionss: any;
 
   ngOnInit(): void {
     this.email = localStorage.getItem('email');
@@ -83,6 +84,7 @@ export class ProfileComponent implements OnInit {
         console.log('Delivered orders: ', this.deliveredCount);
         console.log('Rejected orders: ', this.rejectedCount);
         this.displayOrderChart();
+        this.displaypiechart();
       },
       error: (error) => {
         console.error('Error fetching delivery details: ', error);
@@ -97,8 +99,7 @@ export class ProfileComponent implements OnInit {
       '--text-color-secondary'
     );
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-    const deliveryc = this.deliveredCount;
-    const rejectc = this.rejectedCount;
+   
 
     this.basicData = {
       labels: ['Delivered', 'Rejected'],
@@ -149,6 +150,40 @@ export class ProfileComponent implements OnInit {
       },
     };
   }
+
+  displaypiechart() {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+
+    this.basicDataa = {
+      labels: ['Delivered', 'Rejected'],
+      datasets: [
+        {
+          label: 'Delievery Stats',
+          data: [this.deliveredCount, this.rejectedCount],
+          backgroundColor: [
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+          ],
+          borderColor: ['rgb(255, 159, 64)', 'rgb(75, 192, 192)'],
+          borderWidth: 1,
+        },
+      ],
+    };
+
+
+    this.basicOptionss = {
+        cutout: '60%',
+        plugins: {
+            legend: {
+                labels: {
+                    color: textColor
+                }
+            }
+        }
+    };
+}
+  
 
   confirm(event: Event) {
     this.confirmationService.confirm({

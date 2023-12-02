@@ -39,6 +39,7 @@
                 </div>
                 <div class="card" style="margin-top: 50px;" *ngIf="this.userData.userType==='Delivery'">
                         <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+                        <p-chart type="doughnut" [data]="basicData" [options]="basicOptions"></p-chart>
                     </div>
 
         </div>
