@@ -43,6 +43,9 @@ import { NameComponent } from './components/name/name.component';
 import { DialogModule } from 'primeng/dialog';
 import { DelnavComponent } from './components/delnav/delnav.component';
 import { ChartModule } from 'primeng/chart';
+import { GMapModule } from 'primeng/gmap';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,7 @@ import { ChartModule } from 'primeng/chart';
     OrderstatusComponent,
     NameComponent,
     DelnavComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +94,9 @@ import { ChartModule } from 'primeng/chart';
     MessagesModule,
     DialogModule,
     MatPaginatorModule,
-    ChartModule
+    ChartModule,
+    GMapModule,
+    GoogleMapsModule
     
   ],
    providers: [ConfirmationService,MessageService],

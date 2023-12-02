@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Chart } from 'chart.js';
+
 // import {
 //   ConfirmationService,
 //   MessageService,
@@ -22,7 +22,7 @@ import { UserService } from 'src/shared/services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  orderChart: Chart;
+  // orderChart: Chart;
   constructor(
     private userService: UserService,
     private router: Router,

@@ -6,6 +6,7 @@ import { Cart } from 'src/shared/model/cart';
 import { CartService } from 'src/shared/services/cart.service';
 import { UserService } from 'src/shared/services/user.service';
 
+
 @Component({
   selector: 'app-orderstatus',
   templateUrl: './orderstatus.component.html',
@@ -17,7 +18,10 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
   cartId: string;
   status: string;
   orderStatusInterval = null;
-  cart:Cart;
+  cart: Cart;
+  options: any;
+
+  overlays: any[];
   constructor(
     private route: ActivatedRoute,
     private router: Router,

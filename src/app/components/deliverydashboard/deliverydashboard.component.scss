@@ -32,7 +32,7 @@
 }
 
 .delivery-details th {
-  background-color: #fc8019; 
+  background-color:rgb(252,128,25);
   color: white;
 }
 
@@ -47,21 +47,21 @@
 }
 
 .delivery-details button {
-  background-color: #f79e65; 
+  background-color:rgb(252,128,25);
   color: white;
   border: none;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 10px;
   margin: 4px 2px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .delivery-details button:hover {
-  background-color: #ce6c00;
+  background-color: rgb(252,128,25);
 }
 
 h1 { font-size: 3em; font-weight: bold; color: #fff; opacity: 0.9; margin-left: 70px; }

@@ -25,7 +25,7 @@
                                                 <p-toast></p-toast>
                                                 <p-confirmPopup></p-confirmPopup>
                                                 <button (click)="confirm($event , orderIdStatus.key)"
-                                                        style="margin-left: 140px;border-radius: 12px;">REJECT</button>
+                                                        style="margin-left: 140px;border-radius: 12px;" *ngIf="orderIdStatus.value === 'Order Placed'" >REJECT</button>
                                         </td>
                                 </tr>
                         </tbody>
