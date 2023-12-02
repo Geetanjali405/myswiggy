@@ -41,23 +41,16 @@ export class MainhomeComponent implements OnInit {
       this.router.navigate(['dashboard']);
     }
     this.signUpForm = this.fb.group({
-      userName: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(20),
-      ]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-      ]),
+      userName: new FormControl(''),
+      email: new FormControl(''),
+      password: new FormControl(''),
+      // userType: new FormControl(false),
+       userType: ['customer'],
+      
     });
     this.signInForm = this.fb.group({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-      ]),
+      email: new FormControl(''),
+      password: new FormControl(''),
     });
 
     if (localStorage.getItem('user')) {
@@ -76,7 +69,10 @@ export class MainhomeComponent implements OnInit {
       password: formValue.password,
       phone: '',
       userAddress: '',
-      userType: '',
+      // userType: '',
+      // userType: formValue.userType ? 'delivery' : 'customer',
+
+      userType: formValue.userType, 
       firstTimeUser: false,
       favouriteRestaurants: [],
     };

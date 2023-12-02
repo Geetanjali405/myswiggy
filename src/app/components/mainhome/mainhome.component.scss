@@ -325,7 +325,7 @@
 }
 
 .field{
-                border: 1px solid #d4d5d9;
+                // border: 1px solid #d4d5d9;
                 padding: 0;
                 display: block;
                 position: relative;
@@ -392,3 +392,8 @@
 .contbtn { margin-top: 20px; cursor: pointer; }
 
 .contbtn:hover { background-color: #0080ff; }
+
+input[type="checkbox"] {
+    width: auto;
+    height: auto; 
+}

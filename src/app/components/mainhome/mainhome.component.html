@@ -56,7 +56,7 @@
                                                                 class="btn btn-primary btn-sm mt-4 ms-5 contbtn"
                                                                 style="width:300px"
                                                                 (click)="offcanvas.close()">CONTINUE</button>
-                                                        <p class="ms-5">By creating an account, I accept the Terms &
+                                                        <p class="ms-5">I accept the Terms &
                                                                 Conditions & Privacy Policy</p>
                                                 </form>
                                         </ng-template>
@@ -82,42 +82,21 @@
                                                 </div>
                                                 <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
                                                         <div class="col-lg-8 mt-4 ms-5 field"
-                                                                [ngClass]="{'valid': signInForm.controls['userName'].valid, 'invalid': signInForm.controls['userName'].touched && signInForm.controls['userName'].invalid}">
+                                                              >
                                                                 <label style="color: black;">Name</label>
                                                                 <input type="text" id="Name" formControlName="userName"
                                                                         class="form-control">
-                                                                <div class="error"
-                                                                        *ngIf="signInForm.controls['userName'].touched && signInForm.controls['userName'].invalid">
-                                                                        <div
-                                                                                *ngIf="signInForm.controls['userName'].errors?.['required']">
-                                                                                Name is required</div>
-                                                                        <div
-                                                                                *ngIf="signInForm.controls['userName'].errors?.['minlength']">
-                                                                                Name must be at least 2 characters long
-                                                                        </div>
-                                                                        <div
-                                                                                *ngIf="signInForm.controls['userName'].errors?.['maxlength']">
-                                                                                Name cannot be more than 30 characters
-                                                                                long</div>
-                                                                </div>
+                                                              
                                                         </div>
                                                         <div class="col-lg-8 mt-4 ms-5 field"
-                                                                [ngClass]="{'valid': signInForm.controls['email'].valid, 'invalid': signInForm.controls['email'].touched && signInForm.controls['email'].invalid}">
+                                                                >
                                                                 <label style="color: black;">Email</label>
                                                                 <input type="email" id="email" formControlName="email"
                                                                         class="form-control">
-                                                                <div class="error"
-                                                                        *ngIf="signInForm.controls['email'].touched && signInForm.controls['email'].invalid">
-                                                                        <div
-                                                                                *ngIf="signInForm.controls['email'].errors?.['required']">
-                                                                                Email is required</div>
-                                                                        <div
-                                                                                *ngIf="signInForm.controls['email'].errors?.['email']">
-                                                                                Invalid email format</div>
-                                                                </div>
+                                                              
                                                         </div>
                                                         <div class="col-lg-8 mt-4 ms-5 field"
-                                                                [ngClass]="{'valid': signInForm.controls['password'].valid, 'invalid': signInForm.controls['password'].touched && signInForm.controls['password'].invalid}">
+                                                               >
                                                                 <label style="color: black;">Password</label>
                                                                 <input type="password" id="password"
                                                                         formControlName="password" class="form-control">
@@ -127,7 +106,15 @@
                                                                                 *ngIf="signInForm.controls['password'].errors?.['required']">
                                                                                 Password is required</div>
                                                                 </div>
+
                                                         </div>
+                                                        <div class="col-lg-8 mt-4 ms-5 field">
+                                                                <label style="color: black;">Join swiggy as</label>
+                                                                <select id="userType" formControlName="userType" class="form-control" style="width: 150px; height: 40px; border: 1px solid black;font-size: 14px; align-items: center;">
+                                                                    <option value="customer">Customer</option>
+                                                                    <option value="Delivery">Delivery</option>
+                                                                </select>
+                                                            </div>
                                                         <button type="submit"
                                                                 class="btn btn-primary btn-sm mt-4 ms-5 contbtn"
                                                                 style="width:300px"

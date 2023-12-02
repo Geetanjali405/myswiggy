@@ -22,6 +22,7 @@ const reject: string = `${baseURL}/rejectOrder`;
 const getStatus: string = `${baseURL}/getstatus`;
 const delCart: string = `${baseURL}/deletecart`;
 const getUser: string = `${baseURL}/user`;
+const getUsersofdel: string = `${baseURL}/users`;
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +65,12 @@ export class UserService {
 
     return this.httpclient
       .post<any>(`${signInEndPoint}`, user, { headers: header })
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.httpclient
+      .get<User[]>(`${getUsersofdel}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -114,7 +121,7 @@ export class UserService {
     );
   }
 
-  rejectorder(orderId: string): Observable<DeliveryData>{
+  rejectorder(orderId: string): Observable<DeliveryData> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

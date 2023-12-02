@@ -41,6 +41,8 @@ import { ToastModule } from 'primeng/toast';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NameComponent } from './components/name/name.component';
 import { DialogModule } from 'primeng/dialog';
+import { DelnavComponent } from './components/delnav/delnav.component';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import { DialogModule } from 'primeng/dialog';
     DeliverydashboardComponent,
     OrderstatusComponent,
     NameComponent,
+    DelnavComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,8 @@ import { DialogModule } from 'primeng/dialog';
     ConfirmPopupModule,
     MessagesModule,
     DialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ChartModule
     
   ],
    providers: [ConfirmationService,MessageService],

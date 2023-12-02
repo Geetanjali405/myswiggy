@@ -4,7 +4,7 @@ import { Observable, retry, catchError, throwError } from 'rxjs';
 import { Menu } from '../model/menu';
 import { Restaurant } from '../model/restaurant';
 
-const baseURL = 'http://localhost:8080';
+const baseURL= 'http://localhost:8080';
 const getRestaurants: string = `${baseURL}/restaurant`;
 const getRestaurantsbyId: string = `${baseURL}/restaurant`;
 const getMenu: string = `${baseURL}/menu`;

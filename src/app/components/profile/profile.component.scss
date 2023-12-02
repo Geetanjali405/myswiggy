@@ -7,16 +7,23 @@
     box-sizing: border-box;
 }
 
-.profile { width: 40%; margin: 50px auto; background: linear-gradient(to bottom right, #FFE4B5, #ffffff); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+.profile {
+    width: 40%;
+    margin: 50px auto;
+    background: linear-gradient(to bottom right, #FFE4B5, #ffffff);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-.pro{
+.pro {
     display: flex;
     justify-content: center
 }
 
 .profile ul {
     list-style-type: none;
-   
+
 }
 
 .profile ul li {
@@ -33,4 +40,51 @@
 .profile ul li span {
     font-weight: 700;
     margin-right: 10px;
+}
+
+.deluser {
+    width: 27%;
+    padding: 10px;
+    margin-top: 50px ;
+    background: linear-gradient(to bottom right, #FFE4B5, #ffffff);
+    border-right: 1px solid #ddd;
+}
+
+.profile {
+    width: 45%;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.deluser {
+    margin-left: 20px;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+li strong {
+    display: inline-block;
+    width: 120px;
+    font-weight: bold;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    li strong {
+        width: 100%;
+    }
 }

@@ -1,6 +1,22 @@
 <div>
         <app-nav></app-nav>
-        <div style="margin-top: 200px;">
+        <div style="margin-top: 100px; display: flex;">
+                <div class="deluser" *ngIf="userData.userType==='Delivery'">
+                        <div class="container">
+                                <p><i>All the delivery users nearby:</i></p>
+                                <ul>
+                                        <li *ngFor="let user of users">
+                                                <ul>
+                                                        <li><strong>User Name:</strong> {{ user.userName }}</li>
+                                                        <li><strong>Email:</strong> {{ user.email }}</li>
+
+                                                </ul>
+                                                <br>
+
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
                 <div class="profile">
                         <div class="pro">
                                 <ul>
@@ -16,12 +32,15 @@
                         <p-toast></p-toast>
                         <p-confirmPopup></p-confirmPopup>
                         <button pButton pRipple type="button" class="des" label="Log out"
-                                class="p-button-rounded p-button-danger pt-3 ps-3 pe-3 pb-3"
-                                style="margin-left: 160px;"
+                                class="p-button-rounded p-button-danger pt-3 ps-3 pe-3 pb-3" style="margin-left: 160px;"
                                 (click)="confirm($event)"></button>
 
 
                 </div>
+                <div class="card" style="margin-top: 50px;" *ngIf="this.userData.userType==='Delivery'">
+                        <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+                    </div>
 
         </div>
+
 </div>
