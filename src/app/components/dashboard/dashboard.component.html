@@ -12,7 +12,7 @@
                         [autoplayInterval]="3000">
                         <ng-template let-image pTemplate="item">
                                 <div style="padding-right: 16px;">
-                                        <img [src]="image.image" class="carousel-image" />
+                                        <img [routerLink]="['/offer']" [src]="image.image" class="carousel-image" />
                                 </div>
                         </ng-template>
 
@@ -40,7 +40,7 @@
                         [autoplayInterval]="3000">
                         <ng-template let-image pTemplate="item">
                                 <div style="padding-right: 16px;">
-                                        <img [src]="image.image" class="carouse-image" />
+                                        <img routerLink="/cat"   [src]="image.image" class="carouse-image" />
                                 </div>
                         </ng-template>
 

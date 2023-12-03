@@ -46,6 +46,8 @@ import { ChartModule } from 'primeng/chart';
 import { GMapModule } from 'primeng/gmap';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './components/map/map.component';
+import { OffersComponent } from './components/offers/offers.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { MapComponent } from './components/map/map.component';
     NameComponent,
     DelnavComponent,
     MapComponent,
+    OffersComponent,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,

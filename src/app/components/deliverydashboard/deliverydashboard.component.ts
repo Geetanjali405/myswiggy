@@ -109,6 +109,7 @@ export class DeliverydashboardComponent implements OnInit {
       },
     });
   }
+  
   rejectOrder(orderId: any) {
     this.userService.rejectorder(orderId).subscribe({
       next: (delivery) => {
