@@ -23,6 +23,7 @@ const getStatus: string = `${baseURL}/getstatus`;
 const delCart: string = `${baseURL}/deletecart`;
 const getUser: string = `${baseURL}/user`;
 const getUsersofdel: string = `${baseURL}/users`;
+const addtoorderhis: string = `${baseURL}/usercart`;
 
 @Injectable({
   providedIn: 'root',
@@ -74,6 +75,18 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  addtoorderhistory(userId: string, cartId: string):Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.httpclient.put<any>(
+      `${addtoorderhis}/${userId}/${cartId}`,
+      null,
+      httpOptions
+    );
+  }
   /**
    * @function addToDelivery Adds an order to the delivery list to track the status of the order.
    * @param cartId The id of the cart which is to be added to the delivery list.

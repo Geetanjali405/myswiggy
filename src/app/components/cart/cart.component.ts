@@ -78,7 +78,7 @@ export class CartComponent implements OnInit {
   removeItem(menuId: string) {
     this.cartService.removeItem(this.userId, menuId).subscribe({
       next: (cart) => {
-        console.log('Removed item from cart');
+        // console.log('Removed item from cart');
         this.snackBar.open('Item removed from cart', 'OK');
         this.cart = cart;
         this.populateCart();
@@ -118,6 +118,9 @@ export class CartComponent implements OnInit {
     this.cartService.decreaseItem(this.userId, menuId).subscribe(
       (data) => {
         console.log('Item decresed by 1 successfully!');
+        this.snackBar.open('Cart Updated', 'OK', {
+          duration: 3000,
+        });
         this.populateCart();
       },
       (error) => {
