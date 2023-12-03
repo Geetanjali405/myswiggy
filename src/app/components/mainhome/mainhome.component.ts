@@ -25,7 +25,7 @@ export class MainhomeComponent implements OnInit {
   userId: string;
   delId: string;
   visible: boolean = false;
-
+  selectedLocation: string = '';
   constructor(
     private offcanvasService: NgbOffcanvas,
     private fb: FormBuilder,
@@ -35,8 +35,11 @@ export class MainhomeComponent implements OnInit {
     private snackbar: MatSnackBar
   ) { }
   
-
+  onLocationChange(): void {
+    localStorage.setItem('selectedLocation', this.selectedLocation);
+  }
   ngOnInit(): void {
+    
     if (localStorage.getItem('user')) {
       this.router.navigate(['dashboard']);
     }
