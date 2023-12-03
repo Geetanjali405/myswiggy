@@ -13,12 +13,18 @@
                         <ng-template pTemplate>
                                 <div class="p-col p-d-flex p-ai-center p-jc-center">
                                         <!-- <h1><b><i><u>{{status}}</u></i></b></h1> -->
-                                        <div class="cla" *ngIf="status; else showLoader">
+                                        <div class="cla flex row " style="padding:-10px" *ngIf="status; else showLoader">
+                                                <br>
                                                 <h1 style="text-transform: uppercase;">YOUR ORDER IS {{status}} ...</h1>
+                                                <h4>Thankyou for saying Thankyou to our delivery partner !!</h4>
+                                                
                                         </div>
                                         <ng-template #showLoader>
 
-                                                <div class="spin">
+                                                <div class="flex row spin">
+                                                        <h5>Share meals,not only memes.</h5>
+                                                        <h5>Feeding India has served 14+ crore meals.Thanks for ordering</h5>
+                                                       
                                                         <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8"
                                                                 fill="var(--surface-ground)"
                                                                 animationDuration=".5s"></p-progressSpinner>

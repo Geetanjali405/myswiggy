@@ -42,10 +42,11 @@
     margin-right: 10px;
 }
 
-.deluser {
+.deluser,
+.detcustomer {
     width: 27%;
     padding: 10px;
-    margin-top: 50px ;
+    margin-top: 50px;
     background: linear-gradient(to bottom right, #FFE4B5, #ffffff);
     border-right: 1px solid #ddd;
 }
@@ -80,6 +81,10 @@ li strong {
     display: inline-block;
     width: 120px;
     font-weight: bold;
+}
+
+.spa{
+    padding: 4px;
 }
 
 /* Responsive styles */

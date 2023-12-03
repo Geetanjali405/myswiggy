@@ -102,10 +102,33 @@ export class CartComponent implements OnInit {
         this.snackBar.open('Cart Updated', 'OK', {
           duration: 3000,
         });
-        this.populateCart();
+        this.cartService.addtofood(this.userId, menuId).subscribe({
+          next: (data) => {
+            console.log(data);
+            console.log('Item added to order his');
+            this.populateCart();
+          },
+          error: (error) => {
+            console.log(error);
+            console.error('Error : ' + error);
+          },
+        });
+        
+    
       },
       error: (error) => {
         console.error('Error while increasing item in cart: ' + error);
+      },
+    });
+  }
+
+  addtofood(menuId: string) {
+    this.cartService.addtofood(this.userId, menuId).subscribe({
+      next: (data) => {
+        console.log('Item added to order his');
+      },
+      error: (error) => {
+        console.error('Error : ' + error);
       },
     });
   }

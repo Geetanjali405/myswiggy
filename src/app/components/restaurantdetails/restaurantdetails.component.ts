@@ -91,6 +91,7 @@ export class RestaurantdetailsComponent implements OnInit {
         this.snackBar.open('Item added to cart', 'OK', {
           duration: 3000,
         });
+        
       },
       (error) => {
         console.error('Error while adding item to cart: ');

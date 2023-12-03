@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, retry, throwError } from 'rxjs';
+import { Observable, catchError, of, retry, throwError } from 'rxjs';
 import { Cart } from '../model/cart';
 
 const baseURL = 'http://localhost:8080';
@@ -10,6 +10,7 @@ const addOrIncreaseItem: string = `${baseURL}/cart`;
 const decItem: string = `${baseURL}/cartdec`;
 const remoItem: string = `${baseURL}/delete`;
 const delCart: string = `${baseURL}/deletecart`;
+const addtofood: string = `${baseURL}/addfood`;
 
 @Injectable({
   providedIn: 'root',
@@ -100,6 +101,22 @@ export class CartService {
   removeItem(userId: string, itemId: string): Observable<Cart> {
     return this.httpclient.delete<Cart>(`${remoItem}/${userId}/${itemId}`);
   }
+
+  addtofood(id: string, foodid: string): Observable<any> {
+    console.log(`${baseURL}/addtofood/${id}/${foodid}`);
+    const headers = new HttpHeaders().set('Response-Type', 'text/plain');
+    return this.httpclient.post<any>(
+      `${baseURL}/addfood/${id}/${foodid}`,
+      null,
+      this.httpOptions
+    ).pipe(
+      catchError(error => {
+        console.error('Error in addtofood: ', error);
+        return of(null); 
+      })
+    );
+  }
+
 
   //handles any error
   handleError(err: any) {

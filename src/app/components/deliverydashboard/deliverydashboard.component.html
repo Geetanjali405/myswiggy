@@ -19,9 +19,9 @@
                                 <tr *ngFor="let orderIdStatus of paginatedDelivery | keyvalue">
                                         <td>{{orderIdStatus.key}}</td>
                                         <td>{{orderIdStatus.value}}</td>
-                                        <td><button (click)="showUpdateStatusPopup(orderIdStatus.key)"
-                                                        style="margin-left: 140px;border-radius: 12px;">UPDATE ORDER
-                                                        STATUS</button>
+                                        <td>  <button (click)="showUpdateStatusPopup(orderIdStatus.key)" style="margin-left: 140px;border-radius: 12px;">
+                                                {{ (orderIdStatus.value === 'Order Placed') ? 'Processing' : (orderIdStatus.value === 'Processing') ? 'Accept Order' : (orderIdStatus.value === 'Accepted') ? 'Im on my way' : (orderIdStatus.value === 'Order Rejected') ? 'Order Rejected' : 'Order Delivered' }}
+                                              </button>
                                                 <p-toast></p-toast>
                                                 <p-confirmPopup></p-confirmPopup>
                                                 <button (click)="confirm($event , orderIdStatus.key)"

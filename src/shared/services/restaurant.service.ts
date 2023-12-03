@@ -12,6 +12,7 @@ const getMenubyRes: string = `${baseURL}/menus`;
 const addtofav: string = `${baseURL}/addFavouriteRestaurant`;
 const removefav: string = `${baseURL}/removefromfav`;
 const getfav: string = `${baseURL}/getfavourites`;
+const getfood: string = `${baseURL}/getfoodrec`;
 
 @Injectable({
   providedIn: 'root',
@@ -123,6 +124,12 @@ export class RestaurantService {
   getFav(id: string): Observable<string[]> {
     return this.httpclient
       .get<string[]>(`${getfav}/${id}`)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getrecFood(id: string): Observable<string[]> {
+    return this.httpclient
+      .get<string[]>(`${getfood}/${id}`)
       .pipe(retry(1), catchError(this.handleError));
   }
 

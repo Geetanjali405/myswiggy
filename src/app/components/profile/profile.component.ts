@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 // import {
@@ -14,6 +15,8 @@ import {
 } from 'primeng/api';
 import { DeliveryData } from 'src/shared/model/delivery';
 import { User } from 'src/shared/model/user';
+import { CartService } from 'src/shared/services/cart.service';
+import { RestaurantService } from 'src/shared/services/restaurant.service';
 import { UserService } from 'src/shared/services/user.service';
 
 @Component({
@@ -22,12 +25,18 @@ import { UserService } from 'src/shared/services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+addToCart(_t30: any) {
+throw new Error('Method not implemented.');
+}
   // orderChart: Chart;
   constructor(
     private userService: UserService,
+    private cartService: CartService,
+    private restaurantService:RestaurantService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private snackBar: MatSnackBar
   ) {}
   userId: string;
   userData: User;
@@ -40,6 +49,9 @@ export class ProfileComponent implements OnInit {
   basicOptions: any;
   basicDataa: any;
   basicOptionss: any;
+  foodrecList: string[];
+  id: string;
+  foodList = [];
 
   ngOnInit(): void {
     this.email = localStorage.getItem('email');
@@ -50,9 +62,11 @@ export class ProfileComponent implements OnInit {
     console.log(this.userData);
     console.log(this.userData.userType);
     this.userId = localStorage.getItem('id');
+    console.log(this.userId);
+
+
     this.populatedelivery();
-    // this.displayOrderChart();
-    // this.displayOrderChart();
+    this.getFav(this.userId);
   }
   // ngAfterViewInit() {
   //   this.displayOrderChart();
@@ -91,6 +105,54 @@ export class ProfileComponent implements OnInit {
       },
     });
   }
+
+  getFav(id: string) {
+    console.log(id);
+    if(id) {
+      this.userService.getrecFood(id).subscribe({
+        next: (response) => {
+          this.foodrecList = response;
+          console.log(response);
+          this.foodrecList.forEach((fav) => {
+            this.restaurantService.getMenubyId(fav).subscribe({
+              next: (res) => {
+                // console.warn(restaurant);
+                this.foodList.push(res);
+                console.log(this.foodList);
+                // console.warn(this.restaurantList);
+              },
+              error: (error) => {
+                console.log('Error in fetching restaurant details', error);
+              },
+            });
+          });
+        
+        },
+        error: (error) => {
+          console.log('Error in fetching food rec details', error);
+          
+        },
+      });
+    }
+  
+  }
+
+  addIteminCart(menuId: string) {
+    this.cartService.addItemToCart(this.userId, menuId).subscribe(
+      (data) => {
+        console.log('Item added to cart successfully!');
+        this.snackBar.open('Item added to cart', 'OK', {
+          duration: 3000,
+        });
+        
+      },
+      (error) => {
+        console.error('Error while adding item to cart: ');
+        console.error(error);
+      }
+    );
+  }
+ 
 
   displayOrderChart() {
     const documentStyle = getComputedStyle(document.documentElement);

@@ -24,6 +24,7 @@ const delCart: string = `${baseURL}/deletecart`;
 const getUser: string = `${baseURL}/user`;
 const getUsersofdel: string = `${baseURL}/users`;
 const addtoorderhis: string = `${baseURL}/usercart`;
+const getfood: string = `${baseURL}/getfoodrec`;
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +47,13 @@ export class UserService {
 
   getUser() {
     return this.user$.asObservable();
+  }
+  
+  getrecFood(id: string): Observable<string[]> {
+    console.log(`${getfood}/${id}`);
+    return this.httpclient
+      .get<string[]>(`${getfood}/${id}`)
+      .pipe(retry(1), catchError(this.handleError));
   }
 
   constructor(private httpclient: HttpClient) {
