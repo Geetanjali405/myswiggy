@@ -52,6 +52,7 @@ throw new Error('Method not implemented.');
   foodrecList: string[];
   id: string;
   foodList = [];
+  public link: string = 'Swiggy is the best food delivery app available !!'
 
   ngOnInit(): void {
     this.email = localStorage.getItem('email');

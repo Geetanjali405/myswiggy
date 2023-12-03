@@ -1,9 +1,21 @@
 <div>
         <app-nav></app-nav>
-        <div class="main" style="margin-top:100px">
+        <div class="main" style="margin-top:100px; display: flex; justify-content: space-between;">
+                <div class="soc" style="width: 10%; margin-top: 100px;">
+                        <app-share
+                        type='facebook'
+                        [shareUrl]='link'>
+                      </app-share>
+                      
+                      <br>
+                    
+                      <app-share
+                        type='twitter'
+                        [shareUrl]='link'>
+                      </app-share>
+                </div>
 
-
-                <div class="cart-container">
+                <div class="cart-container" style="width: 80%;">
                         <h1 class="margin-left:400px"><b>Your cart</b></h1>
                         <ul class="cart-details">
                                 <!-- <li *ngIf="cart?.id">ID: {{ cart.id }}</li>
@@ -48,17 +60,8 @@
                         <h1>{{statusorder}}</h1>
                 </div>
              
-                <app-share
-                type='facebook'
-                [shareUrl]='link'>
-              </app-share>
-              
-              <br>
-            
-              <app-share
-                type='twitter'
-                [shareUrl]='link'>
-              </app-share>
+             
         </div>
+   
 
 </div>

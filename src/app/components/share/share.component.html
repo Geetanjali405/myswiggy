@@ -1,15 +1,17 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 
+<!-- <div>
+        <button *ngIf="type === 'facebook'" (click)="share()">
+                Share on Facebook
+        </button>
 
-<div>
-        <button
-        *ngIf="type === 'facebook'"
-        (click)="share()">
-          Share on Facebook
+        <button *ngIf="type === 'twitter'" (click)="share()">
+                Share on Twitter
         </button>
-        
-        <button
-        *ngIf="type === 'twitter'"
-        (click)="share()">
-          Share on Twitter
-        </button>
-</div>
+</div> -->
+
+<div class="icons" style="display: flex; justify-content: center; flex-direction: row; align-items: center;">
+        <a *ngIf="type === 'facebook'" (click)="share()" class="fb" style="margin-right: 10px;"><i class="fab fa-facebook-f"></i></a>
+        <a *ngIf="type === 'twitter'" (click)="share()" class="twitter"><i class="fab fa-twitter"></i></a>
+      </div>

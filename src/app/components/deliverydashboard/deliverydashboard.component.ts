@@ -52,7 +52,7 @@ export class DeliverydashboardComponent implements OnInit {
   paginateDelivery() {
     const startIndex = this.currentPageIndex * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    const keys = Object.keys(this.delivery?.orderIdAndStatus || {});
+    const keys = Object.keys(this.delivery?.orderIdAndStatus || {}).reverse(); // Reverse the keys array
     const totalOrders = keys.length;
     const paginatedDelivery = {};
     for (let i = startIndex; i < endIndex && i < totalOrders; i++) {
@@ -109,7 +109,7 @@ export class DeliverydashboardComponent implements OnInit {
       },
     });
   }
-  
+
   rejectOrder(orderId: any) {
     this.userService.rejectorder(orderId).subscribe({
       next: (delivery) => {
