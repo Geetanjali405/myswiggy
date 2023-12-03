@@ -15,8 +15,8 @@
                                 <form [formGroup]="searchForm">
                                         <div class="form-group has-search">
                                                 <span class="fa fa-search form-control-feedback"></span>
-                                                <input type="text" class="form-control" formControlName="searchQuery" id="searchQuery"
-                                                        placeholder="Search in menu">
+                                                <input type="text" class="form-control" formControlName="searchQuery"
+                                                        id="searchQuery" placeholder="Search in menu">
                                         </div>
                                 </form>
                         </div>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div id="menu-container" class="ms-5">
-                        <button pButton pRipple type="button" label="Pure Veg"
+                        <button pButton pRipple type="button" label="Veg Only"
                                 class="p-button-raised p-button-secondary p-button-text category-btn"
                                 (click)="toggleVegFilter()"></button>
                         <button pButton pRipple type="button" label="Non Veg"
@@ -39,7 +39,12 @@
                                 <div *ngFor="let menuItem of filtered" class="card-container">
                                         <div class="details">
                                                 <!-- <h1>{{menuItem.id}}</h1> -->
-                                                <h3><b>{{ menuItem.name }}</b></h3>
+                                                <!-- <h1>{{menuItem.isVeg}}</h1> -->
+                                                <h3><i class="bi"
+                                                                [ngClass]="(menuItem.isVeg === '1') ? 'bi-triangle-fill text-success' : 'bi-triangle-fill text-danger'"
+                                                                style="margin-right: 10px;"></i>
+                                                        <b>{{ menuItem.name }}</b>
+                                                </h3>
                                                 <p>Category: {{ menuItem.category }}</p>
                                                 <p>{{ menuItem.description }}</p>
                                                 <p><b>Price:Rs. {{menuItem.price.substring(0, 3)}}</b></p>

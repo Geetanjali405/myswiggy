@@ -42,7 +42,7 @@ export class RestaurantdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.resId = this.route.snapshot.params['id'];
     this.userId = localStorage.getItem('id');
-    console.log('line 31');
+    // console.log('line 31');
     console.log(this.userId);
     // console.log(this.resId);
    
