@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/shared/services/user.service';
@@ -8,6 +8,8 @@ import { Restaurant } from 'src/shared/model/restaurant';
 import { CartService } from 'src/shared/services/cart.service';
 import { RestaurantService } from 'src/shared/services/restaurant.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-restaurantdetails',
@@ -29,15 +31,20 @@ export class RestaurantdetailsComponent implements OnInit {
   imgSrc: string;
   layout: string = 'list';
   searchForm: FormGroup;
+  reviewText = '';
+  rating = '';
+  reviews: any[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
     private cartService: CartService,
-    private restaurantService:RestaurantService,
+    private restaurantService: RestaurantService,
     private snackBar: MatSnackBar,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private offcanvasService: NgbOffcanvas,
+    private httpclient: HttpClient
   ) {}
   ngOnInit(): void {
     this.resId = this.route.snapshot.params['id'];
@@ -45,8 +52,7 @@ export class RestaurantdetailsComponent implements OnInit {
     // console.log('line 31');
     console.log(this.userId);
     // console.log(this.resId);
-   
-    
+
     this.searchForm = this.fb.group({
       searchQuery: this.fb.control(''),
     });
@@ -86,6 +92,8 @@ export class RestaurantdetailsComponent implements OnInit {
         button.classList.toggle('added');
       });
     });
+
+    
   }
 
   removeFilter() {
@@ -106,7 +114,6 @@ export class RestaurantdetailsComponent implements OnInit {
         this.snackBar.open('Item added to cart', 'OK', {
           duration: 3000,
         });
-        
       },
       (error) => {
         console.error('Error while adding item to cart: ');
@@ -121,7 +128,7 @@ export class RestaurantdetailsComponent implements OnInit {
     if (query.length === 0) {
       this.filtered = this.menuList;
     }
-     if (query.length > 1) {
+    if (query.length > 1) {
       this.filtered = this.menuList.filter((item) => {
         return (
           item.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -130,8 +137,45 @@ export class RestaurantdetailsComponent implements OnInit {
         );
       });
       console.log(this.filtered);
-  
-     
     }
+  }
+
+  openEndSignIn(contentsignin: TemplateRef<any>) {
+    this.offcanvasService.open(contentsignin, { position: 'end' });
+  }
+  openReviews(reviewcontent: TemplateRef<any>) {
+    this.getReviews(this.resId);
+    this.offcanvasService.open(reviewcontent, { position: 'end' });
+  }
+  onSubmit() {
+    // const restaurantId = '123'; // Replace with the actual restaurant ID
+    const review = {
+      comment: this.reviewText,
+      rating: Number(this.rating),
+    };
+
+    this.restaurantService.addReview(this.resId, review).subscribe(
+      (response) => {
+        alert(response);
+      },
+      (error) => {
+        alert(error);
+      }
+    );
+  }
+
+  getReviews(resId: number) {
+    // const restaurantId = 15680; // replace this with the actual restaurant ID
+    const apiUrl = `http://localhost:8080/restaurants/${this.resId}/reviews`;
+
+    this.httpclient.get(apiUrl).subscribe(
+      (response: any[]) => {
+        this.reviews = response;
+        console.log(this.reviews);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

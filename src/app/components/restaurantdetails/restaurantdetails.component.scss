@@ -174,3 +174,55 @@
     color: #aaa;
 }
 
+.review-section {
+    padding: 20px;
+  }
+  
+  .review-section h2 {
+    margin-bottom: 20px;
+  }
+  
+  .review-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .review-card {
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    margin: 20px;
+  }
+  
+  .review-comment {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .review-rating {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .item-controls{
+  
+    background-color: #fc8019;
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 0 1px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .item-controls :hover {
+    background-color: #e67300;
+  }
+  
+//   .item-controls button:last-child {
+//     margin-left: 50px;
+//   }

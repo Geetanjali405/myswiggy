@@ -13,6 +13,7 @@
                                                         style="color: rgb(255,188,55);"></i>{{restaurant?.avgRatingString}}</b>
                                 </p>
                                 <p class="mt-4">{{restaurant?.totalRatingsString}} ratings</p>
+
                                 <form [formGroup]="searchForm">
                                         <div class="form-group has-search">
                                                 <span class="fa fa-search form-control-feedback"></span>
@@ -22,44 +23,121 @@
                                 </form>
                         </div>
                         <div class="restaurant-image">
-                                <img alt="Card" [src]="imgSrc" class="imgg">
-                        </div>
-                </div>
+                                <img alt="Card" [src]="imgSrc" class="imgg"
+                                        style="margin-bottom: 25px; margin-left: 10px;">
+                                <button class="item-controls" (click)="openEndSignIn(contentsignin)">ADD
+                                        REVIEW</button>
 
-                <div id="menu-container" class="ms-5">
-                        <button pButton pRipple type="button" label="Veg Only"
-                                class="p-button-raised p-button-secondary p-button-text category-btn"
-                                (click)="toggleVegFilter()"></button>
-                        <button pButton pRipple type="button" label="Non Veg"
-                                class="p-button-raised p-button-secondary p-button-text category-btn"
-                                (click)="toggleNonVegFilter()"></button>
-                        <button pButton pRipple type="button" label="Clear Filters"
-                                class="p-button-raised p-button-secondary p-button-text category-btn"
-                                (click)="removeFilter()"></button>
-                        <div class="list">
-                                <div *ngFor="let menuItem of filtered" class="card-container">
-                                        <div class="details">
-                                                <!-- <h1>{{menuItem.id}}</h1> -->
-                                                <!-- <h1>{{menuItem.isVeg}}</h1> -->
-                                                <h3><i class="bi"
-                                                                [ngClass]="(menuItem.isVeg === '1') ? 'bi-triangle-fill text-success' : 'bi-triangle-fill text-danger'"
-                                                                style="margin-right: 10px;"></i>
-                                                        <b>{{ menuItem.name }}</b>
-                                                </h3>
-                                                <p>Category: {{ menuItem.category }}</p>
-                                                <p>{{ menuItem.description }}</p>
-                                                <p><b>Price:Rs. {{menuItem.price.substring(0, 3)}}</b></p>
+                                <ng-template #contentsignin let-offcanvas>
+                                        <div
+                                                style="background-color: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+                                                <h4
+                                                        style="color: #ff4500; font-size: 24px; font-weight: bold; margin-bottom: 20px;">
+                                                        Add Review on Swiggy!!</h4>
+
+                                                <h1><b>{{restaurant?.name}}</b></h1>
+                                                <!-- Add more details here -->
+                                                <h3>{{restaurant?.locality}}</h3>
+                                                <h3>{{ restaurant?.cuisines.join(', ') }}</h3>
+                                                <p style="margin-bottom: 22px;" class="ms-1"><b><i
+                                                                        class="bi bi-star-fill me-1"
+                                                                        style="color: rgb(255,188,55);"></i>{{restaurant?.avgRatingString}}</b>
+                                                </p>
+                                                <p class="mt-4">{{restaurant?.totalRatingsString}} ratings</p>
+
+                                                <form (ngSubmit)="onSubmit()">
+                                                        <div style="margin-bottom: 20px;">
+                                                                <label for="review"
+                                                                        style="display: block; color: #333; font-size: 16px; margin-bottom: 10px;margin-top:30px">Review:</label>
+                                                                <textarea id="review" name="review"
+                                                                        style="width: 100%; border: 1px solid #d9d9d9; border-radius: 5px; padding: 10px;"
+                                                                        [(ngModel)]="reviewText"></textarea>
+                                                        </div>
+                                                        <div style="margin-bottom: 20px;">
+                                                                <label for="rating"
+                                                                        style="display: block; color: #333; font-size: 16px; margin-bottom: 25px;">Rating:</label>
+                                                                <select id="rating" name="rating" [(ngModel)]="rating"
+                                                                        style="width: 100%; border: 1px solid #d9d9d9; border-radius: 5px; padding: 10px;">
+                                                                        <option value="">Select a Rating</option>
+                                                                        <option value="1">1 Star</option>
+                                                                        <option value="2">2 Stars</option>
+                                                                        <option value="3">3 Stars</option>
+                                                                        <option value="4">4 Stars</option>
+                                                                        <option value="5">5 Stars</option>
+                                                                </select>
+                                                        </div>
+                                                        <div style="text-align: right;">
+                                                                <button type="submit"
+                                                                        style="background-color: #ff4500; color: #fff; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer;margin-top:30px"
+                                                                        (click)="offcanvas.close()">Submit</button>
+                                                        </div>
+                                                </form>
                                         </div>
-                                        <div class="img-container">
-                                                <img alt="{{ menuItem.name }}"
-                                                        src="{{cloudinaryBaseURL}}{{menuItem.imageId}}" class="img">
-                                                <div class="myButton">
-                                                        <a class="add-to-cart" (click)="addIteminCart(menuItem.id)">Add
-                                                                to cart</a>
-                                                        <a class="cart"><span></span></a>
+                                </ng-template>
+                                <button class="item-controls" (click)="openReviews(reviewcontent)">SEE
+                                        REVIEW</button>
+                        </div>
+
+                        <ng-template #reviewcontent let-offcanvas>
+
+                                <h2 style="color: #fc8019; font-size: 24px; font-weight: 600; margin: 20px;">
+                                        Customer Reviews</h2>
+                                <div *ngIf="reviews.length > 0; else noReviews">
+                                        <div *ngFor="let review of reviews">
+                                                <div class="review-card">
+                                                        <h5>by Anonymous</h5>
+                                                        <div class="review-comment">
+                                                                "{{review.comment}}"
+                                                        </div>
+                                                        <div class="review-rating">
+                                                                Rating: {{review.rating}}/5
+                                                        </div>
                                                 </div>
+                                        </div>
+                                </div>
+
+                                <ng-template #noReviews>
+                                        <img src="https://b.zmtcdn.com/webFrontend/691ad4ad27a5804a3033977d45390c811584432410.png"
+                                                style="margin-top: 29px;">
+                                </ng-template>
+                        </ng-template>
+                </div>
+        </div>
+
+        <div id="menu-container" class="ms-5">
+                <button pButton pRipple type="button" label="Veg Only"
+                        class="p-button-raised p-button-secondary p-button-text category-btn"
+                        (click)="toggleVegFilter()"></button>
+                <button pButton pRipple type="button" label="Non Veg"
+                        class="p-button-raised p-button-secondary p-button-text category-btn"
+                        (click)="toggleNonVegFilter()"></button>
+                <button pButton pRipple type="button" label="Clear Filters"
+                        class="p-button-raised p-button-secondary p-button-text category-btn"
+                        (click)="removeFilter()"></button>
+                <div class="list">
+                        <div *ngFor="let menuItem of filtered" class="card-container">
+                                <div class="details">
+                                        <!-- <h1>{{menuItem.id}}</h1> -->
+                                        <!-- <h1>{{menuItem.isVeg}}</h1> -->
+                                        <h3><i class="bi"
+                                                        [ngClass]="(menuItem.isVeg === '1') ? 'bi-triangle-fill text-success' : 'bi-triangle-fill text-danger'"
+                                                        style="margin-right: 10px;"></i>
+                                                <b>{{ menuItem.name }}</b>
+                                        </h3>
+                                        <p>Category: {{ menuItem.category }}</p>
+                                        <p>{{ menuItem.description }}</p>
+                                        <p><b>Price:Rs. {{menuItem.price.substring(0, 3)}}</b></p>
+                                </div>
+                                <div class="img-container">
+                                        <img alt="{{ menuItem.name }}" src="{{cloudinaryBaseURL}}{{menuItem.imageId}}"
+                                                class="img">
+                                        <div class="myButton">
+                                                <a class="add-to-cart" (click)="addIteminCart(menuItem.id)">Add
+                                                        to cart</a>
+                                                <a class="cart"><span></span></a>
                                         </div>
                                 </div>
                         </div>
                 </div>
         </div>
+</div>

@@ -4,7 +4,7 @@ import { Observable, retry, catchError, throwError } from 'rxjs';
 import { Menu } from '../model/menu';
 import { Restaurant } from '../model/restaurant';
 
-const baseURL= 'http://localhost:8080';
+const baseURL = 'http://localhost:8080';
 const getRestaurants: string = `${baseURL}/restaurant`;
 const getRestaurantsbyId: string = `${baseURL}/restaurant`;
 const getMenu: string = `${baseURL}/menu`;
@@ -74,7 +74,7 @@ export class RestaurantService {
   /**
    * @function getMenuDetailsofRestaurant et Menu of specific restaurant
    * @param restId  The id of the restaurant whose menu details are to be retrieved.
-   * @returns Returns an Observable of type Menu array which will emit an array of all the menu details 
+   * @returns Returns an Observable of type Menu array which will emit an array of all the menu details
    * of the specific restaurant.
    */
   getMenuDetailsofRestaurant(restId: string): Observable<Menu[]> {
@@ -87,7 +87,7 @@ export class RestaurantService {
    * @function addToFav Adds a restaurant to favorites of a user.
    * @param id The id of the user who is adding the restaurant to favorites.
    * @param restId  The id of the restaurant which is to be added to favorites.
-   * @returns  Returns an Observable of type string which will emit a success message upon successfully 
+   * @returns  Returns an Observable of type string which will emit a success message upon successfully
    * adding the restaurant to favorites.
    */
   addToFav(id: string, restId: string): Observable<string> {
@@ -99,11 +99,19 @@ export class RestaurantService {
     );
   }
 
+  addReview(restaurantId: number, review: any): Observable<string> {
+    return this.httpclient.post<string>(
+      `${baseURL}/restaurants/${restaurantId}/reviews`,
+      JSON.stringify(review),
+      this.httpOptions
+    );
+  }
+
   /**
    * @function removeFromFav Removes a restaurant from favorites of a user.
    * @param id  The id of the user who is removing the restaurant from favorites.
    * @param restId  The id of the restaurant which is to be removed from favorites.
-   * @returns Returns an Observable of type string which will emit a success message upon successfully 
+   * @returns Returns an Observable of type string which will emit a success message upon successfully
    * removing the restaurant from favorites.
    */
   removeFromFav(id: string, restId: string): Observable<string> {
@@ -118,7 +126,7 @@ export class RestaurantService {
   /**
    * @function getFav Retrieves all favorite restaurants of a user.
    * @param id  The id of the user whose favorite restaurants are to be retrieved.
-   * @returns  Returns an Observable of type string array which will emit an array of all the favorite 
+   * @returns  Returns an Observable of type string array which will emit an array of all the favorite
    * restaurant ids of the user
    */
   getFav(id: string): Observable<string[]> {
