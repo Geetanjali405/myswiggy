@@ -7,6 +7,7 @@ import { Menu } from 'src/shared/model/menu';
 import { Restaurant } from 'src/shared/model/restaurant';
 import { CartService } from 'src/shared/services/cart.service';
 import { RestaurantService } from 'src/shared/services/restaurant.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-restaurantdetails',
@@ -27,6 +28,7 @@ export class RestaurantdetailsComponent implements OnInit {
     'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
   imgSrc: string;
   layout: string = 'list';
+  searchForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,15 +36,24 @@ export class RestaurantdetailsComponent implements OnInit {
     private userService: UserService,
     private cartService: CartService,
     private restaurantService:RestaurantService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private fb: FormBuilder
   ) {}
-
   ngOnInit(): void {
     this.resId = this.route.snapshot.params['id'];
     this.userId = localStorage.getItem('id');
     console.log('line 31');
     console.log(this.userId);
     // console.log(this.resId);
+   
+    
+    this.searchForm = this.fb.group({
+      searchQuery: this.fb.control(''),
+    });
+    this.searchForm.valueChanges.subscribe(() => {
+      this.filterProducts();
+      console.log(this.searchForm.value);
+    });
 
     this.subscription = this.restaurantService
       .getRestaurantsbyId(this.resId.toString())
@@ -77,6 +88,10 @@ export class RestaurantdetailsComponent implements OnInit {
     });
   }
 
+  removeFilter() {
+    this.filtered = this.menuList;
+  }
+
   toggleVegFilter() {
     this.filtered = this.menuList.filter((item) => item.isVeg === '1');
   }
@@ -98,5 +113,25 @@ export class RestaurantdetailsComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  filterProducts() {
+    let query = this.searchForm.get('searchQuery')?.value;
+    console.log(query);
+    if (query.length === 0) {
+      this.filtered = this.menuList;
+    }
+     if (query.length > 1) {
+      this.filtered = this.menuList.filter((item) => {
+        return (
+          item.name.toLowerCase().includes(query.toLowerCase()) ||
+          item.description.toLowerCase().includes(query.toLowerCase()) ||
+          item.category.toLowerCase().includes(query.toLowerCase())
+        );
+      });
+      console.log(this.filtered);
+  
+     
+    }
   }
 }

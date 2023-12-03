@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Menu } from 'src/shared/model/menu';
+import { Restaurant } from 'src/shared/model/restaurant';
 import { RestaurantService } from 'src/shared/services/restaurant.service';
 import { UserService } from 'src/shared/services/user.service';
 
@@ -13,9 +14,12 @@ import { UserService } from 'src/shared/services/user.service';
 })
 export class SearchComponent {
   menuList: Menu[];
+  restraunts: Restaurant[];
   filteredProducts: Menu[];
   subscription: Subscription;
+  subres: Subscription;
   searchForm: FormGroup;
+  filteredRestaurants: Restaurant[];
 
   public images = [
     {
@@ -72,8 +76,6 @@ export class SearchComponent {
     },
   ];
   constructor(
-    private router: Router,
-    private userService: UserService,
     private restaurantService:RestaurantService,
     private fb: FormBuilder
   ) {}
@@ -85,6 +87,15 @@ export class SearchComponent {
       },
       (error) => {
         console.log('Error in fetching menu details', error);
+      }
+    );
+    this.subres = this.restaurantService.getRestrauntDetails().subscribe(
+      (response) => {
+        this.restraunts = response;
+        console.log(response);
+      },
+      (error) => {
+        console.log('Error in fetching restaurant details', error);
       }
     );
     this.searchForm = this.fb.group({
@@ -101,6 +112,7 @@ export class SearchComponent {
     console.log(query);
     if (query.length === 0) {
       this.filteredProducts = [];
+      this.filteredRestaurants = [];
     } else if (query.length > 1) {
       this.filteredProducts = this.menuList.filter((item) => {
         return (
@@ -110,6 +122,20 @@ export class SearchComponent {
         );
       });
       console.log(this.filteredProducts);
+  
+      this.filteredRestaurants = this.restraunts.filter((restaurant) =>
+        restaurant.name.toLowerCase().includes(query.toLowerCase())
+      );
+
+      console.log(this.filteredRestaurants);
+  
+      // If no menu items match the query, show restaurants that match
+      if (this.filteredProducts.length === 0) {
+        this.filteredRestaurants = this.restraunts.filter((restaurant) =>
+          restaurant.name.toLowerCase().includes(query.toLowerCase())
+        );
+        console.log(this.filteredRestaurants);
+      }
     }
   }
 }
