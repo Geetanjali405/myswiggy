@@ -92,8 +92,6 @@ export class RestaurantdetailsComponent implements OnInit {
         button.classList.toggle('added');
       });
     });
-
-    
   }
 
   removeFilter() {
@@ -156,10 +154,12 @@ export class RestaurantdetailsComponent implements OnInit {
 
     this.restaurantService.addReview(this.resId, review).subscribe(
       (response) => {
-        alert(response);
+        this.snackBar.open('Review Added Successfully !!', 'OK', {
+          duration: 3000,
+        });
       },
       (error) => {
-        alert(error);
+        console.error(error);
       }
     );
   }
