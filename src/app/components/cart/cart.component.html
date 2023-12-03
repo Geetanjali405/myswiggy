@@ -47,8 +47,18 @@
 
                         <h1>{{statusorder}}</h1>
                 </div>
-
-
+             
+                <app-share
+                type='facebook'
+                [shareUrl]='link'>
+              </app-share>
+              
+              <br>
+            
+              <app-share
+                type='twitter'
+                [shareUrl]='link'>
+              </app-share>
         </div>
 
 </div>

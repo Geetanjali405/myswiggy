@@ -48,6 +48,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './components/map/map.component';
 import { OffersComponent } from './components/offers/offers.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { ShareComponent } from './components/share/share.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
     MapComponent,
     OffersComponent,
     CategoriesComponent,
+    ShareComponent,
   ],
   imports: [
     BrowserModule,

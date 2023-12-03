@@ -20,6 +20,7 @@ import { Menu } from 'src/shared/model/menu';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  public link: string = 'Swiggy is the best food delivery app available !!'
   Razorpay: any;
   subscription: Subscription;
   cart: Cart;

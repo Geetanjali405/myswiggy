@@ -9,5 +9,44 @@
                         </div>
                 </div>
 
+                <br>
+                <h2>Our Restaurant Chains</h2>
+                <select [(ngModel)]="selLoc">
+                        <option [value]="'Bangalore'">Bangalore</option>
+                        <option [value]="'Hyderabad'" selected>Hyderabad</option>
+                        <option [value]="'Patna'">Patna</option>
+                </select>
+
+                <div *ngIf="selLoc === 'Bangalore'">
+                        <!-- Display Bangalore restaurants -->
+                        <div class="restaurants-container" style="margin-left:90px">
+                                <div class="restaurant-box" *ngFor="let restaurant of bangaloreRestaurants"
+                                        style="margin-right: 30px;">
+                                        <div class="restaurant-name">{{restaurant}}</div>
+                                </div>
+                        </div>
+
+                </div>
+
+                <div *ngIf="selLoc === 'Hyderabad'">
+                        <!-- Display Hyderabad restaurants -->
+                        <div class="restaurants-container" style="margin-left:90px">
+                                <div class="restaurant-box" *ngFor="let restaurant of hyderabadRestaurants"
+                                        style="margin-right: 30px;">
+                                        <div class="restaurant-name">{{restaurant}}</div>
+                                </div>
+                        </div>
+                </div>
+
+                <div *ngIf="selLoc === 'Patna'">
+                        <!-- Display Patna restaurants -->
+                        <div class="restaurants-container" style="margin-left:90px">
+                                <div class="restaurant-box" *ngFor="let restaurant of patnaAmericanRestaurants"
+                                        style="margin-right: 30px;">
+                                        <div class="restaurant-name">{{restaurant}}</div>
+                                </div>
+                        </div>
+                </div>
+
         </div>
 </div>

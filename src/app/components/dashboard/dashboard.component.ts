@@ -175,6 +175,18 @@ export class DashboardComponent implements OnInit {
     this.isAscending = !isAscending;
   }
 
+  clearfilter() {
+    this.subscription = this.restaurantService.getRestrauntDetails().subscribe(
+      (response) => {
+        this.restaurantList = response;
+        console.log(response);
+      },
+      (error) => {
+        console.log('Error in fetching restaurant details', error);
+      }
+    );
+  }
+
   toggleSortBynoofRatings(): void {
     const isAscending =
       this.isAscending === undefined ? true : this.isAscending;

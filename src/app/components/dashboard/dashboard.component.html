@@ -40,7 +40,7 @@
                         [autoplayInterval]="3000">
                         <ng-template let-image pTemplate="item">
                                 <div style="padding-right: 16px;">
-                                        <img routerLink="/cat"   [src]="image.image" class="carouse-image" />
+                                        <img routerLink="/cat" [src]="image.image" class="carouse-image" />
                                 </div>
                         </ng-template>
 
@@ -74,6 +74,9 @@
                 <button pButton pRipple type="button" label="Sort by no. of ratings"
                         class="p-button-raised p-button-secondary p-button-text category-btn "
                         (click)="toggleSortBynoofRatings()"></button>
+                <button pButton pRipple type="button" label="Clear filter"
+                        class="p-button-raised p-button-secondary p-button-text category-btn "
+                        (click)="clearfilter()"></button>
 
         </div>
 
