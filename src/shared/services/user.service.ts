@@ -15,12 +15,11 @@ const baseURL = 'http://localhost:8080';
 const signUpEndPoint: string = `${baseURL}/signup`;
 const signInEndPoint: string = `${baseURL}/signin`;
 
-const adddel: string = `${baseURL}/delivery`;
+const adddel: string = `${baseURL}/placeorder`;
 const getdel: string = `${baseURL}/delivery/6554e024a594227362c3e04d`;
 const updateStatus: string = `${baseURL}/delivery`;
 const reject: string = `${baseURL}/rejectOrder`;
 const getStatus: string = `${baseURL}/getstatus`;
-const delCart: string = `${baseURL}/deletecart`;
 const getUser: string = `${baseURL}/user`;
 const getUsersofdel: string = `${baseURL}/users`;
 const addtoorderhis: string = `${baseURL}/usercart`;
@@ -128,14 +127,17 @@ export class UserService {
    * @returns Returns an Observable of type DeliveryData which will emit the updated delivery data to
    * track the status of the order
    */
-  updateStatusofOrder(orderId: string): Observable<DeliveryData> {
+  updateStatusofOrder(
+    orderId: string,
+    userId: string
+  ): Observable<DeliveryData> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
     };
     return this.httpclient.post<DeliveryData>(
-      `${updateStatus}/${orderId}`,
+      `${updateStatus}/${orderId}/${userId}`,
       null,
       httpOptions
     );

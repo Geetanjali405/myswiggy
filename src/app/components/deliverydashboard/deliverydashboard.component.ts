@@ -22,6 +22,7 @@ export class DeliverydashboardComponent implements OnInit {
   pageLength: number;
   filteredDelievery;
   totalOrders: number = 0;
+  userId: string;
 
   constructor(
     private userService: UserService,
@@ -32,6 +33,7 @@ export class DeliverydashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.populateDelivery();
+    this.userId = localStorage.getItem('id');
   }
 
   populateDelivery() {
@@ -59,7 +61,7 @@ export class DeliverydashboardComponent implements OnInit {
       const key = keys[i];
       paginatedDelivery[key] = this.delivery.orderIdAndStatus[key];
     }
-  
+
     this.paginatedDelivery = paginatedDelivery;
     this.pageLength = Math.ceil(totalOrders / this.pageSize);
     this.totalOrders = totalOrders;
@@ -72,11 +74,8 @@ export class DeliverydashboardComponent implements OnInit {
   }
 
   showUpdateStatusPopup(orderId: any) {
-    // var userId =JSON.parse(localStorage.getItem('user')).id
-    // alert(userId)
-    this.userService.updateStatusofOrder(orderId).subscribe({
+    this.userService.updateStatusofOrder(orderId, this.userId).subscribe({
       next: (delivery) => {
-        
         this.snackBar.open('Order status updated successfully!', 'OK', {
           duration: 3000,
         });
@@ -87,7 +86,6 @@ export class DeliverydashboardComponent implements OnInit {
       },
     });
   }
-
 
   confirm(event: Event, orderId: any) {
     this.confirmationService.confirm({
@@ -115,7 +113,6 @@ export class DeliverydashboardComponent implements OnInit {
   rejectOrder(orderId: any) {
     this.userService.rejectorder(orderId).subscribe({
       next: (delivery) => {
-        
         this.snackBar.open('Order rejected successfully!', 'OK', {
           duration: 3000,
         });
