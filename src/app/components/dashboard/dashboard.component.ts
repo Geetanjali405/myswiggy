@@ -152,7 +152,6 @@ export class DashboardComponent implements OnInit {
     this.subscription = this.restaurantService.getRestrauntDetails().subscribe(
       (response) => {
         this.restaurantList = response;
-        console.log(response);
       },
       (error) => {
         console.log('Error in fetching restaurant details', error);
@@ -179,7 +178,6 @@ export class DashboardComponent implements OnInit {
     this.subscription = this.restaurantService.getRestrauntDetails().subscribe(
       (response) => {
         this.restaurantList = response;
-        console.log(response);
       },
       (error) => {
         console.log('Error in fetching restaurant details', error);

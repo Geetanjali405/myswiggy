@@ -21,7 +21,7 @@ export class CardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private restaurantService:RestaurantService,
+    private restaurantService: RestaurantService,
     private snackBar: MatSnackBar
   ) {}
   fav = null;
@@ -31,7 +31,6 @@ export class CardComponent implements OnInit {
     this.getFav(this.id);
 
     this.imgSrc = `${this.cloudinaryBaseURL}${this.res.cloudinaryImageId}`;
-    console.log(this.imgSrc);
   }
 
   /**
@@ -44,7 +43,6 @@ export class CardComponent implements OnInit {
     this.restaurantService.getFav(id).subscribe({
       next: (data) => {
         this.favarr = data;
-        console.log(this.favarr);
       },
       error: (er) => {
         console.log(er);
@@ -61,9 +59,8 @@ export class CardComponent implements OnInit {
   addToFav(id: string, restId: string) {
     this.restaurantService.addToFav(id, restId).subscribe({
       next: (res) => {
-        console.log(res);
         this.snackBar.open('Added to favourites !!', 'OK', {
-          duration: 3000
+          duration: 3000,
         });
         this.getFav(id);
       },
@@ -82,9 +79,8 @@ export class CardComponent implements OnInit {
   removeFromFav(id: string, restId: string) {
     this.restaurantService.removeFromFav(id, restId).subscribe({
       next: (res) => {
-        console.log(res);
         this.snackBar.open('Removed from favourites !!', 'OK', {
-          duration: 3000
+          duration: 3000,
         });
         this.getFav(id);
       },
@@ -101,7 +97,6 @@ export class CardComponent implements OnInit {
    * @returns {boolean} - `true` if the restaurant is in the list of favorite items, `false` otherwise.
    */
   issFav(resId: string): boolean {
-    // console.log(this.favarr);
     if (this.favarr && this.favarr.includes(resId)) {
       return true;
     } else {

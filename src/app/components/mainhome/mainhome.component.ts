@@ -80,9 +80,10 @@ export class MainhomeComponent implements OnInit {
       favouriteRestaurants: [],
     };
     this.user = newUser;
-    console.log(this.user);
+    
     this.userService.registration(this.user).subscribe((response) => {
-      console.log(response);
+     
+      
       // alert('Registered Successfully! Please Log In');
       this.visible = true;
     });
@@ -91,7 +92,7 @@ export class MainhomeComponent implements OnInit {
   
   onSubmitIn() {
     this.user = this.signInForm.value;
-    console.log(this.user);
+
     this.userService.loginUser(this.user).subscribe({
       next: (response) => {
         // this.userService.isuser$.next(true);
@@ -115,7 +116,6 @@ export class MainhomeComponent implements OnInit {
             }
           );
 
-          console.log(this.userInfo.userType);
 
           if (this.userInfo.userType === 'Delivery') {
             localStorage.setItem('delId', this.userInfo.id);

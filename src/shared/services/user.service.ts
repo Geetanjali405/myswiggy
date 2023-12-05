@@ -48,9 +48,8 @@ export class UserService {
   getUser() {
     return this.user$.asObservable();
   }
-  
+
   getrecFood(id: string): Observable<string[]> {
-    console.log(`${getfood}/${id}`);
     return this.httpclient
       .get<string[]>(`${getfood}/${id}`)
       .pipe(retry(1), catchError(this.handleError));
@@ -83,7 +82,7 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  addtoorderhistory(userId: string, cartId: string):Observable<User> {
+  addtoorderhistory(userId: string, cartId: string): Observable<User> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -161,9 +160,6 @@ export class UserService {
    * @returns Returns an Observable of type string which will emit the status of the order
    */
   getOrderStatuss(orderId: string): Observable<string> {
-    // const headers = new HttpHeaders().set('Response-Type', 'text/plain');
-    // console.log(' inside getorderstatus service function');
-    // console.log(`${getStatus}/${orderId}`);
     return this.httpclient
       .get<string>(`${getStatus}/${orderId}`, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));

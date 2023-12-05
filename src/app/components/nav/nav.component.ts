@@ -16,6 +16,6 @@ export class NavComponent implements OnInit {
     this.userData = JSON.parse(userString);
    
     this.userType = this.userData.userType;
-    console.log(this.userType);
+
   }
 }

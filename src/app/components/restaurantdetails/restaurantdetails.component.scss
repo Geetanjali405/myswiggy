@@ -223,6 +223,7 @@
     background-color: #e67300;
   }
   
-//   .item-controls button:last-child {
-//     margin-left: 50px;
-//   }
+  .scrollable-content {
+    max-height: 550px; 
+    overflow-y: auto;
+}

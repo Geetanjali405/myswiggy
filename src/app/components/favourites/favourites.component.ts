@@ -186,7 +186,7 @@ export class FavouritesComponent implements OnInit {
     this.restaurantService.getFav(this.id).subscribe({
       next: (response) => {
         this.favList = response;
-        console.log(response);
+        
         this.favList.forEach((fav) => {
           this.restaurantService.getRestaurantsbyId(fav).subscribe({
             next: (restaurant) => {

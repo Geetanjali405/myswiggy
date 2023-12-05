@@ -60,10 +60,7 @@ throw new Error('Method not implemented.');
 
     const userString = localStorage.getItem('user');
     this.userData = JSON.parse(userString);
-    console.log(this.userData);
-    console.log(this.userData.userType);
     this.userId = localStorage.getItem('id');
-    console.log(this.userId);
 
 
     this.populatedelivery();
@@ -76,7 +73,6 @@ throw new Error('Method not implemented.');
     this.userService.getUsers().subscribe({
       next: (res) => {
         this.users = res;
-        console.log(this.users);
       },
       error: (error) => {
         console.error('Error fetching details of delivery users: ', error);
@@ -85,7 +81,6 @@ throw new Error('Method not implemented.');
     this.userService.getDelivery().subscribe({
       next: (delivery) => {
         this.delivery = delivery;
-        console.log(delivery);
 
         for (let status in this.delivery.orderIdAndStatus) {
           if (this.delivery.orderIdAndStatus[status] === 'Delivered') {
@@ -96,8 +91,6 @@ throw new Error('Method not implemented.');
             this.rejectedCount++;
           }
         }
-        console.log('Delivered orders: ', this.deliveredCount);
-        console.log('Rejected orders: ', this.rejectedCount);
         this.displayOrderChart();
         this.displaypiechart();
       },
@@ -108,19 +101,15 @@ throw new Error('Method not implemented.');
   }
 
   getFav(id: string) {
-    console.log(id);
     if(id) {
       this.userService.getrecFood(id).subscribe({
         next: (response) => {
           this.foodrecList = response;
-          console.log(response);
           this.foodrecList.forEach((fav) => {
             this.restaurantService.getMenubyId(fav).subscribe({
               next: (res) => {
-                // console.warn(restaurant);
+                
                 this.foodList.push(res);
-                console.log(this.foodList);
-                // console.warn(this.restaurantList);
               },
               error: (error) => {
                 console.log('Error in fetching restaurant details', error);
@@ -141,7 +130,7 @@ throw new Error('Method not implemented.');
   addIteminCart(menuId: string) {
     this.cartService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
-        console.log('Item added to cart successfully!');
+        
         this.snackBar.open('Item added to cart', 'OK', {
           duration: 3000,
         });

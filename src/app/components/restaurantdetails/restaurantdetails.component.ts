@@ -49,16 +49,12 @@ export class RestaurantdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.resId = this.route.snapshot.params['id'];
     this.userId = localStorage.getItem('id');
-    // console.log('line 31');
-    console.log(this.userId);
-    // console.log(this.resId);
 
     this.searchForm = this.fb.group({
       searchQuery: this.fb.control(''),
     });
     this.searchForm.valueChanges.subscribe(() => {
       this.filterProducts();
-      console.log(this.searchForm.value);
     });
 
     this.subscription = this.restaurantService
@@ -67,7 +63,6 @@ export class RestaurantdetailsComponent implements OnInit {
         (response) => {
           this.restaurant = response;
           this.imgSrc = `${this.cloudinaryBaseURL}${this.restaurant.cloudinaryImageId}`;
-          console.log(response);
         },
         (error) => {
           console.log('Error in fetching restaurant details by id', error);
@@ -80,7 +75,6 @@ export class RestaurantdetailsComponent implements OnInit {
         (response) => {
           this.menuList = response;
           this.filtered = response;
-          console.log(response);
         },
         (error) => {
           console.log('Error in fetching menudetails of restaurant', error);
@@ -108,7 +102,6 @@ export class RestaurantdetailsComponent implements OnInit {
   addIteminCart(menuId: string) {
     this.cartService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
-        console.log('Item added to cart successfully!');
         this.snackBar.open('Item added to cart', 'OK', {
           duration: 3000,
         });
@@ -122,7 +115,6 @@ export class RestaurantdetailsComponent implements OnInit {
 
   filterProducts() {
     let query = this.searchForm.get('searchQuery')?.value;
-    console.log(query);
     if (query.length === 0) {
       this.filtered = this.menuList;
     }
@@ -134,7 +126,6 @@ export class RestaurantdetailsComponent implements OnInit {
           item.category.toLowerCase().includes(query.toLowerCase())
         );
       });
-      console.log(this.filtered);
     }
   }
 
@@ -171,7 +162,6 @@ export class RestaurantdetailsComponent implements OnInit {
     this.httpclient.get(apiUrl).subscribe(
       (response: any[]) => {
         this.reviews = response;
-        console.log(this.reviews);
       },
       (error) => {
         console.log(error);

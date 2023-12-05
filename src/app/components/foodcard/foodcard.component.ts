@@ -48,15 +48,13 @@ export class FoodcardComponent {
   ) {}
   ngOnInit() {
     this.userId = localStorage.getItem('id');
-    console.log('Current FOOD ITEM:', this.res);
+    
     this.imgSrc = `${this.cloudinaryBaseURL}${this.res.imageId}`;
   }
   addIteminCart(menuId: string) {
-    // console.log(menuId);
-    // console.log(this.userId);
+    
     this.cartService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
-        console.log('Item added to cart successfully!');
         this.snackBar.open('Item added to cart', 'OK', {
           duration: 3000,
         });

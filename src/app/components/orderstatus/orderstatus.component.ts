@@ -68,11 +68,9 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
           }
           this.cartService.deleteCart(this.userId).subscribe({
             next: (response) => {
-              console.log(response);
 
               this.cartService.createCart(this.userId).subscribe({
                 next: (newcart) => {
-                  console.log('New Cart created: ', newcart);
                   this.cart = newcart;
                   this.cartId = this.cart.id;
                   localStorage.setItem('cartId', this.cartId);

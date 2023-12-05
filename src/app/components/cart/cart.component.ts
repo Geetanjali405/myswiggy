@@ -20,7 +20,6 @@ import { Menu } from 'src/shared/model/menu';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-
   Razorpay: any;
   subscription: Subscription;
   cart: Cart;
@@ -32,7 +31,7 @@ export class CartComponent implements OnInit {
   orderStatusInterval = null;
   menu: Menu;
   rou = null;
-  public link: string = 'Order from swiggy now!!'
+  public link: string = 'Order from swiggy now!!';
   itemNames: string[] = [];
   constructor(
     private router: Router,
@@ -63,8 +62,6 @@ export class CartComponent implements OnInit {
         for (let itemId in this.cart.items) {
           this.getItembyId(itemId);
         }
-        console.log(this.cart.items);
-        console.log(this.cart);
       },
       error: (error) => {
         console.error('Error fetching cart: ', error);
@@ -80,7 +77,6 @@ export class CartComponent implements OnInit {
   removeItem(menuId: string) {
     this.cartService.removeItem(this.userId, menuId).subscribe({
       next: (cart) => {
-        // console.log('Removed item from cart');
         this.snackBar.open('Item removed from cart', 'OK');
         this.cart = cart;
         this.populateCart();
@@ -100,23 +96,17 @@ export class CartComponent implements OnInit {
   increaseItem(menuId: string) {
     this.cartService.addItemToCart(this.userId, menuId).subscribe({
       next: (data) => {
-        console.log('Item increased by 1 successfully!');
         this.snackBar.open('Cart Updated', 'OK', {
           duration: 3000,
         });
         this.cartService.addtofood(this.userId, menuId).subscribe({
           next: (data) => {
-            console.log(data);
-            console.log('Item added to order his');
             this.populateCart();
           },
           error: (error) => {
-            console.log(error);
             console.error('Error : ' + error);
           },
         });
-        
-    
       },
       error: (error) => {
         console.error('Error while increasing item in cart: ' + error);
@@ -126,9 +116,7 @@ export class CartComponent implements OnInit {
 
   addtofood(menuId: string) {
     this.cartService.addtofood(this.userId, menuId).subscribe({
-      next: (data) => {
-        console.log('Item added to order his');
-      },
+      next: (data) => {},
       error: (error) => {
         console.error('Error : ' + error);
       },
@@ -142,7 +130,6 @@ export class CartComponent implements OnInit {
   decreaseItem(menuId: string) {
     this.cartService.decreaseItem(this.userId, menuId).subscribe(
       (data) => {
-        console.log('Item decresed by 1 successfully!');
         this.snackBar.open('Cart Updated', 'OK', {
           duration: 3000,
         });
@@ -165,7 +152,6 @@ export class CartComponent implements OnInit {
         this.rou = setTimeout(() => {
           this.router.navigate(['/orderstatuscomp']);
         }, 20000);
-        console.log(res);
       },
       error: (er) => {
         console.warn(er);
@@ -176,7 +162,6 @@ export class CartComponent implements OnInit {
       key: 'pk_test_51O0D4kSGOSBMEK547xBZt1fmSQFw9w3r0YRpCrtCxvvA1vYrDyqnwlfUcFYDIzxpoLIpJChr7qrxdcSSnSRcoVrR00iOqeCNAt',
       locale: 'auto',
       token: function (stripeToken: any) {
-        console.log(stripeToken);
         // alert('Stripe token generated!');
       },
     });
@@ -196,10 +181,7 @@ export class CartComponent implements OnInit {
         this.paymentHandler = (<any>window).StripeCheckout.configure({
           key: 'pk_test_51H7bbSE2RcKvfXD4DZhu',
           locale: 'auto',
-          token: function (stripeToken: any) {
-            // console.log(stripeToken);
-            // alert('Payment has been successfull!');
-          },
+          token: function (stripeToken: any) {},
         });
       };
       window.document.body.appendChild(script);
@@ -216,7 +198,6 @@ export class CartComponent implements OnInit {
     console.warn('inside get order status');
     this.userService.getOrderStatuss(this.cartId).subscribe({
       next: (response) => {
-        // console.log(response.body);
         this.status = response;
         this.statusorder = response;
         if (this.status === 'Order Placed') {

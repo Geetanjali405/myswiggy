@@ -103,7 +103,7 @@ export class CartService {
   }
 
   addtofood(id: string, foodid: string): Observable<any> {
-    console.log(`${baseURL}/addtofood/${id}/${foodid}`);
+
     const headers = new HttpHeaders().set('Response-Type', 'text/plain');
     return this.httpclient.post<any>(
       `${baseURL}/addfood/${id}/${foodid}`,

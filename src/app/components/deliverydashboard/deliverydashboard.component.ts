@@ -59,7 +59,7 @@ export class DeliverydashboardComponent implements OnInit {
       const key = keys[i];
       paginatedDelivery[key] = this.delivery.orderIdAndStatus[key];
     }
-    console.log(paginatedDelivery);
+  
     this.paginatedDelivery = paginatedDelivery;
     this.pageLength = Math.ceil(totalOrders / this.pageSize);
     this.totalOrders = totalOrders;
@@ -72,9 +72,11 @@ export class DeliverydashboardComponent implements OnInit {
   }
 
   showUpdateStatusPopup(orderId: any) {
+    // var userId =JSON.parse(localStorage.getItem('user')).id
+    // alert(userId)
     this.userService.updateStatusofOrder(orderId).subscribe({
       next: (delivery) => {
-        console.log(delivery);
+        
         this.snackBar.open('Order status updated successfully!', 'OK', {
           duration: 3000,
         });
@@ -113,7 +115,7 @@ export class DeliverydashboardComponent implements OnInit {
   rejectOrder(orderId: any) {
     this.userService.rejectorder(orderId).subscribe({
       next: (delivery) => {
-        console.log(delivery);
+        
         this.snackBar.open('Order rejected successfully!', 'OK', {
           duration: 3000,
         });

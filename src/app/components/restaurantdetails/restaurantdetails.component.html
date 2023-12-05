@@ -82,7 +82,7 @@
 
                                 <h2 style="color: #fc8019; font-size: 24px; font-weight: 600; margin: 20px;">
                                         Customer Reviews</h2>
-                                <div *ngIf="reviews.length > 0; else noReviews">
+                                <div *ngIf="reviews.length > 0; else noReviews" class="scrollable-content">
                                         <div *ngFor="let review of reviews">
                                                 <div class="review-card">
                                                         <h5>by Anonymous</h5>
@@ -90,7 +90,10 @@
                                                                 "{{review.comment}}"
                                                         </div>
                                                         <div class="review-rating">
-                                                                Rating: {{review.rating}}/5
+                                                                <p-rating [(ngModel)]="review.rating" [cancel]="false"
+                                                                        style="color: rgb(255,190,61);"></p-rating>
+
+
                                                         </div>
                                                 </div>
                                         </div>

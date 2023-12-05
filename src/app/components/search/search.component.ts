@@ -83,7 +83,6 @@ export class SearchComponent {
     this.subscription = this.restaurantService.getMenuDetails().subscribe(
       (response) => {
         this.menuList = response;
-        console.log(response);
       },
       (error) => {
         console.log('Error in fetching menu details', error);
@@ -92,7 +91,6 @@ export class SearchComponent {
     this.subres = this.restaurantService.getRestrauntDetails().subscribe(
       (response) => {
         this.restraunts = response;
-        console.log(response);
       },
       (error) => {
         console.log('Error in fetching restaurant details', error);
@@ -103,13 +101,11 @@ export class SearchComponent {
     });
     this.searchForm.valueChanges.subscribe(() => {
       this.filterProducts();
-      console.log(this.searchForm.value);
     });
   }
 
   filterProducts() {
     let query = this.searchForm.get('searchQuery')?.value;
-    console.log(query);
     if (query.length === 0) {
       this.filteredProducts = [];
       this.filteredRestaurants = [];
@@ -121,20 +117,15 @@ export class SearchComponent {
           item.category.toLowerCase().includes(query.toLowerCase())
         );
       });
-      console.log(this.filteredProducts);
   
       this.filteredRestaurants = this.restraunts.filter((restaurant) =>
         restaurant.name.toLowerCase().includes(query.toLowerCase())
       );
-
-      console.log(this.filteredRestaurants);
   
-      // If no menu items match the query, show restaurants that match
       if (this.filteredProducts.length === 0) {
         this.filteredRestaurants = this.restraunts.filter((restaurant) =>
           restaurant.name.toLowerCase().includes(query.toLowerCase())
         );
-        console.log(this.filteredRestaurants);
       }
     }
   }
