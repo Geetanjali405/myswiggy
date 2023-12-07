@@ -10,12 +10,16 @@
                 </div>
 
                 <br>
-                <h2>Our Restaurant Chains</h2>
-                <select [(ngModel)]="selLoc">
-                        <option [value]="'Bangalore'">Bangalore</option>
-                        <option [value]="'Hyderabad'" selected>Hyderabad</option>
-                        <option [value]="'Patna'">Patna</option>
-                </select>
+                <div style="display: flex; align-items: center;">
+                        <h2 style="color: #333; font-family: Arial, sans-serif; margin-right: 20px;">Our Restaurant Chains:</h2>
+                        <select [(ngModel)]="selLoc" style="padding: 10px; font-size: 16px;margin-top:-5px">
+                            <option [value]="'Bangalore'">Bangalore</option>
+                            <option [value]="'Hyderabad'" selected>Hyderabad</option>
+                            <option [value]="'Patna'">Patna</option>
+                        </select>
+                    </div>
+                    
+                    
 
                 <div *ngIf="selLoc === 'Bangalore'">
                         <!-- Display Bangalore restaurants -->

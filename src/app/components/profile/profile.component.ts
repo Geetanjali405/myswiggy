@@ -25,14 +25,14 @@ import { UserService } from 'src/shared/services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-addToCart(_t30: any) {
-throw new Error('Method not implemented.');
-}
+  addToCart(_t30: any) {
+    throw new Error('Method not implemented.');
+  }
   // orderChart: Chart;
   constructor(
     private userService: UserService,
     private cartService: CartService,
-    private restaurantService:RestaurantService,
+    private restaurantService: RestaurantService,
     private router: Router,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
@@ -52,7 +52,7 @@ throw new Error('Method not implemented.');
   foodrecList: string[];
   id: string;
   foodList = [];
-  public link: string = 'Swiggy is the best food delivery app available !!'
+  public link: string = 'Swiggy is the best food delivery app available !!';
 
   ngOnInit(): void {
     this.email = localStorage.getItem('email');
@@ -61,7 +61,6 @@ throw new Error('Method not implemented.');
     const userString = localStorage.getItem('user');
     this.userData = JSON.parse(userString);
     this.userId = localStorage.getItem('id');
-
 
     this.populatedelivery();
     this.getFav(this.userId);
@@ -101,14 +100,13 @@ throw new Error('Method not implemented.');
   }
 
   getFav(id: string) {
-    if(id) {
+    if (id) {
       this.userService.getrecFood(id).subscribe({
         next: (response) => {
           this.foodrecList = response;
           this.foodrecList.forEach((fav) => {
             this.restaurantService.getMenubyId(fav).subscribe({
               next: (res) => {
-                
                 this.foodList.push(res);
               },
               error: (error) => {
@@ -116,25 +114,20 @@ throw new Error('Method not implemented.');
               },
             });
           });
-        
         },
         error: (error) => {
           console.log('Error in fetching food rec details', error);
-          
         },
       });
     }
-  
   }
 
   addIteminCart(menuId: string) {
     this.cartService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
-        
         this.snackBar.open('Item added to cart', 'OK', {
           duration: 3000,
         });
-        
       },
       (error) => {
         console.error('Error while adding item to cart: ');
@@ -142,7 +135,6 @@ throw new Error('Method not implemented.');
       }
     );
   }
- 
 
   displayOrderChart() {
     const documentStyle = getComputedStyle(document.documentElement);
@@ -151,7 +143,6 @@ throw new Error('Method not implemented.');
       '--text-color-secondary'
     );
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-   
 
     this.basicData = {
       labels: ['Delivered', 'Rejected'],
@@ -223,19 +214,17 @@ throw new Error('Method not implemented.');
       ],
     };
 
-
     this.basicOptionss = {
-        cutout: '60%',
-        plugins: {
-            legend: {
-                labels: {
-                    color: textColor
-                }
-            }
-        }
+      cutout: '60%',
+      plugins: {
+        legend: {
+          labels: {
+            color: textColor,
+          },
+        },
+      },
     };
-}
-  
+  }
 
   confirm(event: Event) {
     this.confirmationService.confirm({
@@ -264,6 +253,6 @@ throw new Error('Method not implemented.');
 
   logout() {
     localStorage.clear();
-    // this.router.navigate(['/login']);
+    this.router.navigate(['/mainhome']);
   }
 }

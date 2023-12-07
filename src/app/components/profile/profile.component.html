@@ -1,35 +1,37 @@
-<div>
+<div class="propro">
         <app-nav></app-nav>
-        <h1 style="margin-top: 80px;margin-left: 30px; "><b>Hey, {{userData.userName}} !!</b></h1>
+        <h1 style="margin-top: 80px;margin-left: 30px;color:black "><b>Hey , {{userData.userName}} !</b></h1>
         <div style=" display: flex;">
 
 
-                <div class="deluser" *ngIf="userData.userType==='Delivery'">
-                        <div class="container">
-                                <p><i>All the delivery users nearby:</i></p>
+                <div class="card" style="margin-top: 50px;" *ngIf="userData.userType==='Delivery'">
+                        <!-- <div class="container">
+                                <p><i>All the delivery executives nearby:</i></p>
                                 <ul>
                                         <li *ngFor="let user of users">
                                                 <ul>
-                                                        <li><strong>User Name:</strong> {{ user.userName }}</li>
-                                                        <li><strong>Email:</strong> {{ user.email }}</li>
+                                                        <li><strong><i>Name:</i></strong> {{ user.userName }}</li>
+                                                        <li><strong><i>Email:</i></strong> {{ user.email }}</li>
 
                                                 </ul>
                                                 <br>
 
                                         </li>
                                 </ul>
-                        </div>
+                        </div> -->
+                        <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+                        <p-chart type="doughnut" [data]="basicData" [options]="basicOptions"></p-chart>
+
                 </div>
                 <div class="detcustomer" *ngIf="userData.userType==='Customer' ">
-                        <h1 *ngIf="foodList" style="margin-left:20px">Order these again ?</h1>
-                        <div class="container" style="width:300px">
-                                <div class="row">
+                        <h1 *ngIf="foodList" style="margin-left:20px"><b>Order these again ?</b></h1>
+                        <div class="container" style="width:300px;height: 300px; overflow-y:  overlay;">
+                                <div class="row" *ngIf="foodList && foodList.length > 0">
                                         <div class="row-md-4 mb-1" *ngFor="let food of foodList">
                                                 <div class="card mb-2 shadow-sm" style="padding: 5px;">
                                                         <div class="card-body">
                                                                 <h5 class="card-title"><b>{{ food.name }}</b></h5>
-                                                                <h5></h5>
-                                                                <!--<p class="card-text">{{ food.description }}</p>-->
+
                                                                 <div
                                                                         class="d-flex justify-content-between align-items-center">
                                                                         <div class="btn-group">
@@ -45,16 +47,25 @@
                                                 </div>
                                         </div>
                                 </div>
+                                <div class="row" *ngIf="foodList || foodList.length === 0">
+                                        <img src="https://b.zmtcdn.com/webFrontend/96a9a259cfa3dd8e260d65d1f135ab941581004545.png"
+                                                style="max-width: 180px;max-height: 200px;margin-left: 30px;margin-top:30px;">
+                                </div>
                         </div>
                 </div>
                 <div class="profile">
-                        <div class="pro">
+                       
+                                <div class=" text-align: center;">
+                                        <img src="https://b.zmtcdn.com/web/assets/2267aec184e096c98c46a1565a5563661664945464.png?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A"
+                                                style="border-radius: 50%; width: 100px; height: 100px;margin-left: 210px;"><br>
+                                </div>
+                                <div class="pro" style="margin-top: 10px;">
                                 <ul>
                                         <!-- <li><span>User ID:</span> {{ userData.id }}</li> -->
-                                        <li><span>User Name:</span> {{ userData.userName }}</li>
+                                        <li><span>Name:</span> {{ userData.userName }}</li>
                                         <li><span>Email:</span> {{ userData.email }}</li>
                                         <!-- <li><span>Phone Number:</span>9798733349</li> -->
-                                        <li><span>User Type:</span> {{ userData.userType }}</li>
+                                        <li><span>Signed in as </span> {{ userData.userType }}</li>
 
                                 </ul>
                         </div>
@@ -63,16 +74,16 @@
                         <p-confirmPopup></p-confirmPopup>
                         <button pButton pRipple type="button" class="des" label="Log out"
                                 class="p-button-rounded p-button-danger pt-3 ps-3 pe-3 pb-3"
-                                style="margin-left: 220px;max-height: 300px;" (click)="confirm($event)"></button>
+                                style="margin-left: 220px;max-height: 300px;" (click)="logout()"></button>
 
 
 
 
                 </div>
-                <div class="card" style="margin-top: 50px;" *ngIf="this.userData.userType==='Delivery'">
+                <!-- <div class="card" style="margin-top: 50px;" *ngIf="this.userData.userType==='Delivery'">
                         <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
                         <p-chart type="doughnut" [data]="basicData" [options]="basicOptions"></p-chart>
-                </div>
+                </div> -->
 
         </div>
 

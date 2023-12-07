@@ -20,12 +20,12 @@
                                         <td>{{orderIdStatus.key}}</td>
                                         <td>{{orderIdStatus.value}}</td>
                                         <td>  <button (click)="showUpdateStatusPopup(orderIdStatus.key)" style="margin-left: 140px;border-radius: 12px;">
-                                                {{ (orderIdStatus.value === 'Order Placed') ? 'Processing' : (orderIdStatus.value === 'Processing') ? 'Accept Order' : (orderIdStatus.value === 'Accepted') ? 'Im on my way' : (orderIdStatus.value === 'Order Rejected') ? 'Order Rejected' : 'Order Delivered' }}
+                                                {{ (orderIdStatus.value === 'Placed') ? 'Processing' : (orderIdStatus.value === 'Processing') ? 'Accept Order' : (orderIdStatus.value === 'Accepted') ? 'Im on my way' : (orderIdStatus.value === 'Order Rejected') ? 'Order Rejected' : 'Order Delivered' }}
                                               </button>
                                                 <p-toast></p-toast>
                                                 <p-confirmPopup></p-confirmPopup>
                                                 <button (click)="confirm($event , orderIdStatus.key)"
-                                                        style="margin-left: 140px;border-radius: 12px;" *ngIf="orderIdStatus.value === 'Order Placed'" >REJECT</button>
+                                                        style="margin-left: 140px;border-radius: 12px;" *ngIf="orderIdStatus.value === 'Placed'" >REJECT</button>
                                         </td>
                                 </tr>
                         </tbody>

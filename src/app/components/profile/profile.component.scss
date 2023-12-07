@@ -5,6 +5,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow: hidden;
+   
+}
+.propro{
+    overflow: hidden;
+}
+html,
+body{
+    overflow: hidden;
 }
 
 .profile {
@@ -86,6 +95,30 @@ li strong {
 .spa{
     padding: 4px;
 }
+
+.scrollable-content {
+    max-height: 550px; 
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
 
 /* Responsive styles */
 @media (max-width: 768px) {

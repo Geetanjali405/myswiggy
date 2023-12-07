@@ -5,5 +5,6 @@ export interface Cart {
   items: Map<string, number>;
   deliveryAddress: string;
   total: number;
+  noofItems: number;
   orderPlaced: boolean;
 }

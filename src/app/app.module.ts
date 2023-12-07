@@ -50,7 +50,8 @@ import { OffersComponent } from './components/offers/offers.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { ShareComponent } from './components/share/share.component';
 
-import {RatingModule} from 'primeng/rating';
+import { RatingModule } from 'primeng/rating';
+import {BadgeModule} from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import {RatingModule} from 'primeng/rating';
     ChartModule,
     GMapModule,
     GoogleMapsModule,
-    RatingModule
+    RatingModule,
+    BadgeModule
     
   ],
    providers: [ConfirmationService,MessageService],

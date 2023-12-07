@@ -19,6 +19,10 @@
                                                 <h4>Thankyou for saying Thankyou to our delivery partner !!</h4>
                                                 
                                         </div>
+                                        <div *ngIf="status === 'placed'">
+                                                <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-confirm-order-icon-png-image_4959969.png">
+
+                                        </div>
                                         <ng-template #showLoader>
 
                                                 <div class="flex row spin">

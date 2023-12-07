@@ -11,6 +11,7 @@ import { User } from 'src/shared/model/user';
 import { UserService } from 'src/shared/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from 'src/shared/services/cart.service';
+import { Cart } from 'src/shared/model/cart';
 
 @Component({
   selector: 'app-mainhome',
@@ -23,6 +24,8 @@ export class MainhomeComponent implements OnInit {
   user = new User();
   userInfo: User;
   userId: string;
+  cartId: string;
+  activeCart: Cart;
   delId: string;
   visible: boolean = false;
   selectedLocation: string = '';
@@ -78,6 +81,7 @@ export class MainhomeComponent implements OnInit {
       userType: formValue.userType, 
       firstTimeUser: false,
       favouriteRestaurants: [],
+      // offers:[],
     };
     this.user = newUser;
     
@@ -109,7 +113,13 @@ export class MainhomeComponent implements OnInit {
           this.userId = localStorage.getItem('id');
           this.cartService.createCart(this.userId).subscribe(
             (cart) => {
+              this.activeCart = cart;
+              // const cartString = JSON.stringify(cart);
+              // localStorage.setItem('cart', cartString);
+              this.cartId = this.activeCart.id;
+              localStorage.setItem('cartId', this.cartId);
               console.log('Cart created: ', cart);
+            
             },
             (error) => {
               console.error('Error creating cart: ', error);

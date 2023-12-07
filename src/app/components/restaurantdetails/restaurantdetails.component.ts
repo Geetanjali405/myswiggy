@@ -10,6 +10,8 @@ import { RestaurantService } from 'src/shared/services/restaurant.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
+import { Cart } from 'src/shared/model/cart';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-restaurantdetails',
@@ -27,28 +29,30 @@ export class RestaurantdetailsComponent implements OnInit {
   imageSrc: string;
 
   cloudinaryBaseURL =
-    'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/';
+    'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/';
   imgSrc: string;
   layout: string = 'list';
   searchForm: FormGroup;
   reviewText = '';
   rating = '';
   reviews: any[];
+  cart: Cart;
+  cartId: string;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private userService: UserService,
     private cartService: CartService,
     private restaurantService: RestaurantService,
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
+    private location: Location,
     private offcanvasService: NgbOffcanvas,
     private httpclient: HttpClient
   ) {}
   ngOnInit(): void {
     this.resId = this.route.snapshot.params['id'];
     this.userId = localStorage.getItem('id');
+    this.getcartid();
 
     this.searchForm = this.fb.group({
       searchQuery: this.fb.control(''),
@@ -88,6 +92,23 @@ export class RestaurantdetailsComponent implements OnInit {
     });
   }
 
+  // refreshPage() {
+  //   window.location.reload();
+  // }
+  decreaseItem(menuId: string) {
+    this.cartService.decreaseItem(this.userId, menuId).subscribe(
+      (data) => {
+        this.snackBar.open('Cart Updated', 'OK', {
+          duration: 3000,
+        });
+        // this.populateCart();
+      },
+      (error) => {
+        console.error('Error while decreasing item in cart: ' + error);
+      }
+    );
+  }
+
   removeFilter() {
     this.filtered = this.menuList;
   }
@@ -99,18 +120,51 @@ export class RestaurantdetailsComponent implements OnInit {
     this.filtered = this.menuList.filter((item) => item.isVeg === '0');
   }
 
+  getcartid() {
+    this.cartService.getCart(this.userId).subscribe((cart) => {
+      this.cart = cart;
+      this.cartId = this.cart.id;
+    });
+  }
+  isItemInCart(itemId: string): boolean {
+    return this.cart.items.has(itemId);
+  }
+  getItemQuantity(itemId: string): number {
+    return this.cart.items.get(itemId) ?? 0;
+  }
+
   addIteminCart(menuId: string) {
     this.cartService.addItemToCart(this.userId, menuId).subscribe(
       (data) => {
         this.snackBar.open('Item added to cart', 'OK', {
           duration: 3000,
         });
+        if (!this.cart.items[menuId]) {
+          this.cart.items[menuId] = 1;
+        } else {
+          this.cart.items[menuId]++;
+        }
+
+        // this.refreshPage();
+        // this.updateBadgeCount(menuId, this.cart.items[menuId], event.target);
       },
       (error) => {
         console.error('Error while adding item to cart: ');
         console.error(error);
       }
     );
+  }
+
+  removeItem(menuId: string) {
+    this.cartService.removeItem(this.userId, menuId).subscribe({
+      next: (cart) => {
+        this.snackBar.open('Item removed from cart', 'OK');
+        this.cart = cart;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   filterProducts() {

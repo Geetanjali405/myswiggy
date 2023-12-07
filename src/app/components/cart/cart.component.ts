@@ -50,6 +50,23 @@ export class CartComponent implements OnInit {
     this.invokeStripe();
   }
 
+  messages: string[] = [
+    'Your cart is as empty as a desert. Time to make it bloom with products!',
+    'Oops! Your cart looks lonely. Let\'s find some friends for it.',
+    'It seems your shopping journey hasnt started yet. Let\'s embark on it together!',
+    'Your cart is an empty canvas. Let\'s paint it with vibrant products!',
+    'Your cart is waiting for a shopping spree. Let\'s fill it up!',
+    'Looks like your cart is on a diet. How about we add some healthy products?',
+    'Your cart is empty, but the world of shopping is vast and full!',
+    'Your cart is currently enjoying a zen moment of emptiness. Time to shake things up!',
+    'Your cart is in hibernation mode. Let\'s wake it up with some cool products!',
+    'Your cart is playing hide and seek, and the products are yet to be found!'
+];
+  getRandomMessage(): string {
+    const randomIndex = Math.floor(Math.random() * this.messages.length);
+    return this.messages[randomIndex];
+}
+
   /**
    * @function populateCart to render cart in DOM
    */

@@ -46,8 +46,8 @@
 }
 
 .restaurant-image img {
-    max-width: 70%;
-    height: auto;
+    max-width: 80%;
+    height: 200px;
     border-radius: 10px;
 }
 
@@ -107,10 +107,10 @@
 }
 
 .img-container .img {
-    margin-top: 190px;
+    margin-top: 210px;
     margin-bottom:30px;
-    width: 70%;
-    max-height: 90px;
+    width: 80%;
+    max-height: 110px;
     border-radius: 10px;
 }
 
@@ -166,6 +166,7 @@
     position: absolute;
     // z-index: 1;
     display: block;
+    // margin-bottom: 30px;
     width: 2rem;
     height: 2rem;
     line-height: 2rem;
@@ -226,4 +227,12 @@
   .scrollable-content {
     max-height: 550px; 
     overflow-y: auto;
+}
+
+.rate{
+  color:gold;
+  color: gold !important;
+}
+body .ui-rating .ui-rating-star-on a {
+  color: yellow;
 }
