@@ -1,19 +1,19 @@
-.main_buttonInner__z6Jz0 {
-        width: 96px!important;
-        height: 36px!important;
-    }
-    .main_button__3gpqi {
-        position: relative;
-        width: 96px;
-        min-height: 36px;
-    }
+
     .card {
-       
+       border-radius: 15px;
         transition: transform 0.2s ease-in-out;
+      }
+      .header{
+        font-size: 12px;
       }
       
       .card:hover {
         transform: translateY(-5px);
         background: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1) 50%, transparent 100%);
         transition: left 0.3s ease-out;
+      }
+      .btn-group{
+        margin-top: 10px;
+        margin-left: 70px;
+        margin-bottom: 0px;
       }

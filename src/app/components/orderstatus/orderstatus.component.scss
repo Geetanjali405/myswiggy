@@ -1,17 +1,20 @@
+    .orderorder{
+        overflow: hidden;
+    }
 .myorderstatus{
         background-image: "https://us.123rf.com/450wm/cosmaa/cosmaa2210/cosmaa221000233/192624410-cartoon-vector-illustration-of-location-map-application-to-deliver-package-goods-man-ride-on.jpg?ver=6";
         background-size: cover;
 }
 .cla {
-    background: linear-gradient(to bottom right, #FF6434, #FF7B2A);
+    background: linear-gradient(to bottom right, #FF6434, rgb(247,152,93));
         color: white;
         font-family: Arial, sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
         // height: 100vh;
-        height:300px;
-        width:1300px;
+        height:280px;
+        width: 1289px;
         text-align: center;
     }
     h1 {
@@ -27,6 +30,7 @@
         align-items: center;
         // height: 100vh;
         height:300px;
-        width:1300px;
+        width:1289px;
         text-align: center;
     }
+

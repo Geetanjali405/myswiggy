@@ -20,6 +20,19 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
   orderStatusInterval = null;
   cart: Cart;
   options: any;
+  messages: string[] = [
+    'Thank you for choosing our service!',
+    "We appreciate your patience.",
+    "Thank you for being a valued customer.",
+    "We hope you enjoy your meal!",
+    "Remember to say thank you to your delivery partner.",
+    "Your feedback helps us improve.",
+    "Thank you for supporting local restaurants.",
+  ];
+  getRandomMessage(): string {
+    const randomIndex = Math.floor(Math.random() * this.messages.length);
+    return this.messages[randomIndex];
+}
 
   overlays: any[];
   constructor(
@@ -38,7 +51,7 @@ export class OrderstatusComponent implements OnInit, OnDestroy {
 
     this.orderStatusInterval = setInterval(() => {
       this.getOrderStatus(this.cartId);
-    }, 6500);
+    }, 7500);
   }
   ngOnDestroy(): void {
     clearInterval(this.orderStatusInterval);

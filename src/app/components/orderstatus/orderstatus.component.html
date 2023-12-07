@@ -1,4 +1,4 @@
-<div>
+<div class="orderorder">
         <app-nav></app-nav>
         <div class="myorderstatus" style="margin-top: 80px;">
 
@@ -12,23 +12,40 @@
                         </ng-template>
                         <ng-template pTemplate>
                                 <div class="p-col p-d-flex p-ai-center p-jc-center">
-                                        <!-- <h1><b><i><u>{{status}}</u></i></b></h1> -->
-                                        <div class="cla flex row " style="padding:-10px" *ngIf="status; else showLoader">
+                                        <div class="cla flex row " style="padding:-10px"
+                                                *ngIf="status; else showLoader">
                                                 <br>
-                                                <h1 style="text-transform: uppercase;">YOUR ORDER IS {{status}} ...</h1>
-                                                <h4>Thankyou for saying Thankyou to our delivery partner !!</h4>
-                                                
-                                        </div>
-                                        <div *ngIf="status === 'placed'">
-                                                <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-confirm-order-icon-png-image_4959969.png">
+                                                <h1 style="text-transform: uppercase;margin-top: 20px;">YOUR ORDER IS
+                                                        {{status}} ...</h1>
+
+                                                <img src="https://uxwing.com/wp-content/themes/uxwing/download/e-commerce-currency-shopping/order-placed-purchased-icon.svg"
+                                                        style="width:200px;height :100px;margin-top: -25px;"
+                                                        *ngIf="status === 'Placed'">
+                                                <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/order-processing-3427753-2876574.png"
+                                                        style="width:200px;height :140px;margin-top: -25px;"
+                                                        *ngIf="status === 'Processing'">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/849/849463.png"
+                                                        style="width:200px;height :140px;margin-top: -25px;"
+                                                        *ngIf="status === 'Accepted'">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/7541/7541900.png"
+                                                        style="width:200px;height :130px;margin-top: -10px;"
+                                                        *ngIf="status === 'On the way'">
+                                                <h4 *ngIf="status === 'Placed'">"Thank you for choosing our service!"
+                                                </h4>
+                                                <h4 *ngIf="status === 'Processing'">"We appreciate your patience."</h4>
+                                                <h4 *ngIf="status === 'Accepted'">"Thank you for supporting local
+                                                        restaurants."</h4>
+                                                <h4 *ngIf="status === 'On the way'">Remember to say thank you to your
+                                                        delivery partner.</h4>
 
                                         </div>
                                         <ng-template #showLoader>
 
                                                 <div class="flex row spin">
                                                         <h5>Share meals,not only memes.</h5>
-                                                        <h5>Feeding India has served 14+ crore meals.Thanks for ordering</h5>
-                                                       
+                                                        <h5>Feeding India has served 14+ crore meals.Thanks for ordering
+                                                        </h5>
+
                                                         <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8"
                                                                 fill="var(--surface-ground)"
                                                                 animationDuration=".5s"></p-progressSpinner>
