@@ -17,24 +17,6 @@
                         </ng-template>
                 </p-carousel>
 
-                <!-- <p-carousel [numVisible]="1" [autoplayInterval]="3000" [responsiveOptions]="[
-                          {
-                            breakpoint: '1024px',
-                            numVisible: 2,
-                            numScroll: 2
-                          },
-                          {
-                            breakpoint: '768px',
-                            numVisible: 1,
-                            numScroll: 1
-                          }
-                        ]">
-                        <ng-template let-image pTemplate="item">
-                                <div class="carousel-image-container">
-                                        <img [src]="image" class="carousel-image" />
-                                </div>
-                        </ng-template>
-                </p-carousel> -->
                 <h2 class="ms-5"><b>{{ userData.userName }}, What's on your mind?</b></h2>
                 <p-carousel [value]="imagess" [numVisible]="6" [numScroll]="3" [circular]="true"
                         [autoplayInterval]="3000">

@@ -190,9 +190,9 @@ export class FavouritesComponent implements OnInit {
         this.favList.forEach((fav) => {
           this.restaurantService.getRestaurantsbyId(fav).subscribe({
             next: (restaurant) => {
-              // console.warn(restaurant);
+              
               this.restaurantList.push(restaurant);
-              // console.warn(this.restaurantList);
+              
             },
             error: (error) => {
               console.log('Error in fetching restaurant details', error);

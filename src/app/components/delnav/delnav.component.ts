@@ -11,7 +11,7 @@ export class DelnavComponent implements OnInit {
   
   userData: User;
   constructor(
-    private userService: UserService
+    
   ) {}
   ngOnInit(): void {
     const userString = localStorage.getItem('user');

@@ -92,16 +92,15 @@ export class RestaurantdetailsComponent implements OnInit {
     });
   }
 
-  // refreshPage() {
-  //   window.location.reload();
-  // }
+
+  
   decreaseItem(menuId: string) {
     this.cartService.decreaseItem(this.userId, menuId).subscribe(
       (data) => {
         this.snackBar.open('Cart Updated', 'OK', {
           duration: 3000,
         });
-        // this.populateCart();
+        
       },
       (error) => {
         console.error('Error while decreasing item in cart: ' + error);
@@ -145,8 +144,7 @@ export class RestaurantdetailsComponent implements OnInit {
           this.cart.items[menuId]++;
         }
 
-        // this.refreshPage();
-        // this.updateBadgeCount(menuId, this.cart.items[menuId], event.target);
+        
       },
       (error) => {
         console.error('Error while adding item to cart: ');
@@ -210,7 +208,7 @@ export class RestaurantdetailsComponent implements OnInit {
   }
 
   getReviews(resId: number) {
-    // const restaurantId = 15680; // replace this with the actual restaurant ID
+    
     const apiUrl = `http://localhost:8080/restaurants/${this.resId}/reviews`;
 
     this.httpclient.get(apiUrl).subscribe(

@@ -66,7 +66,5 @@ export class FoodcardComponent {
     );
   }
 
-  // getRandomImageUrl(): string {
-  //   return this.imageUrls[Math.floor(Math.random() * this.imageUrls.length)];
-  // }
+  
 }

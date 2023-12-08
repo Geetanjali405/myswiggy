@@ -65,9 +65,7 @@ export class ProfileComponent implements OnInit {
     this.populatedelivery();
     this.getFav(this.userId);
   }
-  // ngAfterViewInit() {
-  //   this.displayOrderChart();
-  // }
+  
   populatedelivery() {
     this.userService.getUsers().subscribe({
       next: (res) => {
@@ -239,7 +237,7 @@ export class ProfileComponent implements OnInit {
           summary: 'Confirmed',
           detail: 'You have succesfully logged out',
         });
-        // this.router.navigate(['/mainhome']);
+        
       },
       reject: () => {
         this.messageService.add({
