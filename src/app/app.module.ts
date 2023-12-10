@@ -52,6 +52,7 @@ import { ShareComponent } from './components/share/share.component';
 
 import { RatingModule } from 'primeng/rating';
 import {BadgeModule} from 'primeng/badge';
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import {BadgeModule} from 'primeng/badge';
     GMapModule,
     GoogleMapsModule,
     RatingModule,
-    BadgeModule
+    BadgeModule,
+    TranslocoRootModule
     
   ],
    providers: [ConfirmationService,MessageService],

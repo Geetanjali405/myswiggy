@@ -1,4 +1,1 @@
-export const environment = {
-        baseURL: "http://localhost:8080",
-        production: false
-};
+export const environment = {};
