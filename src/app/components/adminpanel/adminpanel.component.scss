@@ -1,0 +1,81 @@
+.cla{
+        width:100%;
+}
+
+// .container{
+//         // width:90%;
+// }
+
+.button{
+        border-radius: 25px;
+}
+
+
+.delivery-details {
+  background-image: url('https://th.bing.com/th/id/OIP.OIrdAqyYMLNG5dCpx-UIqgHaFj?w=216&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7');
+  background-size: contain; 
+  width: 85%;
+  margin-left:70px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin-bottom: 90px;
+}
+
+.delivery-details h2 {
+  margin-bottom: 20px;
+  color: #fc8019; 
+}
+
+.delivery-details table {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5); 
+  border-collapse: collapse;
+}
+
+.delivery-details th, .delivery-details td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.delivery-details th {
+  background-color:rgb(252,128,25);
+  color: white;
+}
+
+.delivery-details tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.delivery-details tr:hover {
+  background-color: #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delivery-details button {
+  background-color:rgb(252,128,25);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delivery-details button:hover {
+  background-color: rgb(252,128,25);
+}
+
+h1 { font-size: 3em; font-weight: bold; color: #fff; opacity: 0.9; margin-left: 70px; }
+
+b { font-weight: bold; }

@@ -10,6 +10,7 @@ export class User {
   userType: string = '';
   firstTimeUser: Boolean = false;
   favouriteRestaurants: Restaurant[] = [];
+  status: string = '';
 
   constructor() {}
 }

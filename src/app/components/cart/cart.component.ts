@@ -180,6 +180,7 @@ export class CartComponent implements OnInit {
       locale: 'auto',
       token: function (stripeToken: any) {
         // alert('Stripe token generated!');
+        this.router.navigate(['/orderstatuscomp']);
       },
     });
     paymentHandler.open({

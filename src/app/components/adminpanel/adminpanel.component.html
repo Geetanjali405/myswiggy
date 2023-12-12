@@ -1,0 +1,55 @@
+<div>
+        <app-nav></app-nav>
+        <div style="display: flex;margin-top: 100px;margin-left: 20px;">
+                <div>
+                        <h2> ADMIN PANEL</h2>
+
+                        <div class="cla">
+                                <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+                                <p-chart type="doughnut" [data]="basicData" [options]="basicOptions"></p-chart>
+                        </div>
+                </div>
+                <div class="delivery-details" style="width:570px;height: 200px;margin-top:100px">
+                        <table>
+                                <thead>
+                                        <tr>
+                                                <th>User ID</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+                                                <th>Update Delivery User status</th>
+                                                <!-- <th>Reject Delivery User</th> -->
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr *ngFor="let user of paginatedUsers">
+                                                <td>{{user.id}}</td>
+                                                <td>{{user.userName}}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td>{{user.status}}</td>
+                                                <td>
+                                                        <button [disabled]="user.status === 'VERIFIED'"
+                                                                (click)="approve(user.id)" style="margin-right: 20px;">
+                                                                {{ user.status === 'VERIFIED' ? 'Approved' : 'Approve'
+                                                                }}
+                                                        </button>
+                                                        <button *ngIf="user.status !== 'VERIFIED' && user.status !== 'REJECTED'"
+                                                        (click)="reject(user.id)"
+                                                        [disabled]="user.status === 'REJECTED'">
+                                                        {{ user.status === 'REJECTED' ? 'Rejected' : 'Reject' }}
+                                                </button>
+                                                </td>
+                                                <!-- <td>
+                                                     
+                                                </td> -->
+
+                                        </tr>
+                                </tbody>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[2, 5, 10, 25, 50]" [pageSize]="pageSize"
+                                (page)="handlePageChange($event)" [length]="users.length"
+                                showFirstLastButtons></mat-paginator>
+                </div>
+        </div>
+
+</div>

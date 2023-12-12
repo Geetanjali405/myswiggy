@@ -53,6 +53,7 @@ import { ShareComponent } from './components/share/share.component';
 import { RatingModule } from 'primeng/rating';
 import {BadgeModule} from 'primeng/badge';
 import { TranslocoRootModule } from './transloco-root.module';
+import { AdminpanelComponent } from './components/adminpanel/adminpanel.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { TranslocoRootModule } from './transloco-root.module';
     OffersComponent,
     CategoriesComponent,
     ShareComponent,
+    AdminpanelComponent,
   ],
   imports: [
     BrowserModule,

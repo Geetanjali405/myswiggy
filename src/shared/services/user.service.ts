@@ -26,6 +26,8 @@ const addtoorderhis: string = `${baseURL}/usercart`;
 const getfood: string = `${baseURL}/getfoodrec`;
 const getoff: string = `${baseURL}/offer`;
 const getcat: string = `${baseURL}/cat`;
+const approve: string = `${baseURL}/approve`;
+const rejectdel: string = `${baseURL}/reject`;
 
 @Injectable({
   providedIn: 'root',
@@ -77,6 +79,16 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  approve(id: string): Observable<string> {
+    return this.httpclient.put<any>(`${approve}/${id}`, null, this.httpOptions);
+  }
+  reject(id: string): Observable<string> {
+    return this.httpclient.put<any>(
+      `${rejectdel}/${id}`,
+      null,
+      this.httpOptions
+    );
+  }
   getUsers(): Observable<User[]> {
     return this.httpclient
       .get<User[]>(`${getUsersofdel}`)
@@ -190,7 +202,6 @@ export class UserService {
       .get<string[]>(`${getcat}/${id}`)
       .pipe(retry(1), catchError(this.handleError));
   }
-
 
   //handle any error
   handleError(err: any) {

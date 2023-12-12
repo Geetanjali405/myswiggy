@@ -20,7 +20,7 @@
                                         <td>{{orderIdStatus.key}}</td>
                                         <td>{{orderIdStatus.value}}</td>
                                         <td>  <button (click)="showUpdateStatusPopup(orderIdStatus.key)" style="margin-left: 140px;border-radius: 12px;">
-                                                {{ (orderIdStatus.value === 'Placed') ? 'Processing' : (orderIdStatus.value === 'Processing') ? 'Accept Order' : (orderIdStatus.value === 'Accepted') ? 'Im on my way' : (orderIdStatus.value === 'Order Rejected') ? 'Order Rejected' : 'Order Delivered' }}
+                                                {{ (orderIdStatus.value === 'Placed') ? '⏰ Processing' : (orderIdStatus.value === 'Processing') ? '🍴 Accept Order' : (orderIdStatus.value === 'Accepted') ? '⏳ Im on my way' : (orderIdStatus.value === 'Order Rejected') ? '❌ Order Rejected' : '✔ Order Delivered' }}
                                               </button>
                                                 <p-toast></p-toast>
                                                 <p-confirmPopup></p-confirmPopup>

@@ -75,13 +75,10 @@ export class MainhomeComponent implements OnInit {
       password: formValue.password,
       phone: '',
       userAddress: '',
-      // userType: '',
-      // userType: formValue.userType ? 'delivery' : 'customer',
-
       userType: formValue.userType, 
       firstTimeUser: false,
       favouriteRestaurants: [],
-      // offers:[],
+      status: formValue.userType === 'Delivery' ? 'PENDING' : 'APPROVED', 
     };
     this.user = newUser;
     
