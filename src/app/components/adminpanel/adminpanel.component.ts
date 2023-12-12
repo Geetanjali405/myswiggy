@@ -199,7 +199,7 @@ export class AdminpanelComponent implements OnInit {
         console.log('approved');
         this.userService.sendmail(this.dataapprove).subscribe({
           next: (res) => {
-            console.log('mail sent');
+            console.log('mail sent for approval');
           },
           error: (error) => {
             console.error('Error in sending mail: ', error);
@@ -217,7 +217,7 @@ export class AdminpanelComponent implements OnInit {
         console.log('rejected');
         this.userService.sendmail(this.datareject).subscribe({
           next: (res) => {
-            console.log('mail sent');
+            console.log('mail sent for rejection');
           },
           error: (error) => {
             console.error('Error in sending mail: ', error);
