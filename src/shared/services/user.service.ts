@@ -203,6 +203,13 @@ export class UserService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  sendmail(data: any) {
+    return this.httpclient.post(
+      'https://api.emailjs.com/api/v1.0/email/send',
+      data
+    );
+  }
+
   //handle any error
   handleError(err: any) {
     return throwError(() => {

@@ -36,6 +36,18 @@ export class AdminpanelComponent implements OnInit {
   currentPageIndex: number = 0;
   pageLength: number = 0;
 
+  datareject = {
+    service_id: 'service_193f3p1',
+    template_id: 'template_iiavvq6',
+    user_id: 'b3_hKUshfY5bCffOw',
+  };
+
+  dataapprove = {
+    service_id: 'service_193f3p1',
+    template_id: 'template_s8dx13j',
+    user_id: 'b3_hKUshfY5bCffOw',
+  };
+
   ngOnInit(): void {
     this.email = localStorage.getItem('email');
     console.warn('email');
@@ -109,9 +121,8 @@ export class AdminpanelComponent implements OnInit {
             '  rgba(34,139,34,0.2)',
             'rgba(255, 159, 64, 0.2)',
             // 'rgba(75, 192, 192, 0.2)',
-         
           ],
-          borderColor: [ '  rgba(34,139,34,0.2)', 'rgba(255, 159, 64, 0.2)'],
+          borderColor: ['  rgba(34,139,34,0.2)', 'rgba(255, 159, 64, 0.2)'],
           borderWidth: 1,
         },
       ],
@@ -186,7 +197,14 @@ export class AdminpanelComponent implements OnInit {
     this.userService.approve(id).subscribe({
       next: (res) => {
         console.log('approved');
-        
+        this.userService.sendmail(this.dataapprove).subscribe({
+          next: (res) => {
+            console.log('mail sent');
+          },
+          error: (error) => {
+            console.error('Error in sending mail: ', error);
+          },
+        });
       },
       error: (error) => {
         console.error('Error fetching details of delivery users: ', error);
@@ -197,6 +215,14 @@ export class AdminpanelComponent implements OnInit {
     this.userService.reject(id).subscribe({
       next: (res) => {
         console.log('rejected');
+        this.userService.sendmail(this.datareject).subscribe({
+          next: (res) => {
+            console.log('mail sent');
+          },
+          error: (error) => {
+            console.error('Error in sending mail: ', error);
+          },
+        });
       },
       error: (error) => {
         console.error('Error fetching details of delivery users: ', error);
