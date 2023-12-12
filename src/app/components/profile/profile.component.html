@@ -5,20 +5,6 @@
 
 
                 <div class="card" style="margin-top: 50px;" *ngIf="userData.userType==='Delivery'">
-                        <!-- <div class="container">
-                                <p><i>All the delivery executives nearby:</i></p>
-                                <ul>
-                                        <li *ngFor="let user of users">
-                                                <ul>
-                                                        <li><strong><i>Name:</i></strong> {{ user.userName }}</li>
-                                                        <li><strong><i>Email:</i></strong> {{ user.email }}</li>
-
-                                                </ul>
-                                                <br>
-
-                                        </li>
-                                </ul>
-                        </div> -->
                         <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
                         <p-chart type="doughnut" [data]="basicData" [options]="basicOptions"></p-chart>
 
@@ -54,19 +40,27 @@
                         </div>
                 </div>
                 <div class="profile">
-                       
-                                <div class=" text-align: center;">
-                                        <img src="https://b.zmtcdn.com/web/assets/2267aec184e096c98c46a1565a5563661664945464.png?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A"
-                                                style="border-radius: 50%; width: 100px; height: 100px;margin-left: 210px;"><br>
-                                </div>
-                                <div class="pro" style="margin-top: 10px;">
+
+                        <div class=" text-align: center;">
+                                <img src="https://b.zmtcdn.com/web/assets/2267aec184e096c98c46a1565a5563661664945464.png?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A"
+                                        style="border-radius: 50%; width: 100px; height: 100px;margin-left: 210px;"><br>
+                        </div>
+                        <div class="pro" style="margin-top: 10px;">
                                 <ul>
-                                        
+
                                         <li><span>Name:</span> {{ userData.userName }}</li>
                                         <li><span>Email:</span> {{ userData.email }}</li>
-                                        
-                                        <li><span>Signed in as </span> {{ userData.userType }}</li>
 
+                                        <li><span>Signed in as </span> {{ userData.userType }}</li>
+                                        <li *ngIf=" status; else showLoader">
+                                                <span>Status</span>
+                                                <span [ngStyle]="{
+    'color': status === 'APPROVED' ? 'green' :
+    status === 'VERIFIED' ? 'green' :
+             status === 'REJECTED' ? 'red' :
+             status === 'PENDING' ? 'orange' : ''
+  }">{{ status }}</span>
+                                        </li>
                                 </ul>
                         </div>
 
@@ -75,16 +69,13 @@
                         <button pButton pRipple type="button" class="des" label="Log out"
                                 class="p-button-rounded p-button-danger pt-3 ps-3 pe-3 pb-3"
                                 style="margin-left: 220px;max-height: 300px;" (click)="logout()"></button>
-
-
-
-
                 </div>
-                <!-- <div class="card" style="margin-top: 50px;" *ngIf="this.userData.userType==='Delivery'">
-                        <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
-                        <p-chart type="doughnut" [data]="basicData" [options]="basicOptions"></p-chart>
-                </div> -->
+                <ng-template #showLoader>
+                        <div class="flex row spin">
+                                <p-progressSpinner styleClass="w-1rem h-1rem margin-left-20px" strokeWidth="2"
+                                        fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+                        </div>
 
+                </ng-template>
         </div>
-
 </div>

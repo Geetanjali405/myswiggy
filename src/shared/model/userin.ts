@@ -8,4 +8,6 @@ export interface Userin {
   userType: string;
   firstTimeUser: Boolean;
   favouriteRestaurants: string[];
+  status: string;
+  emailVer: string;
 }

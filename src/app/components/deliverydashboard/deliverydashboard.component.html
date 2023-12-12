@@ -12,16 +12,17 @@
                                 <tr>
                                         <th>Order ID</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th  *ngIf="status==='VERIFIED' ">Action</th>
                                 </tr>
                         </thead>
                         <tbody>
                                 <tr *ngFor="let orderIdStatus of paginatedDelivery | keyvalue">
                                         <td>{{orderIdStatus.key}}</td>
                                         <td>{{orderIdStatus.value}}</td>
-                                        <td>  <button (click)="showUpdateStatusPopup(orderIdStatus.key)" style="margin-left: 140px;border-radius: 12px;">
+                                        <td *ngIf="status==='VERIFIED'"> 
+                                                <button (click)="showUpdateStatusPopup(orderIdStatus.key)" style="margin-left: 140px;border-radius: 12px;">
                                                 {{ (orderIdStatus.value === 'Placed') ? '⏰ Processing' : (orderIdStatus.value === 'Processing') ? '🍴 Accept Order' : (orderIdStatus.value === 'Accepted') ? '⏳ Im on my way' : (orderIdStatus.value === 'Order Rejected') ? '❌ Order Rejected' : '✔ Order Delivered' }}
-                                              </button>
+                                                </button>
                                                 <p-toast></p-toast>
                                                 <p-confirmPopup></p-confirmPopup>
                                                 <button (click)="confirm($event , orderIdStatus.key)"

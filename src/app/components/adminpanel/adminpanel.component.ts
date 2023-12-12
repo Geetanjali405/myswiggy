@@ -17,7 +17,7 @@ import { UserService } from 'src/shared/services/user.service';
 export class AdminpanelComponent implements OnInit {
   // orderChart: Chart;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router,private snackbar:MatSnackBar) {}
   userId: string;
   userData: User;
   email: string;
@@ -60,7 +60,7 @@ export class AdminpanelComponent implements OnInit {
   populatedelivery() {
     this.userService.getUsers().subscribe({
       next: (res) => {
-        this.users = res;
+        this.users = res.reverse();
         console.log(this.users);
         this.pageLength = this.users.length; // Store the length of the data
         this.paginateUsers(this.currentPageIndex, this.pageSize);
@@ -199,6 +199,9 @@ export class AdminpanelComponent implements OnInit {
         console.log('approved');
         this.userService.sendmail(this.dataapprove).subscribe({
           next: (res) => {
+            this.snackbar.open('User is approved !!', 'OK', {
+              duration: 3000,
+            });
             console.log('mail sent for approval');
           },
           error: (error) => {
@@ -217,6 +220,9 @@ export class AdminpanelComponent implements OnInit {
         console.log('rejected');
         this.userService.sendmail(this.datareject).subscribe({
           next: (res) => {
+            this.snackbar.open('User is rejected', 'OK', {
+              duration: 3000,
+            });
             console.log('mail sent for rejection');
           },
           error: (error) => {

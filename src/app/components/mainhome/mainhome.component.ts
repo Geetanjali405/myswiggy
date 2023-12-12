@@ -79,6 +79,7 @@ export class MainhomeComponent implements OnInit {
       firstTimeUser: false,
       favouriteRestaurants: [],
       status: formValue.userType === 'Delivery' ? 'PENDING' : 'APPROVED', 
+      emailVer: formValue.userType === 'Delivery' ? 'PENDING' : 'APPROVED', 
     };
     this.user = newUser;
     
@@ -129,7 +130,10 @@ export class MainhomeComponent implements OnInit {
             console.warn(this.delId);
 
             this.router.navigate(['/deliverydashboard']);
-          } else {
+          } else if(this.userInfo.userType === 'Admin'){
+            this.router.navigate(['/admin']);
+          }
+          else {
             this.router.navigate(['/dashboard']);
           }
         }

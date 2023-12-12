@@ -180,13 +180,15 @@ export class CartComponent implements OnInit {
       locale: 'auto',
       token: function (stripeToken: any) {
         // alert('Stripe token generated!');
-        this.router.navigate(['/orderstatuscomp']);
+        // this.router.navigate(['/orderstatuscomp']);
       },
     });
     paymentHandler.open({
       name: 'MySwiggy',
       description: 'Eat good💗',
       amount: amount * 100,
+      currency:'inr'
+      
     });
   }
   invokeStripe() {

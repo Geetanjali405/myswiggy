@@ -1,7 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
+import { ProgressSpinner } from 'primeng/progressspinner';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 // import {
 //   ConfirmationService,
 //   MessageService,
@@ -25,9 +26,7 @@ import { UserService } from 'src/shared/services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  addToCart(_t30: any) {
-    throw new Error('Method not implemented.');
-  }
+
   // orderChart: Chart;
   constructor(
     private userService: UserService,
@@ -52,20 +51,52 @@ export class ProfileComponent implements OnInit {
   foodrecList: string[];
   id: string;
   foodList = [];
+  statusint: any;
+  status: string;
   public link: string = 'Swiggy is the best food delivery app available !!';
 
   ngOnInit(): void {
     this.email = localStorage.getItem('email');
     console.warn('email');
 
-    const userString = localStorage.getItem('user');
-    this.userData = JSON.parse(userString);
     this.userId = localStorage.getItem('id');
-
+    // this.getUser(this.userId);
+  const userString = localStorage.getItem('user');
+    this.userData = JSON.parse(userString);
     this.populatedelivery();
     this.getFav(this.userId);
+    this.statusint = setInterval(() => {
+      this.getinfo(this.userId);
+    }, 2000);
   }
-  
+  ngOnDestroy(): void {
+    clearInterval(this.statusint);
+  }
+  getinfo(userId: string) {
+    this.userService.getuserstatus(userId).subscribe({
+      next: (res) => {
+        this.status = res;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+
+    })
+  }
+
+  getUser(id: string) {
+    this.userService.getUserById(id).subscribe({
+      next: (res) => {
+        this.userData = res;
+        console.log(this.userData);
+        console.log(this.userData.email);
+      },
+      error: (error) => {
+        console.error('Error fetching details of user: ', error);
+      },
+    });
+  }
+
   populatedelivery() {
     this.userService.getUsers().subscribe({
       next: (res) => {
@@ -237,7 +268,6 @@ export class ProfileComponent implements OnInit {
           summary: 'Confirmed',
           detail: 'You have succesfully logged out',
         });
-        
       },
       reject: () => {
         this.messageService.add({
@@ -252,5 +282,21 @@ export class ProfileComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.router.navigate(['/mainhome']);
+  }
+  otp: number;
+  emailStatus: string = 'UNVERIFIED';
+
+  verifyEmail() {
+    if (this.otp === 975345) {
+      this.emailStatus = 'VERIFIED';
+      this.snackBar.open('EMAIL ID VERIFIED', 'OK', {
+        duration: 3000,
+      });
+    } else {
+      this.emailStatus = 'UNVERIFIED';
+      this.snackBar.open('WRONG OTP', 'TRY AGAIN', {
+        duration: 3000,
+      });
+    }
   }
 }

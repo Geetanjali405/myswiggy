@@ -10,6 +10,7 @@ import {
 
 import { User } from '../model/user';
 import { DeliveryData } from '../model/delivery';
+import { Userin } from '../model/userin';
 
 const baseURL = 'http://localhost:8080';
 const signUpEndPoint: string = `${baseURL}/signup`;
@@ -28,6 +29,8 @@ const getoff: string = `${baseURL}/offer`;
 const getcat: string = `${baseURL}/cat`;
 const approve: string = `${baseURL}/approve`;
 const rejectdel: string = `${baseURL}/reject`;
+const getuserapprovalstatus: string = `${baseURL}/status`;
+const getuseremailstatus: string = `${baseURL}/emailveri`;
 
 @Injectable({
   providedIn: 'root',
@@ -208,6 +211,18 @@ export class UserService {
       'https://api.emailjs.com/api/v1.0/email/send',
       data
     );
+  }
+
+  getuserstatus(userId: string): Observable<string> {
+    return this.httpclient
+      .get<string>(`${getuserapprovalstatus}/${userId}`, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getemailverstatus(userId: string): Observable<string> {
+    return this.httpclient
+      .get<string>(`${getuseremailstatus}/${userId}`, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
   }
 
   //handle any error

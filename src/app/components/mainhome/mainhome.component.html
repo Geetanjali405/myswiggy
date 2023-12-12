@@ -59,7 +59,7 @@
                                                                 class="btn btn-primary btn-sm mt-4 ms-5 contbtn"
                                                                 style="width:300px"
                                                                 (click)="offcanvas.close()">CONTINUE</button>
-                                                        <p class="ms-5">I accept the Terms &
+                                                        <p class="ms-5">I accept the Terms
                                                                 Conditions & Privacy Policy</p>
                                                 </form>
                                         </ng-template>
@@ -73,7 +73,7 @@
 
                                                 <div class="topform d-flex justify-content-around">
                                                         <div class="mt-5">
-                                                                <h3><b>SIGN UP</b></h3>
+                                                                <h2><b>SIGN UP</b></h2>
                                                         </div>
                                                         <div class="me-4">
                                                                 <img class="jdo4W"
@@ -111,17 +111,19 @@
                                                         <div class="col-lg-8 mt-4 ms-5 field">
                                                                 <label style="color: black;">Join swiggy as</label>
                                                                 <select id="userType" formControlName="userType"
-                                                                        class="form-control"
-                                                                        style="width: 150px; height: 40px; border: 1px solid black;font-size: 14px; align-items: center;">
-                                                                        <option value="Customer">Customer</option>
-                                                                        <option value="Delivery">Delivery</option>
-                                                                </select>
+        class="form-control"
+        style="width: 270px; height: 40px; border: 1px solid black;font-size: 14px; align-items: center;"
+        [(ngModel)]="user.userType">
+    <option value="" hidden>Select</option>
+    <option value="Customer">Customer</option>
+    <option value="Delivery">Delivery</option>
+</select>
                                                         </div>
                                                         <button type="submit"
                                                                 class="btn btn-primary btn-sm mt-4 ms-5 contbtn"
-                                                                style="width:300px"
+                                                                style="width:270px"
                                                                 (click)="offcanvas.close()">CONTINUE</button>
-                                                        <p class="ms-5">By creating an account, I accept the Terms &
+                                                        <p class="ms-5">By creating an account, I accept the <br> Terms
                                                                 Conditions & Privacy Policy</p>
                                                 </form>
 
@@ -133,7 +135,7 @@
                                         'color': '#212121', 'font-weight': 'bold', 'padding': '16px'}"
                                                 [draggable]="false" [resizable]="false">
                                                 <p style="color: #212121; font-size: 18px; margin-bottom: 0;">
-                                                        PLEASE LOG IN TO ORDER!
+                                                        PLEASE LOG IN TO CONTINUE!
                                                 </p>
                                         </p-dialog>
 

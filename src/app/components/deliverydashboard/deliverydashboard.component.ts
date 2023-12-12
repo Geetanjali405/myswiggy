@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeliveryData } from 'src/shared/model/delivery';
 import { UserService } from 'src/shared/services/user.service';
@@ -7,13 +7,14 @@ import {
   MessageService,
   ConfirmEventType,
 } from 'primeng/api';
+import { User } from 'src/shared/model/user';
 
 @Component({
   selector: 'app-deliverydashboard',
   templateUrl: './deliverydashboard.component.html',
   styleUrls: ['./deliverydashboard.component.scss'],
 })
-export class DeliverydashboardComponent implements OnInit {
+export class DeliverydashboardComponent implements OnInit ,OnDestroy{
   cartId: string;
   delivery: DeliveryData;
   paginatedDelivery: any;
@@ -23,6 +24,10 @@ export class DeliverydashboardComponent implements OnInit {
   filteredDelievery;
   totalOrders: number = 0;
   userId: string;
+  user: User;
+  status: string;
+  emailveri: string;
+  statusint: any;
 
   constructor(
     private userService: UserService,
@@ -33,7 +38,27 @@ export class DeliverydashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.populateDelivery();
+    const userString = localStorage.getItem('user');
+    this.user = JSON.parse(userString);
     this.userId = localStorage.getItem('id');
+
+    this.statusint = setInterval(() => {
+      this.getinfo(this.userId);
+    }, 2000);
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.statusint);
+  }
+  getinfo(userId: string) {
+    this.userService.getuserstatus(userId).subscribe({
+      next: (res) => {
+        this.status = res;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+
+    })
   }
 
   populateDelivery() {

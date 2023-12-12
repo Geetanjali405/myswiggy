@@ -11,6 +11,7 @@ export class User {
   firstTimeUser: Boolean = false;
   favouriteRestaurants: Restaurant[] = [];
   status: string = '';
+  emailVer: string = '';
 
   constructor() {}
 }
